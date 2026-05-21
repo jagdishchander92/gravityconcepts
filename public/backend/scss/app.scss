@@ -1,0 +1,22 @@
+// Google fonts (CSS import OK)
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;...&display=swap');
+
+// Tabler icons (CSS import OK)
+@import "@tabler/icons-webfont/dist/tabler-icons.min.css";
+
+// Bootstrap (KEEP USING IMPORT)
+@import "bootstrap/scss/functions";
+
+// Your variables override
+@import "variables";
+
+// Bootstrap full
+@import "bootstrap/scss/bootstrap";
+
+// Your custom files
+@import "avatar";
+@import "border";
+@import "button";
+@import "icon-shape";
+@import "utilities";
+@import "custom";

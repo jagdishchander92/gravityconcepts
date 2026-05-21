@@ -1,0 +1,1501 @@
+<x-layout>
+    <!-- Banner Section home2-->
+    {{-- <div class="banner-section-home2">
+        <div class="auto-container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="banner-content-wrap">
+                        <div class="banner-title">
+                            <h2>MODERN <label class="switch"><input type="checkbox" checked=""><span
+                                        class="slider round"></span></label>LOGISTICS</h2>
+                            <h2>TRANSPORTATION</h2>
+                            <h2><img src="{{ url('frontend/images') }}/home2/circle.png" alt="circle"> SYSTEM</h2>
+                        </div>
+                        <p class="text-dark">Reduce your manual work and increase the productivity in your company by
+                            using our asset management service.<br>With Gravity Concepts, you will get a 24×7 service
+                            that helps you automate and improve your daily activities, resulting in greater transparency
+                            and increased efficiency.
+                        </p>
+                        <div class="banner-btn">
+                            <a href="service.html">Explore Services<i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                        <div class="banner-autor-info">
+                            <div class="autor-img-box">
+                                <div class="author-image"><img src="{{ url('frontend/images') }}/home2/autor1.png"
+                                        alt="Image">
+                                </div>
+                                <div class="author-image"><img src="{{ url('frontend/images') }}/home2/autor2.png"
+                                        alt="Image">
+                                </div>
+                                <div class="autor-number">5k+</div>
+                            </div>
+                            <p class="autor-desc">Satisfaction Customers</p>
+                            <div class="banner-autor-desc">
+                                <div class="banner-icon">
+                                    <img src="{{ url('frontend/images') }}/home2/banner-icon.png" alt="icon">
+                                </div>
+                                <div class="banner-desc">
+                                    <p>World wide Best shipping</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    <!--END Banner Section home2 -->
+
+    <!-- Banner Section home2 classic-->
+		<div class="swiper banner-classic-active2">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="banner-section-home2-classic">
+						<div class="auto-container">
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="banner-content-wrap">
+										<div class="banner-title">
+											<h2>MODERN <span><img src="{{url('frontend/images')}}/home2-classic/banner-title.png"
+														alt="title"></span> LOGISTICS</h2>
+											<h2>TRANSPORTATION</h2>
+											<h2><img src="{{url('frontend/images')}}/home2/circle.png" alt="circle"> SYSTEM</h2>
+										</div>
+										<div class="banner-btn">
+											<a href="service.html">Explore Services<i
+													class="fa-solid fa-arrow-right"></i></a>
+										</div>
+										<div class="banner-autor-info">
+											<div class="autor-img-box">
+												<div class="author-image"><img src="{{url('frontend/images')}}/home2/autor1.png"
+														alt="Image"></div>
+												<div class="author-image"><img src="{{url('frontend/images')}}/home2/autor2.png"
+														alt="Image"></div>
+												<div class="autor-number">5k+</div>
+											</div>
+											<p class="autor-desc">Satisfaction Customers</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner-section-home2-classic two">
+						<div class="auto-container">
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="banner-content-wrap">
+										<div class="banner-title">
+											<h2>TAKE <span><img src="{{url('frontend/images')}}/home2-classic/banner-title.png"
+														alt="title"></span> CONTROLS</h2>
+											<h2>home2 RENEWABLE</h2>
+											<h2><img src="{{url('frontend/images')}}/home2/circle.png" alt="circle"> ENERGY</h2>
+										</div>
+										<div class="banner-btn">
+											<a href="service.html">Explore Services<i
+													class="fa-solid fa-arrow-right"></i></a>
+										</div>
+										<div class="banner-autor-info">
+											<div class="autor-img-box">
+												<div class="author-image"><img src="{{url('frontend/images')}}/home2/autor1.png"
+														alt="Image"></div>
+												<div class="author-image"><img src="{{url('frontend/images')}}/home2/autor2.png"
+														alt="Image"></div>
+												<div class="autor-number">5k+</div>
+											</div>
+											<p class="autor-desc">Satisfaction Customers</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner-section-home2-classic">
+						<div class="auto-container">
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="banner-content-wrap">
+										<div class="banner-title">
+											<h2>TAKE <span><img src="{{url('frontend/images')}}/home2-classic/banner-title.png"
+														alt="title"></span> CONTROLS</h2>
+											<h2>home2 RENEWABLE</h2>
+											<h2><img src="{{url('frontend/images')}}/home2/circle.png" alt="circle"> ENERGY</h2>
+										</div>
+										<div class="banner-btn">
+											<a href="service.html">Explore Services<i
+													class="fa-solid fa-arrow-right"></i></a>
+										</div>
+										<div class="banner-autor-info">
+											<div class="autor-img-box">
+												<div class="author-image"><img src="{{url('frontend/images')}}/home2/autor1.png"
+														alt="Image"></div>
+												<div class="author-image"><img src="{{url('frontend/images')}}/home2/autor2.png"
+														alt="Image"></div>
+												<div class="autor-number">5k+</div>
+											</div>
+											<p class="autor-desc">Satisfaction Customers</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="loginet-banner-arrow-box2">
+				<button class="slider-prev" tabindex="0" aria-label="Previous slide">
+					<i class="fa-solid fa-arrow-left-long"></i>
+				</button>
+				<button class="slider-next" tabindex="0" aria-label="Next slide">
+					<i class="fa-solid fa-arrow-right-long"></i>
+				</button>
+			</div>
+		</div>
+		<!--END Banner Section home2 classic -->
+    <!-- breadcumb Section-->
+    {{-- <div class="breadcumb-area">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-12 text-center">
+					<div class="breadcumb-content">
+						<div class="breadcumb-title">
+							<h4>Service Details</h4>
+						</div>
+						<ul>
+							<li><a href="index.html">loginet</a></li>
+							<li>Service Details</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> --}}
+    <!--breadcumb Section-->
+
+    <!-- feature Section home2-->
+    <section class="feature-section-home2">
+        <div class="auto-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="sec-title">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Features
+                            </h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim text-white">Powerfull Features of </h1>
+                            <h1 class="title title-anim text-white">Gravity Concepts company</h1>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="col-lg-6">
+                    <div class="section-desc">
+                        <p class="title-anim">loginet is a main-homeal organizations maintaince
+                            dedicated to protecting planet through sustainable
+                            community empowerment moderator</p>
+                    </div>
+                </div> --}}
+            </div>
+            <div class="row">
+                <div class="swiper feature-home2-active">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <!-- Service box -->
+                            <div class="col-xl-12">
+                                <div class="single-feature-box">
+                                    <div class="feature-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/feature-thumb1.png"
+                                                alt="feature-thumb"></figure>
+                                        <div class="feature-content">
+                                            <div class="feature-icon">
+                                                <svg width="40" height="34" viewBox="0 0 40 34" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M39.375 8.07731L25.7953 0.23708C25.6053 0.127338 25.3897 0.0695677 25.1703 0.0695801H17.4798C17.3157 0.0695801 17.1531 0.101912 17.0015 0.164731C16.8498 0.227549 16.712 0.319623 16.596 0.435697C16.4799 0.55177 16.3878 0.689569 16.325 0.841226C16.2622 0.992883 16.2298 1.15543 16.2298 1.31958C16.2298 1.48373 16.2622 1.64628 16.325 1.79793C16.3878 1.94959 16.4799 2.08739 16.596 2.20346C16.712 2.31954 16.8498 2.41161 17.0015 2.47443C17.1531 2.53725 17.3157 2.56958 17.4798 2.56958H20.5052L11.2556 7.90981H1.25C0.918479 7.90981 0.600537 8.04151 0.366117 8.27593C0.131696 8.51035 0 8.82829 0 9.15981C0 9.49133 0.131696 9.80928 0.366117 10.0437C0.600537 10.2781 0.918479 10.4098 1.25 10.4098H11.2556L23.9202 17.7218V30.5157L12.2155 23.7579C12.0255 23.6482 11.81 23.5904 11.5905 23.5904H1.25C0.918479 23.5904 0.600537 23.7221 0.366117 23.9565C0.131696 24.1909 0 24.5088 0 24.8404C0 25.1719 0.131696 25.4898 0.366117 25.7242C0.600537 25.9587 0.918479 26.0904 1.25 26.0904H11.2556L24.5453 33.763C24.7353 33.8727 24.9509 33.9305 25.1703 33.9305C25.3897 33.9305 25.6053 33.8727 25.7953 33.763L39.375 25.9229C39.565 25.8131 39.7228 25.6553 39.8325 25.4653C39.9423 25.2753 40 25.0597 40 24.8403V9.15981C40 8.9404 39.9422 8.72485 39.8325 8.53483C39.7228 8.34481 39.565 8.18702 39.375 8.07731ZM36.25 9.15981L25.1703 15.5567L14.0906 9.15981L25.1703 2.76294L36.25 9.15981ZM26.4202 30.5157V17.7218L37.5 11.3248V24.1186L26.4202 30.5157ZM3.60031 1.31958C3.60031 0.988059 3.73201 0.670117 3.96643 0.435697C4.20085 0.201276 4.51879 0.0695801 4.85031 0.0695801H12.9356C13.2671 0.0695801 13.5851 0.201276 13.8195 0.435697C14.0539 0.670117 14.1856 0.988059 14.1856 1.31958C14.1856 1.6511 14.0539 1.96904 13.8195 2.20346C13.5851 2.43788 13.2671 2.56958 12.9356 2.56958H4.85031C4.51879 2.56958 4.20085 2.43788 3.96643 2.20346C3.73201 1.96904 3.60031 1.6511 3.60031 1.31958ZM4.85031 18.25C4.51879 18.25 4.20085 18.1184 3.96643 17.8839C3.73201 17.6495 3.60031 17.3316 3.60031 17C3.60031 16.6685 3.73201 16.3506 3.96643 16.1162C4.20085 15.8817 4.51879 15.75 4.85031 15.75H11.3508C11.6823 15.75 12.0002 15.8817 12.2347 16.1162C12.4691 16.3506 12.6008 16.6685 12.6008 17C12.6008 17.3316 12.4691 17.6495 12.2347 17.8839C12.0002 18.1184 11.6823 18.25 11.3508 18.25H4.85031Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </div>
+                                            <h2 class="feature-title">24x7 operations</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <!-- Service box -->
+                            <div class="col-xl-12">
+                                <div class="single-feature-box">
+                                    <div class="feature-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/feature-thumb2.png"
+                                                alt="feature-thumb"></figure>
+                                        <div class="feature-content">
+                                            <div class="feature-icon">
+                                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M34.25 23H24.25C23.9185 23 23.6005 23.1317 23.3661 23.3661C23.1317 23.6005 23 23.9185 23 24.25V34.25C23 34.5815 23.1317 34.8995 23.3661 35.1339C23.6005 35.3683 23.9185 35.5 24.25 35.5H34.25C34.5815 35.5 34.8995 35.3683 35.1339 35.1339C35.3683 34.8995 35.5 34.5815 35.5 34.25V24.25C35.5 23.9185 35.3683 23.6005 35.1339 23.3661C34.8995 23.1317 34.5815 23 34.25 23ZM33 33H25.5V25.5H28V28C28 28.3315 28.1317 28.6495 28.3661 28.8839C28.6005 29.1183 28.9185 29.25 29.25 29.25C29.5815 29.25 29.8995 29.1183 30.1339 28.8839C30.3683 28.6495 30.5 28.3315 30.5 28V25.5H33V33Z"
+                                                        fill="white" />
+                                                    <path
+                                                        d="M23 11.75C23 12.7446 23.3951 13.6984 24.0984 14.4017C24.8016 15.1049 25.7554 15.5 26.75 15.5H32.775C32.9197 16.3256 32.995 17.1619 33 18C33.019 18.3789 33.019 18.7586 33 19.1375C32.9702 19.469 33.0732 19.7988 33.2866 20.0543C33.4999 20.3099 33.806 20.4702 34.1375 20.5C34.469 20.5298 34.7988 20.4268 35.0543 20.2134C35.3099 20.0001 35.4702 19.694 35.5 19.3625V18C35.5 14.5388 34.4737 11.1554 32.5507 8.27753C30.6278 5.39967 27.8947 3.15665 24.697 1.83212C21.4993 0.507582 17.9806 0.161024 14.5859 0.836265C11.1913 1.51151 8.07306 3.17822 5.62564 5.62564C3.17822 8.07306 1.51151 11.1913 0.836265 14.5859C0.161024 17.9806 0.507582 21.4993 1.83212 24.697C3.15665 27.8947 5.39967 30.6278 8.27753 32.5507C11.1554 34.4737 14.5388 35.5 18 35.5H19.3625C19.694 35.4702 20.0001 35.3099 20.2134 35.0543C20.4268 34.7988 20.5298 34.469 20.5 34.1375C20.4702 33.806 20.3099 33.4999 20.0543 33.2866C19.7988 33.0732 19.469 32.9702 19.1375 33C18.7586 33.019 18.3789 33.019 18 33C17.575 33 17.1625 33 16.75 32.9375V31.75C16.75 30.7554 16.3549 29.8016 15.6517 29.0984C14.9484 28.3951 13.9946 28 13 28C12.6685 28 12.3505 27.8683 12.1161 27.6339C11.8817 27.3995 11.75 27.0815 11.75 26.75C11.75 26.4185 11.8817 26.1005 12.1161 25.8661C12.3505 25.6317 12.6685 25.5 13 25.5H14.875C16.3669 25.5 17.7976 24.9074 18.8525 23.8525C19.9074 22.7976 20.5 21.3669 20.5 19.875C20.5 18.3832 19.9074 16.9524 18.8525 15.8975C17.7976 14.8426 16.3669 14.25 14.875 14.25H13.625C13.1277 14.25 12.6508 14.0525 12.2992 13.7008C11.9476 13.3492 11.75 12.8723 11.75 12.375V4.38751C13.3274 3.65964 15.0192 3.21131 16.75 3.06251V4.87501C16.75 6.03533 17.2109 7.14813 18.0314 7.9686C18.8519 8.78907 19.9647 9.25001 21.125 9.25001C21.6223 9.25001 22.0992 9.44755 22.4508 9.79918C22.8025 10.1508 23 10.6277 23 11.125V11.75ZM13.625 16.75H14.875C15.7038 16.75 16.4987 17.0792 17.0847 17.6653C17.6708 18.2514 18 19.0462 18 19.875C18 20.7038 17.6708 21.4987 17.0847 22.0847C16.4987 22.6708 15.7038 23 14.875 23H13C12.0054 23 11.0516 23.3951 10.3484 24.0984C9.6451 24.8016 9.25001 25.7554 9.25001 26.75C9.25001 27.7446 9.6451 28.6984 10.3484 29.4017C11.0516 30.1049 12.0054 30.5 13 30.5C13.3315 30.5 13.6495 30.6317 13.8839 30.8661C14.1183 31.1005 14.25 31.4185 14.25 31.75V32.5125C11.4966 31.7949 9.00409 30.309 7.06338 28.2282C5.12267 26.1474 3.81383 23.5575 3.28962 20.7608C2.76541 17.9642 3.04745 15.0761 4.10283 12.4337C5.15821 9.79127 6.94339 7.50354 9.25001 5.83751V12.375C9.25001 13.5353 9.71095 14.6481 10.5314 15.4686C11.3519 16.2891 12.4647 16.75 13.625 16.75ZM21.125 6.75001C20.6277 6.75001 20.1508 6.55246 19.7992 6.20083C19.4476 5.8492 19.25 5.37229 19.25 4.87501V3.06251C22.1317 3.31059 24.8803 4.38654 27.1646 6.16076C29.4489 7.93498 31.1715 10.3318 32.125 13.0625H26.75C26.4185 13.0625 26.1005 12.9308 25.8661 12.6964C25.6317 12.462 25.5 12.144 25.5 11.8125V11.1875C25.5083 10.6077 25.4012 10.0321 25.1851 9.49407C24.9689 8.95603 24.648 8.46633 24.2409 8.05343C23.8338 7.64053 23.3487 7.31267 22.8138 7.08891C22.2789 6.86515 21.7048 6.74995 21.125 6.75001Z"
+                                                        fill="white" />
+                                                </svg>
+                                            </div>
+                                            <h2 class="feature-title">Dedicated Account and Logistics Managers</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <!-- Service box -->
+                            <div class="col-xl-12">
+                                <div class="single-feature-box">
+                                    <div class="feature-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/feature-thumb3.png"
+                                                alt="feature-thumb"></figure>
+                                        <div class="feature-content">
+                                            <div class="feature-icon">
+                                                <svg width="36" height="36" viewBox="0 0 36 36"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M16.8925 31.3C15.4048 32.4032 13.6021 32.9992 11.75 33C6.925 33 3 29.075 3 24.25C3 19.425 6.925 15.5 11.75 15.5C13.6287 15.5 15.3913 16.1 16.8925 17.2C17.037 16.7725 17.295 16.3923 17.6389 16.1001C17.9828 15.8079 18.3997 15.6147 18.845 15.5412C18.8225 15.52 18.8125 15.4925 18.7887 15.4738C16.7912 13.8744 14.309 13.002 11.75 13C5.54625 13 0.5 18.0475 0.5 24.25C0.5 30.4525 5.54625 35.5 11.75 35.5C14.3 35.5 16.7962 34.6225 18.7825 33.0312C18.8075 33.0112 18.82 32.9812 18.8425 32.9587C18.3977 32.8848 17.9813 32.6915 17.6379 32.3993C17.2944 32.1072 17.0368 31.7272 16.8925 31.3Z"
+                                                        fill="white" />
+                                                    <path
+                                                        d="M11.7499 20.5C12.4399 20.5 12.9999 21.0612 12.9999 21.75C12.9999 22.0815 13.1316 22.3994 13.366 22.6339C13.6004 22.8683 13.9184 23 14.2499 23C14.5814 23 14.8993 22.8683 15.1338 22.6339C15.3682 22.3994 15.4999 22.0815 15.4999 21.75C15.4976 20.9769 15.256 20.2236 14.8084 19.5933C14.3608 18.963 13.729 18.4868 12.9999 18.23V18C12.9999 17.6685 12.8682 17.3505 12.6338 17.1161C12.3993 16.8817 12.0814 16.75 11.7499 16.75C11.4184 16.75 11.1004 16.8817 10.866 17.1161C10.6316 17.3505 10.4999 17.6685 10.4999 18V18.23C9.77073 18.4868 9.13897 18.963 8.69134 19.5933C8.24371 20.2236 8.00217 20.9769 7.99987 21.75C7.99987 23.8175 9.68237 25.5 11.7499 25.5C11.9975 25.4997 12.2395 25.5729 12.4455 25.7103C12.6515 25.8477 12.812 26.0431 12.9069 26.2718C13.0017 26.5005 13.0266 26.7522 12.9784 26.995C12.9301 27.2379 12.811 27.4609 12.6359 27.636C12.4608 27.8111 12.2378 27.9303 11.9949 27.9785C11.7521 28.0267 11.5004 28.0019 11.2717 27.907C11.043 27.8121 10.8476 27.6516 10.7102 27.4456C10.5728 27.2396 10.4996 26.9976 10.4999 26.75C10.4999 26.4185 10.3682 26.1005 10.1338 25.8661C9.89933 25.6317 9.58139 25.5 9.24987 25.5C8.91835 25.5 8.60041 25.6317 8.36599 25.8661C8.13157 26.1005 7.99987 26.4185 7.99987 26.75C7.99987 28.3775 9.04862 29.7525 10.4999 30.27V30.5C10.4999 30.8315 10.6316 31.1494 10.866 31.3839C11.1004 31.6183 11.4184 31.75 11.7499 31.75C12.0814 31.75 12.3993 31.6183 12.6338 31.3839C12.8682 31.1494 12.9999 30.8315 12.9999 30.5V30.27C13.729 30.0132 14.3608 29.5369 14.8084 28.9067C15.256 28.2764 15.4976 27.523 15.4999 26.75C15.4999 24.6825 13.8174 23 11.7499 23C11.428 22.9856 11.1241 22.8476 10.9015 22.6148C10.6788 22.3819 10.5545 22.0722 10.5545 21.75C10.5545 21.4278 10.6788 21.1181 10.9015 20.8852C11.1241 20.6524 11.428 20.5144 11.7499 20.5ZM34.2499 16.75H19.2499C18.9184 16.75 18.6004 16.8817 18.366 17.1161C18.1316 17.3505 17.9999 17.6685 17.9999 18V30.5C17.9999 30.8315 18.1316 31.1494 18.366 31.3839C18.6004 31.6183 18.9184 31.75 19.2499 31.75H34.2499C34.5814 31.75 34.8993 31.6183 35.1338 31.3839C35.3682 31.1494 35.4999 30.8315 35.4999 30.5V18C35.4999 17.6685 35.3682 17.3505 35.1338 17.1161C34.8993 16.8817 34.5814 16.75 34.2499 16.75ZM25.4999 19.25H27.9999V22.4825L27.6336 22.1162C27.3992 21.8819 27.0813 21.7502 26.7499 21.7502C26.4184 21.7502 26.1005 21.8819 25.8661 22.1162L25.4999 22.4825V19.25ZM32.9999 29.25H20.4999V19.25H22.9999V25.5C22.9999 25.7472 23.0733 25.9888 23.2106 26.1943C23.348 26.3998 23.5432 26.56 23.7716 26.6546C23.9999 26.7492 24.2512 26.7739 24.4937 26.7257C24.7361 26.6775 24.9588 26.5585 25.1336 26.3837L26.7499 24.7675L28.3661 26.3837C28.5409 26.5585 28.7636 26.6775 29.0061 26.7257C29.2485 26.7739 29.4998 26.7492 29.7282 26.6546C29.9566 26.56 30.1518 26.3998 30.2891 26.1943C30.4265 25.9888 30.4998 25.7472 30.4999 25.5V19.25H32.9999V29.25ZM5.59612 4.72748C5.6588 4.87986 5.75098 5.01835 5.86737 5.13498L8.36612 7.63373C8.48194 7.75021 8.61964 7.84265 8.77131 7.90572C8.92297 7.9688 9.08561 8.00127 9.24987 8.00127C9.41413 8.00127 9.57677 7.9688 9.72844 7.90572C9.8801 7.84265 10.0178 7.75021 10.1336 7.63373C10.368 7.39932 10.4996 7.08143 10.4996 6.74998C10.4996 6.41852 10.368 6.10064 10.1336 5.86623L9.76737 5.49998H21.7499C22.0814 5.49998 22.3993 5.36828 22.6338 5.13386C22.8682 4.89944 22.9999 4.5815 22.9999 4.24998C22.9999 3.91846 22.8682 3.60052 22.6338 3.3661C22.3993 3.13168 22.0814 2.99998 21.7499 2.99998H9.76737L10.1336 2.63373C10.253 2.51842 10.3482 2.38049 10.4137 2.22799C10.4793 2.07548 10.5137 1.91146 10.5152 1.74548C10.5166 1.57951 10.485 1.41491 10.4221 1.26129C10.3593 1.10767 10.2665 0.968102 10.1491 0.850736C10.0317 0.73337 9.89218 0.640553 9.73856 0.577702C9.58494 0.514851 9.42034 0.483224 9.25437 0.484666C9.0884 0.486109 8.92437 0.520591 8.77187 0.586103C8.61936 0.651614 8.48143 0.746842 8.36612 0.866229L5.86612 3.36623C5.69167 3.54107 5.57292 3.76367 5.52486 4.00594C5.47681 4.24821 5.50161 4.49929 5.59612 4.72748ZM26.2324 7.99998H14.2499C13.9184 7.99998 13.6004 8.13168 13.366 8.3661C13.1316 8.60052 12.9999 8.91846 12.9999 9.24998C12.9999 9.5815 13.1316 9.89944 13.366 10.1339C13.6004 10.3683 13.9184 10.5 14.2499 10.5H26.2324L25.8661 10.8662C25.7467 10.9815 25.6515 11.1195 25.586 11.272C25.5205 11.4245 25.486 11.5885 25.4846 11.7545C25.4831 11.9205 25.5147 12.0851 25.5776 12.2387C25.6404 12.3923 25.7333 12.5319 25.8506 12.6492C25.968 12.7666 26.1076 12.8594 26.2612 12.9223C26.4148 12.9851 26.5794 13.0167 26.7454 13.0153C26.9113 13.0139 27.0754 12.9794 27.2279 12.9139C27.3804 12.8483 27.5183 12.7531 27.6336 12.6337L30.1336 10.1337C30.3082 9.95898 30.4271 9.73637 30.4751 9.49406C30.5232 9.25176 30.4983 9.00064 30.4036 8.77248C30.341 8.62008 30.2488 8.48159 30.1324 8.36498L27.6336 5.86623C27.5183 5.74684 27.3804 5.65161 27.2279 5.5861C27.0754 5.52059 26.9113 5.48611 26.7454 5.48467C26.5794 5.48322 26.4148 5.51485 26.2612 5.5777C26.1076 5.64055 25.968 5.73337 25.8506 5.85074C25.7333 5.9681 25.6404 6.10767 25.5776 6.26129C25.5147 6.41491 25.4831 6.57951 25.4846 6.74548C25.486 6.91146 25.5205 7.07548 25.586 7.22798C25.6515 7.38049 25.7467 7.51842 25.8661 7.63373L26.2324 7.99998Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </div>
+                                            <h2 class="feature-title">Factoring</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <!-- Service box -->
+                            <div class="col-xl-12">
+                                <div class="single-feature-box">
+                                    <div class="feature-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/feature-thumb3.png"
+                                                alt="feature-thumb"></figure>
+                                        <div class="feature-content">
+                                            <div class="feature-icon">
+                                                <svg width="36" height="36" viewBox="0 0 36 36"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M16.8925 31.3C15.4048 32.4032 13.6021 32.9992 11.75 33C6.925 33 3 29.075 3 24.25C3 19.425 6.925 15.5 11.75 15.5C13.6287 15.5 15.3913 16.1 16.8925 17.2C17.037 16.7725 17.295 16.3923 17.6389 16.1001C17.9828 15.8079 18.3997 15.6147 18.845 15.5412C18.8225 15.52 18.8125 15.4925 18.7887 15.4738C16.7912 13.8744 14.309 13.002 11.75 13C5.54625 13 0.5 18.0475 0.5 24.25C0.5 30.4525 5.54625 35.5 11.75 35.5C14.3 35.5 16.7962 34.6225 18.7825 33.0312C18.8075 33.0112 18.82 32.9812 18.8425 32.9587C18.3977 32.8848 17.9813 32.6915 17.6379 32.3993C17.2944 32.1072 17.0368 31.7272 16.8925 31.3Z"
+                                                        fill="white" />
+                                                    <path
+                                                        d="M11.7499 20.5C12.4399 20.5 12.9999 21.0612 12.9999 21.75C12.9999 22.0815 13.1316 22.3994 13.366 22.6339C13.6004 22.8683 13.9184 23 14.2499 23C14.5814 23 14.8993 22.8683 15.1338 22.6339C15.3682 22.3994 15.4999 22.0815 15.4999 21.75C15.4976 20.9769 15.256 20.2236 14.8084 19.5933C14.3608 18.963 13.729 18.4868 12.9999 18.23V18C12.9999 17.6685 12.8682 17.3505 12.6338 17.1161C12.3993 16.8817 12.0814 16.75 11.7499 16.75C11.4184 16.75 11.1004 16.8817 10.866 17.1161C10.6316 17.3505 10.4999 17.6685 10.4999 18V18.23C9.77073 18.4868 9.13897 18.963 8.69134 19.5933C8.24371 20.2236 8.00217 20.9769 7.99987 21.75C7.99987 23.8175 9.68237 25.5 11.7499 25.5C11.9975 25.4997 12.2395 25.5729 12.4455 25.7103C12.6515 25.8477 12.812 26.0431 12.9069 26.2718C13.0017 26.5005 13.0266 26.7522 12.9784 26.995C12.9301 27.2379 12.811 27.4609 12.6359 27.636C12.4608 27.8111 12.2378 27.9303 11.9949 27.9785C11.7521 28.0267 11.5004 28.0019 11.2717 27.907C11.043 27.8121 10.8476 27.6516 10.7102 27.4456C10.5728 27.2396 10.4996 26.9976 10.4999 26.75C10.4999 26.4185 10.3682 26.1005 10.1338 25.8661C9.89933 25.6317 9.58139 25.5 9.24987 25.5C8.91835 25.5 8.60041 25.6317 8.36599 25.8661C8.13157 26.1005 7.99987 26.4185 7.99987 26.75C7.99987 28.3775 9.04862 29.7525 10.4999 30.27V30.5C10.4999 30.8315 10.6316 31.1494 10.866 31.3839C11.1004 31.6183 11.4184 31.75 11.7499 31.75C12.0814 31.75 12.3993 31.6183 12.6338 31.3839C12.8682 31.1494 12.9999 30.8315 12.9999 30.5V30.27C13.729 30.0132 14.3608 29.5369 14.8084 28.9067C15.256 28.2764 15.4976 27.523 15.4999 26.75C15.4999 24.6825 13.8174 23 11.7499 23C11.428 22.9856 11.1241 22.8476 10.9015 22.6148C10.6788 22.3819 10.5545 22.0722 10.5545 21.75C10.5545 21.4278 10.6788 21.1181 10.9015 20.8852C11.1241 20.6524 11.428 20.5144 11.7499 20.5ZM34.2499 16.75H19.2499C18.9184 16.75 18.6004 16.8817 18.366 17.1161C18.1316 17.3505 17.9999 17.6685 17.9999 18V30.5C17.9999 30.8315 18.1316 31.1494 18.366 31.3839C18.6004 31.6183 18.9184 31.75 19.2499 31.75H34.2499C34.5814 31.75 34.8993 31.6183 35.1338 31.3839C35.3682 31.1494 35.4999 30.8315 35.4999 30.5V18C35.4999 17.6685 35.3682 17.3505 35.1338 17.1161C34.8993 16.8817 34.5814 16.75 34.2499 16.75ZM25.4999 19.25H27.9999V22.4825L27.6336 22.1162C27.3992 21.8819 27.0813 21.7502 26.7499 21.7502C26.4184 21.7502 26.1005 21.8819 25.8661 22.1162L25.4999 22.4825V19.25ZM32.9999 29.25H20.4999V19.25H22.9999V25.5C22.9999 25.7472 23.0733 25.9888 23.2106 26.1943C23.348 26.3998 23.5432 26.56 23.7716 26.6546C23.9999 26.7492 24.2512 26.7739 24.4937 26.7257C24.7361 26.6775 24.9588 26.5585 25.1336 26.3837L26.7499 24.7675L28.3661 26.3837C28.5409 26.5585 28.7636 26.6775 29.0061 26.7257C29.2485 26.7739 29.4998 26.7492 29.7282 26.6546C29.9566 26.56 30.1518 26.3998 30.2891 26.1943C30.4265 25.9888 30.4998 25.7472 30.4999 25.5V19.25H32.9999V29.25ZM5.59612 4.72748C5.6588 4.87986 5.75098 5.01835 5.86737 5.13498L8.36612 7.63373C8.48194 7.75021 8.61964 7.84265 8.77131 7.90572C8.92297 7.9688 9.08561 8.00127 9.24987 8.00127C9.41413 8.00127 9.57677 7.9688 9.72844 7.90572C9.8801 7.84265 10.0178 7.75021 10.1336 7.63373C10.368 7.39932 10.4996 7.08143 10.4996 6.74998C10.4996 6.41852 10.368 6.10064 10.1336 5.86623L9.76737 5.49998H21.7499C22.0814 5.49998 22.3993 5.36828 22.6338 5.13386C22.8682 4.89944 22.9999 4.5815 22.9999 4.24998C22.9999 3.91846 22.8682 3.60052 22.6338 3.3661C22.3993 3.13168 22.0814 2.99998 21.7499 2.99998H9.76737L10.1336 2.63373C10.253 2.51842 10.3482 2.38049 10.4137 2.22799C10.4793 2.07548 10.5137 1.91146 10.5152 1.74548C10.5166 1.57951 10.485 1.41491 10.4221 1.26129C10.3593 1.10767 10.2665 0.968102 10.1491 0.850736C10.0317 0.73337 9.89218 0.640553 9.73856 0.577702C9.58494 0.514851 9.42034 0.483224 9.25437 0.484666C9.0884 0.486109 8.92437 0.520591 8.77187 0.586103C8.61936 0.651614 8.48143 0.746842 8.36612 0.866229L5.86612 3.36623C5.69167 3.54107 5.57292 3.76367 5.52486 4.00594C5.47681 4.24821 5.50161 4.49929 5.59612 4.72748ZM26.2324 7.99998H14.2499C13.9184 7.99998 13.6004 8.13168 13.366 8.3661C13.1316 8.60052 12.9999 8.91846 12.9999 9.24998C12.9999 9.5815 13.1316 9.89944 13.366 10.1339C13.6004 10.3683 13.9184 10.5 14.2499 10.5H26.2324L25.8661 10.8662C25.7467 10.9815 25.6515 11.1195 25.586 11.272C25.5205 11.4245 25.486 11.5885 25.4846 11.7545C25.4831 11.9205 25.5147 12.0851 25.5776 12.2387C25.6404 12.3923 25.7333 12.5319 25.8506 12.6492C25.968 12.7666 26.1076 12.8594 26.2612 12.9223C26.4148 12.9851 26.5794 13.0167 26.7454 13.0153C26.9113 13.0139 27.0754 12.9794 27.2279 12.9139C27.3804 12.8483 27.5183 12.7531 27.6336 12.6337L30.1336 10.1337C30.3082 9.95898 30.4271 9.73637 30.4751 9.49406C30.5232 9.25176 30.4983 9.00064 30.4036 8.77248C30.341 8.62008 30.2488 8.48159 30.1324 8.36498L27.6336 5.86623C27.5183 5.74684 27.3804 5.65161 27.2279 5.5861C27.0754 5.52059 26.9113 5.48611 26.7454 5.48467C26.5794 5.48322 26.4148 5.51485 26.2612 5.5777C26.1076 5.64055 25.968 5.73337 25.8506 5.85074C25.7333 5.9681 25.6404 6.10767 25.5776 6.26129C25.5147 6.41491 25.4831 6.57951 25.4846 6.74548C25.486 6.91146 25.5205 7.07548 25.586 7.22798C25.6515 7.38049 25.7467 7.51842 25.8661 7.63373L26.2324 7.99998Z"
+                                                        fill="white" />
+                                                </svg>
+
+                                            </div>
+                                            <h2 class="feature-title">On-time delivery</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loginet-feature-arrow-box">
+                        <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+                            <i class="fa-solid fa-arrow-left-long"></i>
+                        </button>
+                        <button class="slider-next" tabindex="0" aria-label="Next slide">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- feature Section home2-->
+
+
+
+
+    <!-- About Section home2 -->
+    <section class="about-section-home2">
+        <div class="auto-container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="sec-title">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">About
+                                Us</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim">6+ </h1>
+                            <h1 class="title title-anim">Years Working Experience</h1>
+                        </div>
+                    </div>
+                    <div class="about-thumb">
+                        <figure class="reveal"><img src="{{ url('frontend/images') }}/home2/about-thumb.png"
+                                alt="about thumb">
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <!--about counter-->
+                    {{-- <div class="about-counter-wrapper">
+                        <div class="about-counter">
+                            <h2 class="counter">6</h2>
+                            <span>+</span>
+                            <p>Years Working Experience</p>
+                        </div>
+                        <div class="about-counter two">
+                            <h3 class="counter">98</h3>
+                            <span>%</span>
+                            <p>Customers Satisfaction Rates</p>
+                        </div>
+                    </div> --}}
+                    <div class="row mt-3">
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="service-details-icon-box">
+                                <div class="service-details-icon-thumb">
+                                    <img src="{{ url('frontend/images') }}/inner-image/services-details-icon-1.png"
+                                        alt="icon">
+                                </div>
+                                <div class="service-details-box-content">
+                                    <h3>Competitive Prices</h3>
+                                    <p>Our company provides cost-effective logistics services.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="service-details-icon-box">
+                                <div class="service-details-icon-thumb">
+                                    <img src="{{ url('frontend/images') }}/inner-image/services-details-icon-2.png"
+                                        alt="icon">
+                                </div>
+                                <div class="service-details-box-content">
+                                    <h3>Temperature Sensitive
+                                    </h3>
+                                    <p>Sensitive food products often go to waste due to inadequate temperature control
+                                        during logistics.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="service-details-icon-box">
+                                <div class="service-details-icon-thumb">
+                                    <img src="{{ url('frontend/images') }}/inner-image/services-details-icon-2.png"
+                                        alt="icon">
+                                </div>
+                                <div class="service-details-box-content">
+                                    <h3>Cost Effective LTL
+                                    </h3>
+                                    <p>Cost Effective LTL can be significantly lower than methods like paying for a full
+                                        truckload.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 mt-3">
+                            <div class="service-details-icon-box">
+                                <div class="service-details-icon-thumb">
+                                    <img src="{{ url('frontend/images') }}/inner-image/services-details-icon-2.png"
+                                        alt="icon">
+                                </div>
+                                <div class="service-details-box-content">
+                                    <h3>Logistics Technology
+                                    </h3>
+                                    <p>Logistics technology is any technology that allows players in the logistics
+                                        industry to manage the flow of goods.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-item-box">
+                        {{-- <div class="single-about-box fade-in">
+                            <div class="about-wrap">
+                                <div class="about-icon">
+                                    <img src="{{ url('frontend/images') }}/home2/about-icon1.png" alt="icon">
+                                </div>
+                                <div class="title">
+                                    <h2>Competitive Prices</h2>
+                                </div>
+                            </div>
+                            <div class="about-desc">
+                                <p>Our company provides cost-effective logistics services</p>
+                            </div>
+                        </div>
+                        <div class="single-about-box  fade-in">
+                            <div class="about-wrap">
+                                <div class="about-icon">
+                                    <img src="{{ url('frontend/images') }}/home2/about-icon2.png" alt="icon">
+                                </div>
+                                <div class="title">
+                                    <h2>Temperature Sensitive</h2>
+                                </div>
+                            </div>
+                            <div class="about-desc">
+                                <p>Sensitive food products often go to waste due to inadequate temperature control
+                                    during logistics.</p>
+                            </div>
+                        </div>
+                        <div class="single-about-box  fade-in">
+                            <div class="about-wrap">
+                                <div class="about-icon">
+                                    <img src="{{ url('frontend/images') }}/home2/about-icon2.png" alt="icon">
+                                </div>
+                                <div class="title">
+                                    <h2>Cost Effective LTL</h2>
+                                </div>
+                            </div>
+                            <div class="about-desc">
+                                <p>Cost Effective LTL can be significantly lower than methods like paying for a full
+                                    truckload.</p>
+                            </div>
+                        </div>
+                        <div class="single-about-box two fade-in">
+                            <div class="about-wrap">
+                                <div class="about-icon">
+                                    <img src="{{ url('frontend/images') }}/home2/about-icon2.png" alt="icon">
+                                </div>
+                                <div class="title">
+                                    <h2>Logistics Technology</h2>
+                                </div>
+                            </div>
+                            <div class="about-desc">
+                                <p>Logistics technology is any technology that allows players in the logistics industry
+                                    to manage the flow of goods.</p>
+                            </div>
+                        </div> --}}
+                        <div class="about-info-box fade-in">
+                            <div class="about-btn">
+                                <a href="about.html">More About Us<i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                            <div class="about-call-info">
+                                <h2 class="call-text">Call Us (Toll free)</h2>
+                                <h3 class="call-number">+1-(456) 678 032</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-shape-gif">
+                <img src="{{ url('frontend/images') }}/home2/about2-shape.png" alt="gif">
+            </div>
+        </div>
+    </section>
+    <!--About Section home2 -->
+
+    <!-- service Section home2 -->
+    <section class="service-section-home2">
+        <div class="auto-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="sec-title">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Services</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim text-white">Smart, Sustainable, and </h1>
+                            <h1 class="title title-anim text-white">Seamless home2 Services</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-desc">
+                        <p class="title-anim">loginet is a main-homeal organizations maintaince
+                            dedicated to protecting planet through sustainable
+                            community empowerment moderator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="swiper service-home2-active">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="col-xl-12">
+                            <div class="single-service-box">
+                                <div class="service-thumb">
+                                    <figure class="reveal"><img
+                                            src="{{ url('frontend/images') }}/home2/service-thumb1.png"
+                                            alt="service-thumb"></figure>
+                                    <div class="service-icon">
+                                        <img src="{{ url('frontend/images') }}/home2/service-icon1.png"
+                                            alt="icon">
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <h2 class="service-title"><a href="service-details.html">Fast Cargo Delivery
+                                        </a></h2>
+                                    <p>main-homeal organizations maintaince
+                                        dedicated to protecting</p>
+                                    <a class="service-btn" href="service-details.html">Explore More<i
+                                            class="fa-solid fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-xl-12">
+                            <div class="single-service-box">
+                                <div class="service-thumb two">
+                                    <figure class="reveal"><img
+                                            src="{{ url('frontend/images') }}/home2/service-thumb2.png"
+                                            alt="service-thumb"></figure>
+                                    <div class="service-icon two">
+                                        <img src="{{ url('frontend/images') }}/home2/service-icon2.png"
+                                            alt="icon">
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <h2 class="service-title two"><a href="service-details.html">Secure Goods
+                                            Storage
+                                        </a></h2>
+                                    <p>main-homeal organizations maintaince
+                                        dedicated to protecting</p>
+                                    <a class="service-btn two" href="service-details.html">Explore More<i
+                                            class="fa-solid fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-xl-12">
+                            <div class="single-service-box">
+                                <div class="service-thumb">
+                                    <figure class="reveal"><img
+                                            src="{{ url('frontend/images') }}/home2/service-thumb3.png"
+                                            alt="service-thumb"></figure>
+                                    <div class="service-icon">
+                                        <img src="{{ url('frontend/images') }}/home2/service-icon3.png"
+                                            alt="icon">
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <h2 class="service-title"><a href="service-details.html">International
+                                            Shipping
+                                        </a></h2>
+                                    <p>main-homeal organizations maintaince
+                                        dedicated to protecting</p>
+                                    <a class="service-btn" href="service-details.html">Explore More<i
+                                            class="fa-solid fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-xl-12">
+                            <div class="single-service-box">
+                                <div class="service-thumb two">
+                                    <figure class="reveal"><img
+                                            src="{{ url('frontend/images') }}/home2/service-thumb4.png"
+                                            alt="service-thumb"></figure>
+                                    <div class="service-icon two">
+                                        <img src="{{ url('frontend/images') }}/home2/service-icon4.png"
+                                            alt="icon">
+                                    </div>
+                                </div>
+                                <div class="service-content">
+                                    <h2 class="service-title two"><a href="service-details.html">Professional
+                                            Handling
+                                        </a></h2>
+                                    <p>main-homeal organizations maintaince
+                                        dedicated to protecting</p>
+                                    <a class="service-btn two" href="service-details.html">Explore More<i
+                                            class="fa-solid fa-arrow-right-long"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loginet-service-arrow-box">
+                    <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                    </button>
+                    <button class="slider-next" tabindex="0" aria-label="Next slide">
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- service Section home2 -->
+
+
+
+
+    <!-- why choose section home2 -->
+    <section class="why-choose-section-home2">
+        <div class="auto-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sec-title text-center">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Why
+                                Choose Us</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim">Provide Transportation </h1>
+                            <h1 class="title title-anim">Services Since 2018</h1>
+                        </div>
+                        <p class="mt-3 text-secondary">It is Gravity Concept’s mission to deliver the best possible
+                            service to our clients, and we
+                            are able to do so because we provide a comprehensive variety of services that enable us to
+                            meet your demands. With our strategic alliances, Gravity Concepts is able to provide both
+                            express and other logistical services across the United States. We have a wide variety of
+                            resources at our disposal, allowing us to supply our clients with the service providers they
+                            choose.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="choose-box-wrapper">
+                        <div class="choose-box fade-in">
+                            <div class="choose-icon">
+                                <span><img src="{{ url('frontend/images') }}/home2/why-choose-icon1.png"
+                                        alt="icon"></span>
+                            </div>
+                            <div class="choose-title">
+                                <h2>Nationwide Coverage</h2>
+                            </div>
+                            <div class="loginet-hover-box hover-bx"></div>
+                            <div class="loginet-hover-box hover-bx2"></div>
+                            <div class="loginet-hover-box hover-bx3"></div>
+                            <div class="loginet-hover-box hover-bx4"></div>
+                        </div>
+                        <div class="choose-box box-2 fade-in">
+                            <div class="choose-icon two">
+                                <span><img src="{{ url('frontend/images') }}/home2/why-choose-icon2.png"
+                                        alt="icon"></span>
+                            </div>
+                            <div class="choose-title">
+                                <h2>Express Delivery</h2>
+                            </div>
+                            <div class="loginet-hover-box hover-bx"></div>
+                            <div class="loginet-hover-box hover-bx2"></div>
+                            <div class="loginet-hover-box hover-bx3"></div>
+                            <div class="loginet-hover-box hover-bx4"></div>
+                        </div>
+                        <div class="choose-box box-3 fade-in">
+                            <div class="choose-icon three">
+                                <span><img src="{{ url('frontend/images') }}/home2/why-choose-icon3.png"
+                                        alt="icon"></span>
+                            </div>
+                            <div class="choose-title">
+                                <h2>Strategic Partnerships</h2>
+                            </div>
+                            <div class="loginet-hover-box hover-bx"></div>
+                            <div class="loginet-hover-box hover-bx2"></div>
+                            <div class="loginet-hover-box hover-bx3"></div>
+                            <div class="loginet-hover-box hover-bx4"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="why-choose-thumb">
+                        <figure class="reveal"><img src="{{ url('frontend/images') }}/home2/why-choose-thumb.png"
+                                alt="choose-thumb">
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="choose-box-wrapper">
+                        <div class="choose-box fade-in">
+                            <div class="choose-icon">
+                                <span><img src="{{ url('frontend/images') }}/home2/why-choose-icon4.png"
+                                        alt="icon"></span>
+                            </div>
+                            <div class="choose-title">
+                                <h2>Client Satisfaction</h2>
+                            </div>
+                            <div class="loginet-hover-box hover-bx"></div>
+                            <div class="loginet-hover-box hover-bx2"></div>
+                            <div class="loginet-hover-box hover-bx3"></div>
+                            <div class="loginet-hover-box hover-bx4"></div>
+                        </div>
+                        <div class="choose-box box-2 fade-in">
+                            <div class="choose-icon two">
+                                <span><img src="{{ url('frontend/images') }}/home2/why-choose-icon5.png"
+                                        alt="icon"></span>
+                            </div>
+                            <div class="choose-title">
+                                <h2>Flexible Resources</h2>
+                            </div>
+                            <div class="loginet-hover-box hover-bx"></div>
+                            <div class="loginet-hover-box hover-bx2"></div>
+                            <div class="loginet-hover-box hover-bx3"></div>
+                            <div class="loginet-hover-box hover-bx4"></div>
+                        </div>
+                        <div class="choose-box box-3 fade-in">
+                            <div class="choose-icon three">
+                                <span><img src="{{ url('frontend/images') }}/home2/why-choose-icon6.png"
+                                        alt="icon"></span>
+                            </div>
+                            <div class="choose-title">
+                                <h2>Custom Solutions</h2>
+                            </div>
+                            <div class="loginet-hover-box hover-bx"></div>
+                            <div class="loginet-hover-box hover-bx2"></div>
+                            <div class="loginet-hover-box hover-bx3"></div>
+                            <div class="loginet-hover-box hover-bx4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="choose-shape1">
+                <img src="{{ url('frontend/images') }}/home2/why-choose-shape.png" alt="choose shape">
+            </div>
+            <div class="choose-shape2">
+                <img src="{{ url('frontend/images') }}/home2/why-choose-shape2.png" alt="choose shape">
+            </div>
+        </div>
+    </section>
+    <!-- why choose section home2 -->
+
+
+
+    <!-- project section home2 -->
+    <section class="project-section-home2">
+        <div class="auto-container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="sec-title">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Projects</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim text-white">Delivering Excellence in</h1>
+                            <h1 class="title title-anim text-white">Logistics Services</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="loginet-button">
+                        <a href="project.html">More Projects<i class="fa-solid fa-arrow-right"></i><span></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="swiper project-home2-active">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="col-xl-12">
+                                <div class="project-box">
+                                    <div class="project-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/project-thumb1.png"
+                                                alt="project-thumb"></figure>
+                                    </div>
+                                    <div class="project-content">
+                                        <div class="project-title">
+                                            <h2>INSTALLATION</h2>
+                                            <h3><a href="project-details.html">Global Cargo Transport</a></h3>
+                                        </div>
+                                        <div class="project-btn">
+                                            <a href="project-details.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="col-xl-12">
+                                <div class="project-box">
+                                    <div class="project-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/project-thumb2.png"
+                                                alt="project-thumb"></figure>
+                                    </div>
+                                    <div class="project-content">
+                                        <div class="project-title">
+                                            <h2>PLANET</h2>
+                                            <h3><a href="project-details.html">Fast Express Delivery</a></h3>
+                                        </div>
+                                        <div class="project-btn">
+                                            <a href="project-details.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="col-xl-12">
+                                <div class="project-box">
+                                    <div class="project-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/project-thumb3.png"
+                                                alt="project-thumb"></figure>
+                                    </div>
+                                    <div class="project-content">
+                                        <div class="project-title">
+                                            <h2>PANNELS</h2>
+                                            <h3><a href="project-details.html">Secure Warehousing Solutions</a>
+                                            </h3>
+                                        </div>
+                                        <div class="project-btn">
+                                            <a href="project-details.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="col-xl-12">
+                                <div class="project-box">
+                                    <div class="project-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/project-thumb4.png"
+                                                alt="project-thumb"></figure>
+                                    </div>
+                                    <div class="project-content">
+                                        <div class="project-title">
+                                            <h2>INSTALLATION</h2>
+                                            <h3><a href="project-details.html">Global Cargo Transport</a></h3>
+                                        </div>
+                                        <div class="project-btn">
+                                            <a href="project-details.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="col-xl-12">
+                                <div class="project-box">
+                                    <div class="project-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/project-thumb2.png"
+                                                alt="project-thumb"></figure>
+                                    </div>
+                                    <div class="project-content">
+                                        <div class="project-title">
+                                            <h2>PLANET</h2>
+                                            <h3><a href="project-details.html">Fast Express Delivery</a></h3>
+                                        </div>
+                                        <div class="project-btn">
+                                            <a href="project-details.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="col-xl-12">
+                                <div class="project-box">
+                                    <div class="project-thumb">
+                                        <figure class="reveal"><img
+                                                src="{{ url('frontend/images') }}/home2/project-thumb1.png"
+                                                alt="project-thumb"></figure>
+                                    </div>
+                                    <div class="project-content">
+                                        <div class="project-title">
+                                            <h2>PANNELS</h2>
+                                            <h3><a href="project-details.html">Secure Warehousing Solutions</a>
+                                            </h3>
+                                        </div>
+                                        <div class="project-btn">
+                                            <a href="project-details.html"><i class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="project-shape1">
+            <img src="{{ url('frontend/images') }}/home2/project-arrow.png" alt="arrow">
+        </div>
+        <div class="project-shape2">
+            <img src="{{ url('frontend/images') }}/home2/project-dot.png" alt="dot">
+        </div>
+    </section>
+    <!-- project section one -->
+
+
+
+    <!-- work process section home2 -->
+    <section class="work-process-section-home2">
+        <div class="auto-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sec-title text-center">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Working Process</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim">We following 3 Easy Steps</h1>
+                            <h1 class="title title-anim">Finished our Works</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="working-process-box first before-transprent after-transprent fade-in">
+                        <div class="process-icon">
+                            <img src="{{ url('frontend/images') }}/main-home/process-icon.png" alt="icon">
+                        </div>
+                        <div class="process-content">
+                            <h2>Receive Packages</h2>
+                            <p>loginet is a nonprofit main-homeal main
+                                dedicated to protecting planet the through
+                                community empowerment</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="working-process-box after-transprent fade-in">
+                        <div class="process-icon">
+                            <img src="{{ url('frontend/images') }}/main-home/process-icon2.png" alt="icon">
+                        </div>
+                        <div class="process-content">
+                            <h2>Transport Packages</h2>
+                            <p>loginet is a nonprofit main-homeal main
+                                dedicated to protecting planet the through
+                                community empowerment</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="working-process-box first before-transprent fade-in">
+                        <div class="process-icon">
+                            <img src="{{ url('frontend/images') }}/main-home/process-icon3.png" alt="icon">
+                        </div>
+                        <div class="process-content">
+                            <h2>Deliver Packages</h2>
+                            <p>loginet is a nonprofit main-homeal main
+                                dedicated to protecting planet the through
+                                community empowerment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="work-shap">
+            <img src="{{ url('frontend/images') }}/home2/work-process-sp.png" alt="work shape">
+        </div>
+        <div class="work-shape2">
+            <img src="{{ url('frontend/images') }}/home2/work-process-sp2.png" alt="work shape">
+        </div>
+    </section>
+    <!-- work process section home2 -->
+
+
+    <!-- marquee section home2 -->
+    <div class="marquee-section-home2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="marquee">
+                        <div class="marquee-block">
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon.png"
+                                        alt="icon"></span>GLOBAL
+                                SHIPPING
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon2.png"
+                                        alt="icon"></span>CARGO
+                                SERVICES
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon3.png"
+                                        alt="icon"></span>FAST
+                                DELIVERY
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon4.png"
+                                        alt="icon"></span>SUPPLY
+                                CHAIN
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon5.png"
+                                        alt="icon"></span>WAREHOUSING
+                            </h3>
+                        </div>
+                        <div class="marquee-block">
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon.png"
+                                        alt="icon"></span>GLOBAL
+                                SHIPPING
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon2.png"
+                                        alt="icon"></span>CARGO
+                                SERVICES
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon3.png"
+                                        alt="icon"></span>FAST
+                                DELIVERY
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon4.png"
+                                        alt="icon"></span>SUPPLY
+                                CHAIN
+                            </h3>
+                            <h3><span><img src="{{ url('frontend/images') }}/main-home/marque-icon5.png"
+                                        alt="icon"></span>WAREHOUSING
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- marquee section home2 -->
+
+
+
+    <!-- contact section home2 -->
+    <section class="contact-section-home2">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="contact-thumb">
+                    <figure class="reveal"><img src="{{ url('frontend/images') }}/home2/contact-thumb.png"
+                            alt="contact thumb">
+                    </figure>
+                    <div class="contact-autor-info">
+                        <div class="autor-img-box">
+                            <div class="author-image"><img
+                                    src="{{ url('frontend/images') }}/home2/contact-autor1.png" alt="Image">
+                            </div>
+                            <div class="author-image"><img
+                                    src="{{ url('frontend/images') }}/home2/contact-autor2.png" alt="Image">
+                            </div>
+                            <div class="autor-number">5k+</div>
+                        </div>
+                        <p class="autor-desc">Trusted Happy Customers</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="contact-form-box">
+                    <!-- section title -->
+                    <div class="sec-title">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Consultations</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title title-anim">Need Help? We’re Here</h1>
+                        </div>
+                    </div>
+                    <form action="https://formspree.io/f/myyleorq" method="POST">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-box">
+                                    <input type="text" name="Name" placeholder="Your Name" required="">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-box">
+                                    <input type="text" name="phone" placeholder="Phone No.">
+                                    <i class="fa-solid fa-circle-phone"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-box">
+                                    <input type="email" name="email" placeholder="Enter E-Mail">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-box">
+                                    <div class="option-box">
+                                        <select class="wide">
+                                            <option value="saab">Select Subject</option>
+                                            <option value="paris">English</option>
+                                            <option value="rome">Computer</option>
+                                            <option value="tokyo">Mathmatic</option>
+                                            <option value="new_york">Scienc</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-box message">
+                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Write Message..."></textarea>
+                                </div>
+                            </div>
+                            <div class="contact-form">
+                                <button type="submit">Send Message<i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="status"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact section home2 -->
+
+
+
+
+    <!-- testimonial section home2 -->
+    <section class="testimonial-section-home2">
+        <div class="auto-container">
+            <div class="row align-items-center">
+                <div class="col-xl-6">
+                    <div class="sec-title">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Testimonials</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title text-white title-anim">What Our Loyal Clients</h1>
+                            <h1 class="title text-white title-anim"> Say About Us</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="section-desc">
+                        <p class="title-anim">loginet is a main-homeal organizations maintaince
+                            dedicated to protecting planet through sustainable
+                            community empowerment moderator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="swiper testi-home2-active">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="col-lg-12">
+                            <div class="single-testi-box" data-cursor-text="View">
+                                <div class="testi-autor-box">
+                                    <div class="testi-autor">
+                                        <img src="{{ url('frontend/images') }}/home2/testi-autor1.png"
+                                            alt="autor">
+                                    </div>
+                                    <div class="testi-autor-content">
+                                        <h2 class="autor-title">Jakulin Farna</h2>
+                                        <p class="autor-desi">UI Designer at — <span>Dream IT</span></p>
+                                    </div>
+                                </div>
+                                <div class="testi-ratting">
+                                    <div class="testi-number">
+                                        <span>5.00</span>
+                                    </div>
+                                    <div class="ratting">
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="testi-desc">
+                                    <p>“This company has been a reliable partner for our logistics needs. Every
+                                        shipment“</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-lg-12">
+                            <div class="single-testi-box" data-cursor-text="View">
+                                <div class="testi-autor-box">
+                                    <div class="testi-autor">
+                                        <img src="{{ url('frontend/images') }}/home2/testi-autor2.png"
+                                            alt="autor">
+                                    </div>
+                                    <div class="testi-autor-content">
+                                        <h2 class="autor-title">John D. Alexon</h2>
+                                        <p class="autor-desi">UI Designer at — <span>Dream IT</span></p>
+                                    </div>
+                                </div>
+                                <div class="testi-ratting">
+                                    <div class="testi-number">
+                                        <span>5.00</span>
+                                    </div>
+                                    <div class="ratting">
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="testi-desc">
+                                    <p>“This company has been a reliable partner for our logistics needs. Every
+                                        shipment“</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-lg-12">
+                            <div class="single-testi-box" data-cursor-text="View">
+                                <div class="testi-autor-box">
+                                    <div class="testi-autor">
+                                        <img src="{{ url('frontend/images') }}/home2/testi-autor1.png"
+                                            alt="autor">
+                                    </div>
+                                    <div class="testi-autor-content">
+                                        <h2 class="autor-title">Jakulin Farna</h2>
+                                        <p class="autor-desi">UI Designer at — <span>Dream IT</span></p>
+                                    </div>
+                                </div>
+                                <div class="testi-ratting">
+                                    <div class="testi-number">
+                                        <span>5.00</span>
+                                    </div>
+                                    <div class="ratting">
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="testi-desc">
+                                    <p>“This company has been a reliable partner for our logistics needs. Every
+                                        shipment“</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-lg-12">
+                            <div class="single-testi-box" data-cursor-text="View">
+                                <div class="testi-autor-box">
+                                    <div class="testi-autor">
+                                        <img src="{{ url('frontend/images') }}/home2/testi-autor2.png"
+                                            alt="autor">
+                                    </div>
+                                    <div class="testi-autor-content">
+                                        <h2 class="autor-title">John D. Alexon</h2>
+                                        <p class="autor-desi">UI Designer at — <span>Dream IT</span></p>
+                                    </div>
+                                </div>
+                                <div class="testi-ratting">
+                                    <div class="testi-number">
+                                        <span>5.00</span>
+                                    </div>
+                                    <div class="ratting">
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="testi-desc">
+                                    <p>“This company has been a reliable partner for our logistics needs. Every
+                                        shipment“</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-lg-12">
+                            <div class="single-testi-box" data-cursor-text="View">
+                                <div class="testi-autor-box">
+                                    <div class="testi-autor">
+                                        <img src="{{ url('frontend/images') }}/home2/testi-autor1.png"
+                                            alt="autor">
+                                    </div>
+                                    <div class="testi-autor-content">
+                                        <h2 class="autor-title">Jakulin Farna</h2>
+                                        <p class="autor-desi">UI Designer at — <span>Dream IT</span></p>
+                                    </div>
+                                </div>
+                                <div class="testi-ratting">
+                                    <div class="testi-number">
+                                        <span>5.00</span>
+                                    </div>
+                                    <div class="ratting">
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="testi-desc">
+                                    <p>“This company has been a reliable partner for our logistics needs. Every
+                                        shipment“</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="col-lg-12">
+                            <div class="single-testi-box" data-cursor-text="View">
+                                <div class="testi-autor-box">
+                                    <div class="testi-autor">
+                                        <img src="{{ url('frontend/images') }}/home2/testi-autor2.png"
+                                            alt="autor">
+                                    </div>
+                                    <div class="testi-autor-content">
+                                        <h2 class="autor-title">John D. Alexon</h2>
+                                        <p class="autor-desi">UI Designer at — <span>Dream IT</span></p>
+                                    </div>
+                                </div>
+                                <div class="testi-ratting">
+                                    <div class="testi-number">
+                                        <span>5.00</span>
+                                    </div>
+                                    <div class="ratting">
+                                        <ul>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                            <li><i class="fa-solid fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="testi-desc">
+                                    <p>“This company has been a reliable partner for our logistics needs. Every
+                                        shipment“</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loginet-home2-arrow-box">
+                    <button class="slider-prev" tabindex="0" aria-label="Previous slide">
+                        <i class="fa-solid fa-arrow-left-long"></i>
+                    </button>
+                    <button class="slider-next" tabindex="0" aria-label="Next slide">
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="testi-shape">
+            <img src="{{ url('frontend/images') }}/home2/testi-shape.png" alt="shape">
+        </div>
+    </section>
+    <!-- testimonial section home2 -->
+
+
+
+    <!-- latest blog section home2 -->
+    <div class="latest-blog-section-home2">
+        <div class="auto-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sec-title text-center">
+                        <div class="section-sub-title">
+                            <h1 class="sub-title"><img
+                                    src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
+                                    alt="sub-icon">Latest Blog</h1>
+                        </div>
+                        <div class="section-title">
+                            <h1 class="title text-anime-3">Read our latest insights from</h1>
+                            <h1 class="title text-anime-3">Update blog posts</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-12">
+                    <div class="single-blog-box">
+                        <div class="blog-thumb reveal">
+                            <img src="{{ url('frontend/images') }}/home2/blog-thumb1.png" alt="thumb">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <a href="blog-details.html">TURBINE</a>
+                                <p>03 June, 2026</p>
+                            </div>
+                            <h2 class="blog-title"><a href="blog-details.html" data-cursor-text="View">The
+                                    Complete
+                                    Guide to Fixed and
+                                    Flexible Logistics Solutions</a></h2>
+                            <div class="blog-btn">
+                                <a href="blog-details.html">Read More<i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-12">
+                    <div class="blog-single-box">
+                        <div class="blog-thumb reveal">
+                            <img src="{{ url('frontend/images') }}/home2/blog-thumb2.png" alt="thumb">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <a href="blog-details.html">home2</a>
+                                <p>04 June, 2026</p>
+                            </div>
+                            <h2 class="blog-title"><a href="blog-details.html" data-cursor-text="View">Is now the
+                                    right time to invest
+                                    in an enterprise solution?</a></h2>
+                            <div class="blog-btn">
+                                <a href="blog-details.html">Read More<i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-single-box">
+                        <div class="blog-thumb reveal">
+                            <img src="{{ url('frontend/images') }}/home2/blog-thumb3.png" alt="thumb">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <a href="blog-details.html">TURBINE</a>
+                                <p>05 June, 2026</p>
+                            </div>
+                            <h2 class="blog-title"><a href="blog-details.html" data-cursor-text="View">Focus
+                                    Logistics secure new
+                                    landmark contracts</a></h2>
+                            <div class="blog-btn">
+                                <a href="blog-details.html">Read More<i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-single-box">
+                        <div class="blog-thumb reveal">
+                            <img src="{{ url('frontend/images') }}/home2/blog-thumb4.png" alt="thumb">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <a href="blog-details.html">home2</a>
+                                <p>06 June, 2026</p>
+                            </div>
+                            <h2 class="blog-title"><a href="blog-details.html" data-cursor-text="View">A Complete
+                                    Guide to Fixed
+                                    and Flexible Logistics</a></h2>
+                            <div class="blog-btn">
+                                <a href="blog-details.html">Read More<i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- latest blog section home2 -->
+</x-layout>

@@ -1,0 +1,370 @@
+.tox-editor-container .tox-promotion {
+    display: none !important;
+}
+
+.tox-statusbar__right-container .tox-statusbar__branding {
+    display: none !important;
+}
+
+.post-select-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    /* max-width: 280px; */
+    overflow: hidden;
+    margin-bottom: 15px;
+    border-radius: 2px;
+}
+
+.post-select-image-container .btn-select-image {
+    width: 100%;
+    height: 200px;
+}
+
+.btn-select-image {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    background: #f8f9fb;
+    border: 2px dashed #e4e5e7;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-select-image .btn-select-image-inner {
+    display: inline-block;
+    text-align: center;
+    width: 140px;
+    height: 98px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.btn-select-image i {
+    display: block;
+    font-size: 48px;
+    line-height: 48px;
+    color: #dadbdd;
+    margin-bottom: 15px;
+}
+
+.btn-select-image .btn {
+    border-color: #cfd3d9 !important;
+    background-color: transparent !important;
+    color: #979ba1 !important;
+    font-size: 13px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-delete-selected-file-image {
+    position: absolute;
+    top: 0;
+    padding: 0;
+    right: 0;
+    border-radius: 2px;
+    width: 22px;
+    height: 22px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.btn {
+    box-shadow: none !important;
+}
+
+.fm-item {
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.fm-item.selected {
+    border: 2px solid #0d6efd;
+}
+
+.fm-item img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* LEFT preview */
+#selectedImages img {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* placeholder broken-style */
+.fm-placeholder {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    color: #888;
+}
+
+#fmImageList {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#fmImageList .card {
+    overflow: hidden;
+}
+
+/* UPLOADER BOX */
+.custom-uploader {
+    border: 2px dashed #d6d6d6;
+    border-radius: 10px;
+    background: #f8f9fa;
+    padding: 30px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* HOVER / DRAG */
+.custom-uploader.active {
+    border-color: #0d6efd;
+    background: #eef5ff;
+}
+
+/* INNER ALIGN */
+.upload-inner {
+    pointer-events: none;
+}
+
+/* FILE TYPES */
+.upload-types {
+    margin-bottom: 15px;
+}
+
+.upload-types span {
+    display: inline-block;
+    border: 1px solid #d6d6d6;
+    padding: 3px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+    margin: 2px;
+    color: #888;
+    background: #fff;
+}
+
+/* ICON */
+.upload-icon {
+    font-size: 40px;
+    color: #999;
+    margin: 10px 0;
+}
+
+/* TEXT */
+.upload-text {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* BUTTON */
+.browse-btn {
+    pointer-events: all;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    padding: 6px 12px;
+}
+
+/* CLICK EFFECT */
+.custom-uploader:hover {
+    border-color: #0d6efd;
+}
+
+/* PROGRESS LIST */
+#files-list li {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.select2-container--bootstrap-5.select2-container--focus .select2-selection,
+.select2-container--bootstrap-5.select2-container--open .select2-selection {
+    box-shadow: unset !important;
+}
+
+.category-tree .card {
+    border-left: 3px solid #0d6efd;
+}
+
+.category-tree .card .card {
+    border-left: 3px solid #6c757d;
+}
+
+/* The base style for the arrow */
+.menu-arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+/* When the parent link is expanded, rotate the arrow 90 degrees */
+.nav-link[aria-expanded="true"] .menu-arrow {
+    transform: rotate(90deg);
+}
+
+/* Optional: Change the icon color of sub-items to make them subtle */
+.collapse .nav-link i {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+/* Active state for parent if you want a different look when open */
+.nav-link[aria-expanded="true"] {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.component .card-add-component {
+    border: darkgray dashed 1px;
+    padding: 8px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.card-comp-item .card-body {
+    font-size: medium;
+}
+
+.iconpicker-popover.fade {
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.iconpicker-popover {
+    z-index: 9999 !important;
+}
+
+.floating-button-group {
+    padding: 15px;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 35px;
+    display: flex;
+    z-index: 3;
+    background-color: black;
+    justify-content: flex-end;
+}
+
+.bg-purple {
+    background-color: #800080;
+}
+
+.border-purple {
+    border-color: #800080 !important;
+}
+
+.sidebar .logo-favicon {
+    display: none;
+}
+
+.sidebar.collapsed .logo-favicon {
+    display: flex;
+}
+
+.comp-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    /* optional */
+}
+
+.comp-item {
+    background-color: white;
+    height: 100px;
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 2rem 1rem;
+}
+
+.comp-item span {
+    font-weight: 500;
+}
+.comp-item i{
+    font-size: 22px;
+}
+
+.side-header {
+    background: #fff;
+    padding: 14px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: rgba(149, 157, 165, 0.15) 0px 8px 24px;
+    border: 1px solid #f1f1f1;
+}
+
+.side-header i {
+    font-size: 22px;
+    color: #f89507;
+}
+
+.side-header span {
+    flex: 1;
+    margin-left: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    letter-spacing: 0.3px;
+}
+
+.comp-item:hover {
+    transform: translateY(-2px);
+    transition: 0.3s ease;
+    box-shadow: rgba(149, 157, 165, 0.25) 0px 12px 30px;
+    cursor: pointer;
+}
+.side-component-section{
+    background-color: #f3f6f8;
+    padding: 8px;
+}
+.side-component-section{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.side-header{
+    flex-shrink: 0;
+}
+/* Hide scrollbar Chrome/Safari */
+.comp-container::-webkit-scrollbar{
+    display: none;
+}
+.comp-container{
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+.page-drag-drop{
+    border: 1px dashed gray;
+    background-color: white;
+    padding: 4rem;
+    text-align: center;
+}
+.page-drag-drop span{
+    font-style: italic;
+}

@@ -3,6 +3,20 @@
 
 <head>
     <meta charset="utf-8">
+    @php
+        $logos = \App\Models\Setting::where('key', 'website_logo_setting')->first();
+        if ($logos->value) {
+            $logos = json_decode($logos->value, true);
+        }
+        $website_info = \App\Models\Setting::where('key', 'website_common_info')->first();
+        if ($website_info->value) {
+            $website_info = json_decode($website_info->value, true);
+        }
+        $social_medias = \App\Models\Setting::where('key', 'website_social_media')->first();
+        if ($social_medias->value) {
+            $social_medias = json_decode($social_medias->value, true);
+        }
+    @endphp
 
     <title>{{ $title ?? 'Gravity Concepts US' }}</title>
 
@@ -16,8 +30,8 @@
     <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backend/lib/sweetalert2/dist/sweetalert2.min.css') }}">
-    <link rel="shortcut icon" href="{{ url('frontend/images') }}/favicon.png" type="image/x-icon">
-    <link rel="icon" href="{{ url('frontend/images') }}/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @stack('styles')
@@ -35,25 +49,38 @@
         {{-- <div class="preloader">
             <div class="loader"></div>
         </div> --}}
+        <div class="preloader">
+            <div class="loader">
+                <div class="road"></div>
+                <div class="truck-container">
+                    <div class="truck">
+                        <div class="truck-trailer">
+                            <div class="trailer-line"></div>
+                            <div class="trailer-line"></div>
+                            <div class="trailer-line"></div>
+                        </div>
+                        <div class="truck-cabin">
+                            <div class="window"></div>
+                            <div class="light"></div>
+                        </div>
+                        <div class="truck-chassis"></div>
+                        <div class="wheel front">
+                            <div class="wheel-inner"></div>
+                        </div>
+                        <div class="wheel back">
+                            <div class="wheel-inner"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="loading-text">DELIVERING</div>
+            </div>
+        </div>
 
 
         <!--  Main Header-->
         <header
             class="main-header  {{ request()->is('/') ? 'header-home2-renewable-classic' : 'inner_page__header' }}">
-            @php
-                $logos = \App\Models\Setting::where('key', 'website_logo_setting')->first();
-                if ($logos->value) {
-                    $logos = json_decode($logos->value, true);
-                }
-                $website_info = \App\Models\Setting::where('key', 'website_common_info')->first();
-                if ($website_info->value) {
-                    $website_info = json_decode($website_info->value, true);
-                }
-                $social_medias = \App\Models\Setting::where('key', 'website_social_media')->first();
-                if ($social_medias->value) {
-                    $social_medias = json_decode($social_medias->value, true);
-                }
-            @endphp
+
             <!-- Header Lower -->
             <div class="header-lower">
                 <!-- Main box -->
@@ -113,9 +140,9 @@
 
                         <div class="outer-box">
                             <div class="menu-btn">
-                                <a href="{{ url('contact-us') }}" class="theme-btn btn-style-one"><span
-                                        class="btn-title">Get a
-                                        Quote <i class="fa-solid fa-arrow-right"></i></span></a>
+                                <button class="theme-btn btn-style-one" data-bs-toggle="modal"
+                                    data-bs-target="#getQuoteModal"><span class="btn-title">Get a
+                                        Quote <i class="fa-solid fa-arrow-right"></i></span></button>
                             </div>
                             <div class="mobile-nav-toggler"><span class="icon lnr-icon-bars"></span></div>
                         </div>
@@ -323,29 +350,29 @@
 
 
 
-        <main class="bg-white">
+        <main class="">
             {{ $slot }}
         </main>
 
 
-        {{-- <!--sign up section home2-->
-        <div class="sign-up-section-home2">
+        <!--sign up section home2-->
+        {{-- <div class="sign-up-section-home2" style="    margin: 30px 0px 0 0px;">
             <div class="auto-container">
                 <div class="row align-items-center">
                     <div class="col-xl-6">
                         <div class="sign-up-title">
-                            <h2>Sign Up for—Update</h2>
+                            <h2>Subscribe for Logistics Insights & Updates!</h2>
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="sign-up">
-                            <form action="https://formspree.io/f/myyleorq" method="POST">
+                            <form action="" method="POST">
                                 <div class="sign-up-form">
                                     <div class="form-input-bx">
                                         <input type="email" name="email" placeholder="Enter Your E-Mail"
                                             required="">
                                         <span><i class="fa-regular fa-envelope"></i></span>
-                                        <button type="submit">Singup Now <i class="fa-solid fa-arrow-right-long"></i>
+                                        <button type="submit">Subscribe <i class="fa-solid fa-arrow-right-long"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -354,12 +381,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!--sign up section home2--> --}}
+        </div> --}}
+        <!--sign up section home2-->
 
-        <!-- Main Footer home2-->
-        <footer class="main-footer-home2">
+        <!-- Main Footer -->
+        <footer class="main-footer-one">
             <div class="auto-container">
+
+
                 <!--main footer Section-->
                 <div class="main-footer-section">
                     <div class="auto-container">
@@ -393,41 +422,6 @@
                                 </div>
                             </div>
 
-                            {{-- <!--Footer Column-->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="footer-widget-content">
-                                    <h2 class="footer-title">Company</h2>
-                                    <ul class="footer-menu">
-                                        <li><a href="index.html">Home<i class="fa-solid fa-arrow-right-long"></i></a>
-                                        </li>
-                                        <li><a href="about.html">About Us<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a></li>
-                                        <li><a href="team.html">Our Team<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a>
-                                        </li>
-                                        <li><a href="contact.html">Contact Us<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!--Footer Column-->
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="footer-widget-content">
-                                    <h2 class="footer-title">Useful Links</h2>
-                                    <ul class="footer-menu">
-                                        <li><a href="#">Pricing Plans<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a>
-                                        </li>
-                                        <li><a href="service.html">Our Services<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a></li>
-                                        <li><a href="testimonial.html">Testimonials<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a></li>
-                                        <li><a href="blog-grid.html">Latest Blog<i
-                                                    class="fa-solid fa-arrow-right-long"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div> --}}
                             @php
                                 $footerMenus = \App\Models\Menu::where('type', 'footer')->first()?->menu;
                                 $footerMenus = collect($footerMenus)
@@ -482,6 +476,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="footer-shape">
+                        <div class="footer-shape1">
+                            <img src="{{ url('frontend/images') }}/home2/footer-shape1.png" alt="footer shape">
+                        </div>
+                        {{-- <div class="footer-shape2">
+                            <img src="{{ url('frontend/images') }}/home2/footer-shape2.png" alt="footer shape">
+                        </div> --}}
+                    </div>
                 </div>
 
                 <!--Footer Bottom-->
@@ -505,15 +507,89 @@
                         </div>
                     </div>
                 </div>
-                <div class="footer-shape1">
-                    <img src="{{ url('frontend/images') }}/home2/footer-shape1.png" alt="footer shape">
-                </div>
-                <div class="footer-shape2">
-                    <img src="{{ url('frontend/images') }}/home2/footer-shape2.png" alt="footer shape">
-                </div>
             </div>
         </footer>
-        <!--End Main Footer home2-->
+
+        <!--End Main Footer -->
+
+        {{-- get quote modal --}}
+        <div class="modal fade" id="getQuoteModal" tabindex="-1" aria-labelledby="getQuoteModalLabel"
+            aria-hidden="true" style="background: rgba(0, 0, 0, 0.5);">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="getQuoteModalLabel">Get a Quote</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('contact.store') }}" method="POST" id="getQuoteForm">
+                        <div class="modal-body">
+                            <div class="contact-section-home2-classic">
+                                <div class="contact-form-box p-0">
+
+
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-box">
+                                                <input type="text" name="name" placeholder="Your Name"
+                                                    required>
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-box">
+                                                <input type="text" name="phone" placeholder="Phone No."
+                                                    required>
+                                                <i class="fa-solid fa-circle-phone"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-box">
+                                                <input type="email" name="email" placeholder="Enter E-Mail"
+                                                    required>
+                                                <i class="fa-solid fa-envelope"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="form-box">
+                                                <input type="text" name="subject" placeholder="Enter Subject"
+                                                    required>
+                                                <i class="fa fa-tag"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="form-box message">
+                                                <textarea name="message" id="message" cols="30" rows="10" placeholder="Write Message..." required></textarea>
+                                                <i class="fa-solid fa-message"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 p-2">
+                                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}">
+                                            </div>
+                                            <small class="text-danger error-g-recaptcha-response"></small>
+                                        </div>
+                                        <div class="form-alert"></div>
+                                        <div class="d-flex justify-content-end gap-2 aligin-items-center">
+                                            <div class="contact-form">
+                                                <button type="submit">Send Message<i
+                                                        class="fa-solid fa-arrow-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
         <!-- Scroll To Top -->
         <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
@@ -536,7 +612,74 @@
         <script src="{{ asset('frontend/js/SplitText.js') }}"></script>
         <script src="{{ asset('frontend/js/cusor-text.js') }}"></script>
         <script src="{{ asset('frontend/js/script.js') }}"></script>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+            $('#contactForm, #getQuoteForm').on('submit', function(e) {
+                e.preventDefault();
 
+                let form = $(this);
+                let btn = form.find('button[type="submit"]');
+                let originalBtnText = btn.html();
+
+                // Clear old errors
+                form.find('.text-danger').html('');
+                form.find('.form-control').removeClass('is-invalid');
+
+                // Button loading state
+                btn.prop('disabled', true);
+                btn.html('<span class="spinner-border spinner-border-sm"></span> Sending...');
+
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    method: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+
+                    success: function(res) {
+
+                        form.find('.form-alert').html(
+                            '<span class="text-success">Message sent successfully!</span>'
+                        );
+
+                        form[0].reset();
+
+                        if (typeof grecaptcha !== "undefined") {
+                            grecaptcha.reset();
+                        }
+
+                        btn.prop('disabled', false).html(originalBtnText);
+                    },
+
+                    error: function(xhr) {
+
+                        btn.prop('disabled', false).html(originalBtnText);
+
+                        if (xhr.status === 422) {
+
+                            let errors = xhr.responseJSON.errors;
+
+                            $.each(errors, function(key, value) {
+
+                                let field = form.find('[name="' + key + '"]');
+
+                                field.addClass('is-invalid');
+
+                                form.find('.error-' + key).html(value[0]);
+                            });
+
+                        } else {
+
+                            form.find('.form-alert').html(
+                                '<span class="text-danger">Something went wrong. Try again.</span>'
+                            );
+                        }
+                    }
+                });
+            });
+        </script>
         @stack('scripts')
 
     </div>

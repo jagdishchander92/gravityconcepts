@@ -12,7 +12,7 @@
     <div class="row">
         <x-alert />
         <div class="col-md-6 mb-3">
-            <div class="card mb-3">
+            {{-- <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-heading">Website Colors</h5>
                 </div>
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> --}}
             <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-heading">
@@ -384,7 +384,7 @@
                     </div>
                 </form>
             </div>
-            <div class="card mb-3">
+            {{-- <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-heading">Slider</h5>
                 </div>
@@ -475,7 +475,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> --}}
         </div>
     </div>
 

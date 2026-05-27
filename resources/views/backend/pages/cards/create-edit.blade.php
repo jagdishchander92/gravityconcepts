@@ -49,6 +49,10 @@
                                         {{ old('card_type', $card->card_type ?? '') == 'service_card' ? 'selected' : '' }}>
                                         Service Card
                                     </option>
+                                    <option value="feature_card"
+                                        {{ old('card_type', $card->card_type ?? '') == 'feature_card' ? 'selected' : '' }}>
+                                        Feature Card
+                                    </option>
                                 </select>
                             </div>
                         </div>

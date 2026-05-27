@@ -461,7 +461,7 @@ hr.dotted {
   font-family: var(--title-font);
   color: var(--theme-color-white);
   background-color: var(--theme-color2);
-  padding: 16px 36px;
+  padding: 16px 30px;
   font-weight: 400;
   font-size: 18px;
   border-radius: 45px;
@@ -470,6 +470,7 @@ hr.dotted {
   transition: all 300ms ease;
   overflow: hidden;
 }
+
 .primary-btn-solid::after {
   content: "";
   display: block;
@@ -485,7 +486,51 @@ hr.dotted {
   transition: all 0.4s ease-in-out;
   z-index: -1;
 }
+
 .primary-btn-solid:hover::after {
+  width: 100%;
+  transform: skew(0deg);
+  left: 0;
+}
+
+.primary-btn-outline {
+  display: inline-block;
+  font-family: var(--title-font);
+  color: var(--theme-color2);
+  background-color: transparent;
+  border: 2px solid var(--theme-color2);
+  padding: 16px 30px;
+  font-weight: 400;
+  font-size: 18px;
+  border-radius: 45px;
+  position: relative;
+  z-index: 1;
+  transition: all 300ms ease;
+  overflow: hidden;
+}
+
+.primary-btn-outline::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -15%;
+  right: 0;
+  width: 0;
+  height: 106%;
+  background: var(--theme-color2);
+  transform: skew(45deg);
+  transition: all 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.primary-btn-outline:hover {
+  color: var(--theme-color-white);
+  border-color: var(--theme-color2);
+}
+
+.primary-btn-outline:hover::after {
   width: 100%;
   transform: skew(0deg);
   left: 0;
@@ -494,3 +539,31 @@ hr.dotted {
 /* .main-menu .navigation>li>ul>li>a {
   margin: 0 12px;
 } */
+.sec-title.text-white h2 {
+  color: var(--theme-color-white) !important;
+}
+
+.modal-backdrop {
+  position: unset !important;
+}
+
+.breadcumb-area {
+  position: relative;
+}
+
+.breadcumb-area::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* black filter */
+  z-index: 1;
+}
+
+.breadcumb-area>* {
+  position: relative;
+  z-index: 2;
+}
+.primary-text{
+  color: var(--theme-color2);
+}

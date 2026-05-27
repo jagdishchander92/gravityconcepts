@@ -2,7 +2,7 @@
      @if (isset($p['sub']) && $p['sub'])
          <div class="section-sub-title">
              <h1 class="sub-title"><img src="{{ url('frontend/images') }}/main-home/sub-title-icon.png"
-                     alt="sub-icon">{{ $p['sub'] ?? '' }}
+                     alt="sub-icon">{!! html_entity_decode($p['sub'] ?? '') !!}
              </h1>
          </div>
      @endif
@@ -11,7 +11,7 @@
      @endphp
      <div class="section-title">
          <{{ $level }}>
-             {{ $p['text'] ?? '' }}
+             {!! html_entity_decode($p['text'] ?? '') !!}
              </{{ $level }}>
      </div>
  </div>

@@ -566,16 +566,19 @@
         let activeDragType = null;
         let selectedId = null;
         let selectedType = null;
-        let idCounter = getMaxId(sections) + 1;
+
+        const maxAfterFix = fixDuplicateIds(sections);
+        let idCounter = Math.max(getMaxId(sections), maxAfterFix) + 1;
+
         const uid = () => "pb" + idCounter++;
 
         function getMaxId(data) {
             let max = 1;
 
             function walk(items) {
-                if (!items) return;
-
+                if (!Array.isArray(items)) return;
                 items.forEach(item => {
+                    if (!item || typeof item !== 'object') return;
 
                     if (item.id && /^pb\d+$/.test(item.id)) {
                         const num = parseInt(item.id.replace('pb', ''));
@@ -583,18 +586,60 @@
                     }
 
                     if (item.cols) {
-                        walk(item.cols);
+                        item.cols.forEach(col => {
+                            if (col.id && /^pb\d+$/.test(col.id)) {
+                                const num = parseInt(col.id.replace('pb', ''));
+                                if (num > max) max = num;
+                            }
+                            if (col.widgets) walk(col.widgets);
+                        });
                     }
 
-                    if (item.widgets) {
-                        walk(item.widgets);
+                    if (item.children) walk(item.children);
+                });
+            }
+
+            walk(data);
+            return max;
+        }
+
+        function fixDuplicateIds(data) {
+            const usedIds = new Set();
+            // Start temp counter above max to avoid future collisions
+            let tempCounter = getMaxId(data) + 1000;
+
+            function generateId() {
+                return 'pb' + tempCounter++;
+            }
+
+            function walk(items) {
+                if (!Array.isArray(items)) return;
+                items.forEach(item => {
+                    if (!item || typeof item !== 'object') return;
+
+                    if (!item.id || usedIds.has(item.id)) {
+                        item.id = generateId();
                     }
+                    usedIds.add(item.id);
+
+                    if (item.cols) {
+                        item.cols.forEach(col => {
+                            if (!col.id || usedIds.has(col.id)) {
+                                col.id = generateId();
+                            }
+                            usedIds.add(col.id);
+                            if (col.widgets) walk(col.widgets);
+                        });
+                    }
+
+                    if (item.children) walk(item.children);
                 });
             }
 
             walk(data);
 
-            return max;
+            // Return the highest counter used so idCounter can be set safely
+            return tempCounter;
         }
 
         // FM state
@@ -1079,42 +1124,37 @@
         }
 
         function assignNewIds(node) {
-            // Always assign a new id to this node
-            node.id = uid();
+            if (!node || typeof node !== "object") return;
 
-            // Section or BS-Row: reassign col ids and recurse into col widgets
-            if (node.type === "section" || node.type === "bs-row") {
-                if (node.cols) {
-                    node.cols.forEach((col) => {
-                        col.id = uid();
-                        if (col.widgets) {
-                            col.widgets.forEach((w) => assignNewIds(w));
-                        }
-                    });
-                }
+            // assign new id if exists
+            if (node.id) {
+                node.id = uid();
             }
 
-            // Div wrapper: recurse into children
-            if (node.nodeType === "div") {
-                if (node.children) {
-                    node.children.forEach((ch) => assignNewIds(ch));
-                }
-            }
-
-            // Regular widget with nested cols (safety fallback)
-            if (node.cols && node.type !== "section" && node.type !== "bs-row") {
+            // cols
+            if (Array.isArray(node.cols)) {
                 node.cols.forEach((col) => {
-                    col.id = uid();
-                    if (col.widgets) {
-                        col.widgets.forEach((w) => assignNewIds(w));
+                    if (col.id) col.id = uid();
+
+                    if (Array.isArray(col.widgets)) {
+                        col.widgets.forEach(assignNewIds);
                     }
                 });
             }
 
-            // Any other children array (safety fallback)
-            if (node.children && node.nodeType !== "div") {
-                node.children.forEach((ch) => assignNewIds(ch));
+            // children
+            if (Array.isArray(node.children)) {
+                node.children.forEach(assignNewIds);
             }
+
+            // generic recursive fallback
+            Object.values(node).forEach((val) => {
+                if (Array.isArray(val)) {
+                    val.forEach(assignNewIds);
+                } else if (val && typeof val === "object") {
+                    assignNewIds(val);
+                }
+            });
         }
 
         function sanitizeDuplicateIds(list = sections) {
@@ -1247,17 +1287,30 @@
 
         function duplicateWidget(widgetId) {
             saveHistory();
+
             const found = findWidget(widgetId);
             if (!found) return;
+
             const clone = JSON.parse(JSON.stringify(found.widget));
-            clone.id = uid();
+
+            // FIX: regenerate all nested ids
+            assignNewIds(clone);
+            sanitizeDuplicateIds([clone]);
+
             if (found.inDiv) {
-                const idx = found.divNode.children.findIndex((c) => c.id === widgetId);
+                const idx = found.divNode.children.findIndex(
+                    (c) => c.id === widgetId
+                );
+
                 found.divNode.children.splice(idx + 1, 0, clone);
             } else {
-                const idx = found.col.widgets.findIndex((w) => w.id === widgetId);
+                const idx = found.col.widgets.findIndex(
+                    (w) => w.id === widgetId
+                );
+
                 found.col.widgets.splice(idx + 1, 0, clone);
             }
+
             renderCanvas();
             updateLayers();
         }
@@ -2214,12 +2267,12 @@
 ${sec.cols
     .map(
         (col, i) => `<div class="bs-col-row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <label>Col ${i + 1}</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <select onchange="updateBsColClass('${sec.id}','${col.id}',this.value)">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${["col-12", "col-md-1", "col-md-2", "col-md-3", "col-md-4", "col-md-5", "col-md-6", "col-md-7", "col-md-8", "col-md-9", "col-md-10", "col-md-11", "col-md-12", "col-lg-3", "col-lg-4", "col-lg-6", "col-lg-8", "col"].map((v) => `<option value="${v}" ${col.bsCol === v ? "selected" : ""}>${v}</option>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </select>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <button onclick="removeBsCol('${sec.id}','${col.id}')"><i class="fa fa-xmark"></i></button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>`,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <label>Col ${i + 1}</label>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select onchange="updateBsColClass('${sec.id}','${col.id}',this.value)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["col-12", "col-md-1", "col-md-2", "col-md-3", "col-md-4", "col-md-5", "col-md-6", "col-md-7", "col-md-8", "col-md-9", "col-md-10", "col-md-11", "col-md-12", "col-lg-3", "col-lg-4", "col-lg-6", "col-lg-8", "col"].map((v) => `<option value="${v}" ${col.bsCol === v ? "selected" : ""}>${v}</option>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <button onclick="removeBsCol('${sec.id}','${col.id}')"><i class="fa fa-xmark"></i></button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>`,
     )
     .join("")}
 </div>
@@ -2270,16 +2323,16 @@ ${sty.bgImage ? `<div class="bg-img-preview"><img src="${esc(sty.bgImage)}" alt=
 ${
     sty.bgImage
         ? `<div class="prop-field-row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="prop-field"><label>BG Size</label><select onchange="updateSectionStyle('${sec.id}','bgSize',this.value)">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${["cover", "contain", "auto", "100% 100%"].map((v) => `<option value="${v}" ${sty.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="prop-field"><label>BG Position</label><select onchange="updateSectionStyle('${sec.id}','bgPosition',this.value)">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${["center", "top", "bottom", "left", "right", "center top", "center bottom"].map((v) => `<option value="${v}" ${sty.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="prop-field"><label>BG Repeat</label><div class="btn-group">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${["no-repeat", "repeat", "repeat-x", "repeat-y"].map((v) => `<button class="${(sty.bgRepeat || "no-repeat") === v ? "active" : ""}" onclick="updateSectionStyle('${sec.id}','bgRepeat','${v}')">${v}</button>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div></div>`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Size</label><select onchange="updateSectionStyle('${sec.id}','bgSize',this.value)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["cover", "contain", "auto", "100% 100%"].map((v) => `<option value="${v}" ${sty.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Position</label><select onchange="updateSectionStyle('${sec.id}','bgPosition',this.value)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["center", "top", "bottom", "left", "right", "center top", "center bottom"].map((v) => `<option value="${v}" ${sty.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Repeat</label><div class="btn-group">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["no-repeat", "repeat", "repeat-x", "repeat-y"].map((v) => `<button class="${(sty.bgRepeat || "no-repeat") === v ? "active" : ""}" onclick="updateSectionStyle('${sec.id}','bgRepeat','${v}')">${v}</button>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div></div>`
         : ""
 }
 <div class="prop-field-row">
@@ -2337,9 +2390,9 @@ ${s.bgImage ? `<div class="bg-img-preview"><img src="${esc(s.bgImage)}" alt=""><
 ${
     s.bgImage
         ? `<div class="prop-field-row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="prop-field"><label>BG Size</label><select onchange="updateDivStyle('${div.id}','bgSize',this.value)">${["cover", "contain", "auto"].map((v) => `<option ${s.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="prop-field"><label>BG Pos</label><select onchange="updateDivStyle('${div.id}','bgPosition',this.value)">${["center", "top", "bottom", "left", "right"].map((v) => `<option ${s.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Size</label><select onchange="updateDivStyle('${div.id}','bgSize',this.value)">${["cover", "contain", "auto"].map((v) => `<option ${s.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Pos</label><select onchange="updateDivStyle('${div.id}','bgPosition',this.value)">${["center", "top", "bottom", "left", "right"].map((v) => `<option ${s.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>`
         : ""
 }
 <div class="prop-field-row">
@@ -2560,27 +2613,27 @@ ${
 
             <div class="items-list">
                 ${(p.cards || []).map((card, i) => `
-                                                                                                                                            <div class="item-row"
-                                                                                                                                                style="flex-direction:column;align-items:stretch;gap:6px">
+                                                                                                                                                                        <div class="item-row"
+                                                                                                                                                                            style="flex-direction:column;align-items:stretch;gap:6px">
 
-                                                                                                                                                <input type="text"
-                                                                                                                                                    placeholder="Icon (fa-rocket)"
-                                                                                                                                                    value="${esc(card.icon || "")}"
-                                                                                                                                                    onchange="updateWorkingCardItem('${widget.id}',${i},'icon',this.value)">
+                                                                                                                                                                            <input type="text"
+                                                                                                                                                                                placeholder="Icon (fa-rocket)"
+                                                                                                                                                                                value="${esc(card.icon || "")}"
+                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'icon',this.value)">
 
-                                                                                                                                                <input type="text"
-                                                                                                                                                    placeholder="Title"
-                                                                                                                                                    value="${esc(card.text || "")}"
-                                                                                                                                                    onchange="updateWorkingCardItem('${widget.id}',${i},'text',this.value)">
+                                                                                                                                                                            <input type="text"
+                                                                                                                                                                                placeholder="Title"
+                                                                                                                                                                                value="${esc(card.text || "")}"
+                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'text',this.value)">
 
-                                                                                                                                                <textarea
-                                                                                                                                                    placeholder="Description"
-                                                                                                                                                    onchange="updateWorkingCardItem('${widget.id}',${i},'desc',this.value)"
-                                                                                                                                                >${esc(card.desc || "")}</textarea>
+                                                                                                                                                                            <textarea
+                                                                                                                                                                                placeholder="Description"
+                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'desc',this.value)"
+                                                                                                                                                                            >${esc(card.desc || "")}</textarea>
 
-                                                                                                                                               
-                                                                                                                                            </div>
-                                                                                                                                        `).join("")}
+                                                                                                                                                                           
+                                                                                                                                                                        </div>
+                                                                                                                                                                    `).join("")}
             </div>
 
         </div>`;
@@ -2611,15 +2664,15 @@ ${
             <div class="prop-section-title"><i class="fa fa-building"></i> Brands Listing</div>
             <div class="items-list">
                 ${(p.images || []).map((img, i) => `
-                                            <div class="brand-item-row">
-                                                <div class="image-preview-box" style="width:70px;height:40px;flex-shrink:0">
-                                                    <img src="${esc(img)}" alt="Brand" style="width:100%;height:100%;object-fit:contain">
-                                                </div>
-                                                <input type="hidden" value="${esc(img)}" placeholder="Image URL" style="flex:1" onchange="updateBrandsItem('${widget.id}',${i},this.value)">
-                                                <button class="image-picker-btn" onclick="openFM(url=>{updateBrandsItem('${widget.id}',${i},url);renderCanvas();selectWidget('${widget.id}');})" style="padding:6px 8px"><i class="fa fa-image"></i></button>
-                                                <button onclick="removeBrandsItem('${widget.id}',${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:6px"><i class="fa fa-xmark"></i></button>
-                                            </div>
-                                        `).join("")}
+                                                                        <div class="brand-item-row">
+                                                                            <div class="image-preview-box" style="width:70px;height:40px;flex-shrink:0">
+                                                                                <img src="${esc(img)}" alt="Brand" style="width:100%;height:100%;object-fit:contain">
+                                                                            </div>
+                                                                            <input type="hidden" value="${esc(img)}" placeholder="Image URL" style="flex:1" onchange="updateBrandsItem('${widget.id}',${i},this.value)">
+                                                                            <button class="image-picker-btn" onclick="openFM(url=>{updateBrandsItem('${widget.id}',${i},url);renderCanvas();selectWidget('${widget.id}');})" style="padding:6px 8px"><i class="fa fa-image"></i></button>
+                                                                            <button onclick="removeBrandsItem('${widget.id}',${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:6px"><i class="fa fa-xmark"></i></button>
+                                                                        </div>
+                                                                    `).join("")}
             </div>
             <button class="add-item-btn" onclick="addBrandsItem('${widget.id}')"><i class="fa fa-plus"></i> Add Brand Image</button>
         </div>`;
@@ -4365,36 +4418,6 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
             }
         }
 
-        // function renderTemplates() {
-
-        //     const container =
-        //         document.getElementById('tab-cust-templates');
-
-        //     let html = '<div class="comp-group-label">Saved Templates</div>';
-
-        //     dynamicTemplates.forEach(template => {
-
-        //         html += `
-    // <div class="tpl-item"
-    //      onclick='insertTemplate(${JSON.stringify(template.content)})'>
-
-    //     <i class="fa fa-bookmark"></i>
-
-    //     <div class="tpl-item-info">
-    //         <h4>${template.name}</h4>
-    //         <p>Saved Template</p>
-    //     </div>
-
-    //     <span class="tpl-delete"
-    //           onclick='event.stopPropagation(); deleteTemplate(${template.id});'>
-    //         <i class="fa-solid fa-trash"></i>
-    //     </span>
-
-    // </div>`;
-        //     });
-
-        //     container.innerHTML = html;
-        // }
 
         function renderTemplates() {
             const container = document.getElementById('tab-cust-templates');
@@ -4591,6 +4614,138 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
             undoLast();
         });
         loadTemplates();
+        let _activeFocusedLayerRow = null;
+        let _activeFocusedCanvasEl = null;
+        let _layerFocusTimer = null;
+        let _canvasFocusTimer = null;
+
+        function clearLayerFocus() {
+            if (_activeFocusedLayerRow) {
+                _activeFocusedLayerRow.style.outline = '';
+                _activeFocusedLayerRow.style.background = '';
+                _activeFocusedLayerRow = null;
+            }
+            clearTimeout(_layerFocusTimer);
+        }
+
+        function clearCanvasFocus() {
+            if (_activeFocusedCanvasEl) {
+                _activeFocusedCanvasEl.style.outline = '';
+                _activeFocusedCanvasEl.style.boxShadow = '';
+                _activeFocusedCanvasEl = null;
+            }
+            clearTimeout(_canvasFocusTimer);
+        }
+
+        function syncLayerFocus(id) {
+            requestAnimationFrame(() => {
+                clearLayerFocus();
+
+                const item = document.querySelector('.layer-item[data-id="' + id + '"]');
+                if (!item) return;
+
+                // Expand any collapsed ancestors
+                let ancestor = item.parentElement;
+                while (ancestor && ancestor.id !== 'layers-tree') {
+                    if (ancestor.tagName === 'LI' && ancestor.dataset.collapsed === '1') {
+                        toggleLayerChildren(ancestor);
+                    }
+                    ancestor = ancestor.parentElement;
+                }
+
+                // Scroll layer panel to this item
+                const layersContainer = document.querySelector('.layers-container');
+                if (layersContainer) {
+                    const containerRect = layersContainer.getBoundingClientRect();
+                    const itemRect = item.getBoundingClientRect();
+                    const scrollTop = layersContainer.scrollTop + (itemRect.top - containerRect.top) - (
+                        containerRect.height / 2) + (itemRect.height / 2);
+                    layersContainer.scrollTo({
+                        top: scrollTop,
+                        behavior: 'smooth'
+                    });
+                }
+
+                const row = item.querySelector('.layer-row');
+                if (!row) return;
+
+                // Apply focus highlight
+                row.style.outline = '2px solid var(--accent)';
+                row.style.outlineOffset = '-2px';
+                row.style.background = 'var(--surface3)';
+                _activeFocusedLayerRow = row;
+
+                // Auto-remove after 2s
+                clearTimeout(_layerFocusTimer);
+                _layerFocusTimer = setTimeout(() => {
+                    if (_activeFocusedLayerRow === row) {
+                        row.style.outline = '';
+                        row.style.background = '';
+                        _activeFocusedLayerRow = null;
+                    }
+                }, 2000);
+            });
+        }
+
+        function syncCanvasFocus(id) {
+            clearCanvasFocus();
+
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            // Scroll canvas-wrapper to center the element
+            const canvasWrapper = document.querySelector('.canvas-wrapper');
+            if (canvasWrapper) {
+                const wrapperRect = canvasWrapper.getBoundingClientRect();
+                const elRect = el.getBoundingClientRect();
+                const scrollTop = canvasWrapper.scrollTop + (elRect.top - wrapperRect.top) - (wrapperRect.height / 2) + (
+                    elRect.height / 2);
+                canvasWrapper.scrollTo({
+                    top: scrollTop,
+                    behavior: 'smooth'
+                });
+            }
+
+            // Small delay so scroll starts before highlight appears
+            setTimeout(() => {
+                // Re-fetch el in case DOM changed
+                const target = document.getElementById(id);
+                if (!target) return;
+
+                target.style.outline = '2px solid var(--accent)';
+                target.style.outlineOffset = '-3px';
+                target.style.boxShadow = '0 0 0 5px rgba(91,82,240,0.18)';
+                _activeFocusedCanvasEl = target;
+
+                clearTimeout(_canvasFocusTimer);
+                _canvasFocusTimer = setTimeout(() => {
+                    if (_activeFocusedCanvasEl === target) {
+                        target.style.outline = '';
+                        target.style.boxShadow = '';
+                        _activeFocusedCanvasEl = null;
+                    }
+                }, 2000);
+            }, 100);
+        }
+
+        // Patch canvas selectors to also sync layer panel
+        const _origSelectSection = selectSection;
+        selectSection = function(id) {
+            _origSelectSection(id);
+            syncLayerFocus(id);
+        };
+
+        const _origSelectWidget = selectWidget;
+        selectWidget = function(id) {
+            _origSelectWidget(id);
+            syncLayerFocus(id);
+        };
+
+        const _origSelectDiv = selectDiv;
+        selectDiv = function(id) {
+            _origSelectDiv(id);
+            syncLayerFocus(id);
+        };
     </script>
 </body>
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Contact;
 use App\Models\Page;
 use App\Models\Seo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class FrontendController extends Controller
 {
@@ -16,7 +18,7 @@ class FrontendController extends Controller
     // {
     //     return view('frontend.home_01');
     // }
-    public function page($slug='/')
+    public function page($slug = '/')
     {
         $page = Page::where('slug', $slug)->firstOrFail();
         $breadcrumb = $page->header_section;
@@ -85,5 +87,35 @@ class FrontendController extends Controller
             'status' => true,
             'message' => 'Comment saved successfully!'
         ]);
+    }
+    public function contactForm(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+            'g-recaptcha-response' => 'required'
+        ]);
+
+        // Verify reCAPTCHA
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+
+        if (!$response->json()['success']) {
+            return response()->json([
+                'errors' => ['captcha' => ['Captcha verification failed']]
+            ], 422);
+        }
+
+        Contact::create($request->only([
+            'name', 'email', 'phone', 'subject', 'message'
+        ]));
+
+        return response()->json(['success' => true]);
     }
 }

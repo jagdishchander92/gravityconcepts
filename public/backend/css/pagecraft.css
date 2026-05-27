@@ -2197,3 +2197,6 @@ img{
     outline: none;
     border-color: var(--accent);
 }
+.canvas-wrapper {
+    overflow-y: auto;
+}

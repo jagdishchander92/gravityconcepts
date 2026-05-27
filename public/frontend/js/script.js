@@ -9,7 +9,7 @@ var DREAMIT = {};
 	//Loading Preloader
 	function handlePreloader() {
 		if ($('.preloader').length) {
-			$('.preloader').delay(200).fadeOut(500);
+			$('.preloader').delay(200).fadeOut(600);
 		}
 	}
 
@@ -424,7 +424,10 @@ var DREAMIT = {};
 		slidesPerView: 4,
 		spaceBetween: 30,
 		loop: true,
-		autoplay: true,
+		autoplay: {
+			delay: 1000,
+			reverseDirection: true,
+    	},
 		breakpoints: {
 			1920: {
 				slidesPerView: 5,

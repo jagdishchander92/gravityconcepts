@@ -1,6 +1,7 @@
 <!-- service Section home2 -->
-<section class="service-section-home2 no-margin">
-    <section class="service-section-home2 p-0 py-0">
+
+<div class="bg-black">
+    <section class="service-section-home2">
         <div class="auto-container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -16,9 +17,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="section-desc">
-                        <p class="title-anim">loginet is a main-homeal organizations maintaince
-                            dedicated to protecting planet through sustainable
-                            community empowerment moderator</p>
+                        <p class="title-anim">With Gravity Concepts, you
+                            will get a 24×7 service that helps you automate and
+                            improve your daily activities, resulting in greater
+                            transparency and increased efficiency.</p>
                     </div>
                 </div>
             </div>
@@ -27,9 +29,14 @@
             <div class="swiper service-home2-active">
                 <div class="swiper-wrapper">
                     @php
-                        $services = \App\Models\Card::where('card_type', 'service_card')
-                            ->whereIn('id', explode(',', $data))
-                            ->get();
+                        $ids = explode(',', $data);
+                        if (!empty($ids)) {
+                            $services = \App\Models\Card::where('card_type', 'service_card')
+                                ->whereIn('id', explode(',', $data))
+                                ->get();
+                        } else {
+                            $services = \App\Models\Card::where('card_type', 'service_card')->get();
+                        }
                     @endphp
                     @foreach ($services as $service)
                         <div class="swiper-slide">
@@ -40,7 +47,7 @@
                                                 alt="service-thumb">
                                         </figure>
                                         <div class="service-icon">
-                                            <img src="{{ url($service->card_icon) }}" alt="icon">
+                                            <img src="{{ url($service->card_icon) }}" alt="icon" width="40">
                                         </div>
                                     </div>
                                     <div class="service-content">
@@ -71,5 +78,5 @@
             </div>
         </div>
     </section>
-</section>
+</div>
 <!-- service Section home2 -->

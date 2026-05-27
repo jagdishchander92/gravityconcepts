@@ -1,4 +1,4 @@
-<div class="about-section-one icon-card {{ $classes }}" style="{{ $widgetStyle}}">
+<div class="about-section-one icon-card {{ $classes }}" style="{{ $widgetStyle }}">
     <div class="single-about-box fade-in"
         style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
         <div class="about-icon">
@@ -8,7 +8,7 @@
             <h1>{{ $p['title'] ?? '' }}</h1>
         </div>
         <div class="about-desc">
-            <p>{{ $p['desc'] ?? '' }}</p>
+            <p>{!! html_entity_decode(nl2br($p['desc'] ?? '')) !!}</p>
         </div>
-    </div>
+    </div>  
 </div>

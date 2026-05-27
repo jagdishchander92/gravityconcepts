@@ -1,6 +1,7 @@
-<x-layout>
+<x-layout >
     @if ($breadcrumb && isset($breadcrumb['breadcrumb_title']) && $breadcrumb['breadcrumb_title'])
-        <div class="breadcumb-area">
+        <div class="breadcumb-area"
+            @if ($breadcrumb['image']) style="background-image: url({{ $breadcrumb['image'] }})" @endif>
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12 text-center">
@@ -12,7 +13,7 @@
                                 <li><a href="/">Home</a></li>
                                 <li>{{ $breadcrumb['breadcrumb_title'] ?? '' }}</li>
                             </ul>
-                            <p class="text-white">{{ $breadcrumb['breadcrumb_title'] ?? '' }}</p>
+                            <p class="text-white">{{ $breadcrumb['breadcrumb_subtitle'] ?? '' }}</p>
                         </div>
                     </div>
                 </div>
@@ -48,8 +49,8 @@
         $sty = $section['style'] ?? [];
         $isBsRow = ($section['type'] ?? '') === 'bs-row';
 
-        $pad = buildSpacing(get($sty, 'pt'), get($sty, 'pr'), get($sty, 'pb'), get($sty, 'pl'), get($sty, 'padding'));
-        $mar = buildSpacing(get($sty, 'mt'), get($sty, 'mr'), get($sty, 'mb'), get($sty, 'ml'), get($sty, 'margin'));
+        $pad = buildPadding($sty);
+        $mar = buildMargin($sty);
 
         $bgStyle = !empty($sty['bgImage'])
             ? "background-image:url({$sty['bgImage']});background-size:" .
@@ -79,8 +80,8 @@
             $flexStyle,
             get($sty, 'background') ? "background:{$sty['background']};" : null,
             $bgStyle,
-            $pad ? "padding:{$pad};" : null,
-            $mar ? "margin:{$mar};" : null,
+            $pad ?: null,
+            $mar ?: null,
             get($sty, 'border') ? "border:{$sty['border']};" : null,
             get($sty, 'borderRadius') ? "border-radius:{$sty['borderRadius']};" : null,
             get($sty, 'minHeight') ? "min-height:{$sty['minHeight']};" : null,
@@ -129,8 +130,8 @@
     {
         $s = $div['inlineStyles'] ?? [];
 
-        $pad = buildSpacing(get($s, 'pt'), get($s, 'pr'), get($s, 'pb'), get($s, 'pl'), '');
-        $mar = buildSpacing(get($s, 'mt'), get($s, 'mr'), get($s, 'mb'), get($s, 'ml'), '');
+        $pad = buildPadding($s);
+        $mar = buildMargin($s);
 
         $bgStyle = !empty($s['bgImage'])
             ? "background-image:url({$s['bgImage']});background-size:" .
@@ -142,8 +143,8 @@
 
         $styleParts = array_filter([
             get($s, 'background') ? "background:{$s['background']};" : null,
-            $pad ? "padding:{$pad};" : null,
-            $mar ? "margin:{$mar};" : null,
+            $pad ?: null,
+            $mar ?: null,
             get($s, 'border') ? "border:{$s['border']};" : null,
             get($s, 'borderRadius') ? "border-radius:{$s['borderRadius']};" : null,
             get($s, 'display') ? "display:{$s['display']};" : null,
@@ -178,8 +179,8 @@
         $p = $widget['props'] ?? [];
         $s = $widget['style'] ?? [];
 
-        $pad = buildSpacing(get($s, 'pt'), get($s, 'pr'), get($s, 'pb'), get($s, 'pl'), '');
-        $mar = buildSpacing(get($s, 'mt'), get($s, 'mr'), get($s, 'mb'), get($s, 'ml'), '');
+        $pad = buildPadding($s);
+        $mar = buildMargin($s);
 
         $bgStyle = !empty($s['bgImage'])
             ? "background-image:url({$s['bgImage']});background-size:" .
@@ -191,8 +192,8 @@
 
         $styleParts = array_filter([
             get($s, 'background') ? "background:{$s['background']};" : null,
-            $pad ? "padding:{$pad};" : null,
-            $mar ? "margin:{$mar};" : null,
+            $pad ?: null,
+            $mar ?: null,
             get($s, 'border') ? "border:{$s['border']};" : null,
             get($s, 'borderRadius') ? "border-radius:{$s['borderRadius']};" : null,
             get($s, 'color') ? "color:{$s['color']};" : null,
@@ -254,8 +255,7 @@
     function renderHeadingN($p, $style, $classes): string
     {
         $level = $p['level'] ?? 'h2';
-        $content = "<{$level} class=\"{$classes}\" style=\"\">" . e($p['text'] ?? 'Heading') . "</{$level}>";
-        return $content;
+        return "<{$level} class=\"{$classes}\" style=\"{$style}\">" . ($p['text'] ?? 'Heading') . "</{$level}>";
     }
     function renderSpacer($p, $style, $classes): string
     {
@@ -271,9 +271,9 @@
     function renderButton($p, $style, $classes): string
     {
         if ($p['style'] == 'outline') {
-            return "<a href=\"{$p['href']}\" class=\"{$classes}\" style=\"{$style}\">" .
+            return "<a href=\"{$p['href']}\" class=\"primary-btn-outline {$classes}\" style=\"{$style}\">" .
                 nl2br(e($p['label'] ?? '')) .
-                "<i class=\"fa-solid fa-arrow-right\"></i><span style=\"top: 61.2031px; left: 45.5px;\"></span></a>";
+                "<i class=\"ms-1 fa-solid fa-arrow-right\"></i><span style=\"top: 61.2031px; left: 45.5px;\"></span></a>";
         } else {
             return "<a class=\"primary-btn-solid {$classes}\"  style=\"{$style}\" href=\"{$p['href']}\">" .
                 nl2br(e($p['label'] ?? '')) .
@@ -298,12 +298,41 @@
         return $array[$key] ?? $default;
     }
 
-    function buildSpacing($t = '', $r = '', $b = '', $l = '', $shorthand = ''): string
+    // REPLACED: buildSpacing removed, use buildPadding / buildMargin instead
+    function buildPadding(array $s): string
     {
-        if ($t || $r || $b || $l) {
-            return trim("{$t} {$r} {$b} {$l}", ' ');
+        $css = '';
+        if (isset($s['pt']) && $s['pt'] !== '') {
+            $css .= "padding-top:{$s['pt']};";
         }
-        return $shorthand;
+        if (isset($s['pr']) && $s['pr'] !== '') {
+            $css .= "padding-right:{$s['pr']};";
+        }
+        if (isset($s['pb']) && $s['pb'] !== '') {
+            $css .= "padding-bottom:{$s['pb']};";
+        }
+        if (isset($s['pl']) && $s['pl'] !== '') {
+            $css .= "padding-left:{$s['pl']};";
+        }
+        return $css;
+    }
+
+    function buildMargin(array $s): string
+    {
+        $css = '';
+        if (isset($s['mt']) && $s['mt'] !== '') {
+            $css .= "margin-top:{$s['mt']};";
+        }
+        if (isset($s['mr']) && $s['mr'] !== '') {
+            $css .= "margin-right:{$s['mr']};";
+        }
+        if (isset($s['mb']) && $s['mb'] !== '') {
+            $css .= "margin-bottom:{$s['mb']};";
+        }
+        if (isset($s['ml']) && $s['ml'] !== '') {
+            $css .= "margin-left:{$s['ml']};";
+        }
+        return $css;
     }
 
     function renderShortCode($p)
@@ -322,6 +351,15 @@
                 break;
             case 'services':
                 return view('pagecraft.partials.services', compact('data'))->render();
+                break;
+            case 'features':
+                return view('pagecraft.partials.features', compact('data'))->render();
+                break;
+            case 'latest_blogs':
+                return view('pagecraft.partials.latest_blogs', compact('data'))->render();
+                break;
+            case 'contact-map':
+                return view('pagecraft.partials.contact-map', compact('data'))->render();
                 break;
 
             default:

@@ -140,7 +140,7 @@
                                         Header Banner Image
                                     </label>
 
-                                    <div class="border rounded-3 p-3 bg-light-subtle">
+                                    <div class="image-wrapper border rounded-3 p-3 bg-light-subtle">
 
                                         <button type="button" class="btn btn-primary btn-sm image-picker">
                                             <i class="ti ti-photo me-1"></i>

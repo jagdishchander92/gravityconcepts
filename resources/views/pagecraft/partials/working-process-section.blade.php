@@ -6,10 +6,10 @@
                  <div class="sec-title text-center">
                      <div class="section-sub-title">
                          <h1 class="sub-title"><img src="{{ asset('frontend/images/main-home/sub-title-icon.png') }}"
-                                 alt="sub-icon">{{ $p['subtitle'] ?? '' }}</h1>
+                                 alt="sub-icon">{!! html_entity_decode($p['subtitle'] ?? '') !!}</h1>
                      </div>
                      <div class="section-title">
-                         <h1 class="title text-white text-anime-3">{{ $p['title'] ?? '' }}</h1>
+                         <h1 class="title text-white text-anime-3">{!! html_entity_decode($p['title'] ?? '') !!}</h1>
                      </div>
                  </div>
              </div>

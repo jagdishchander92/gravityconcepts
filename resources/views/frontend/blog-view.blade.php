@@ -36,7 +36,8 @@
                                     <span><i
                                             class="fa-regular fa-calendar-days"></i>{{ $blog->published_at?->format('d M, Y') }}</span>
                                     <span><img src="{{ asset('frontend/images/inner-image/category-icon.png') }}"
-                                            alt="icon">{{ $blog->category->title }}</span>
+                                            alt="icon"><a
+                                            href="{{ url("category/{$blog->category->slug}") }}">{{ $blog->category->title }}</a></span>
                                 </div>
                                 <h4 class="blog-details-title">{{ $blog->title }}</h4>
 
@@ -285,7 +286,7 @@
                                 </div>
                                 <div class="widget-catefories-tags">
                                     @foreach ($blog->tags as $tag)
-                                        <a href="#">{{ ucfirst($tag) }}</a>
+                                        <a href="{{ url('blogs') }}?tags={{$tag}}">{{ ucfirst($tag) }}</a>
                                     @endforeach
 
 

@@ -1,3 +1,8 @@
+@props([
+    'title' => '',
+    'meta_title' => '',
+    'meta_desc' => '',
+])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +23,7 @@
         }
     @endphp
 
-    <title>{{ $title ?? 'Gravity Concepts US' }}</title>
+    <title>{{ $title ?? 'Gravity IT Solution' }}</title>
 
     <meta name="title" content="{{ $meta_title ?? '' }}">
 
@@ -34,10 +39,19 @@
     <link rel="icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root{
+            --text-color : #67777a;
+        }
+    </style>
     @stack('styles')
     @php
         $google_analytics = \App\Models\Seo::where('key', 'google_analytics')->first()?->data;
+        $custom_header_codes = \App\Models\CustomCode::where('type', 'header')->get();
     @endphp
+    @foreach ($custom_header_codes as $code)
+        {!! html_entity_decode($code->codes) !!}
+    @endforeach
     {!! html_entity_decode($google_analytics['header_codes'] ?? '') !!}
 </head>
 
@@ -224,7 +238,7 @@
                     <div class="inner-container">
                         <!--Logo-->
                         <div class="logo">
-                            <a href="index.html"><img
+                            <a href="/"><img
                                     src="{{ $logos['logo_light'] ? asset($logos['logo_light']) : '' }}"
                                     alt=""></a>
                         </div>
@@ -396,7 +410,7 @@
                             <!--Footer Column-->
                             <div class="col-xl-3 col-lg-12 col-md-6">
                                 <div class="footer-widget-content social">
-                                    <div class="logo"><a href="/"><img src="{{ $logos['logo_dark'] ?? '' }}"
+                                    <div class="logo"><a href="/"><img src="{{ asset($logos['logo_dark']??'')}}"
                                                 alt="logo" width="180"></a></div>
                                     <div class="footer-desc">{{ $website_info['footer_about'] ?? '' }}
                                     </div>
@@ -499,7 +513,7 @@
                                 <div class="footer-bottom-menu">
                                     <ul>
                                         <li><a href="{{ url('privacy-policy') }}">Privacy and Policy</a></li>
-                                        <li><a href="{{ url('sitemap') }}">Sitemap</a></li>
+                                        <li><a href="{{ url('sitemap.xml') }}" target="_blank">Sitemap</a></li>
                                         <li><a href="{{ url('faq') }}">FAQ’s</a></li>
                                     </ul>
                                 </div>
@@ -593,96 +607,104 @@
 
         <!-- Scroll To Top -->
         <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-up"></span></div>
-        {!! html_entity_decode($google_analytics['footer_codes'] ?? '') !!}
-        <script src="{{ asset('backend/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/jquery.js') }}"></script>
-        <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/magnific.js') }}"></script>
-        <script src="{{ asset('frontend/js/wow.js') }}"></script>
-        <script src="{{ asset('frontend/js/appear.js') }}"></script>
-        <script src="{{ asset('frontend/js/swiper.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/jquery.counterup.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/waypoints.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/nice-select.js') }}"></script>
-        <script src="{{ asset('frontend/js/gsap.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/ScrollTrigger.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/ScrollToPlugin.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/ScrollSmoother.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/SplitText.js') }}"></script>
-        <script src="{{ asset('frontend/js/cusor-text.js') }}"></script>
-        <script src="{{ asset('frontend/js/script.js') }}"></script>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <script>
-            $('#contactForm, #getQuoteForm').on('submit', function(e) {
-                e.preventDefault();
+    </div>
+    {!! html_entity_decode($google_analytics['footer_codes'] ?? '') !!}
+    <script src="{{ asset('backend/lib/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+    <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/magnific.js') }}"></script>
+    <script src="{{ asset('frontend/js/wow.js') }}"></script>
+    <script src="{{ asset('frontend/js/appear.js') }}"></script>
+    <script src="{{ asset('frontend/js/swiper.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/nice-select.js') }}"></script>
+    <script src="{{ asset('frontend/js/gsap.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/ScrollTrigger.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/ScrollToPlugin.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/ScrollSmoother.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/SplitText.js') }}"></script>
+    <script src="{{ asset('frontend/js/cusor-text.js') }}"></script>
+    <script src="{{ asset('frontend/js/script.js') }}"></script>
+    <script src="{{ asset('frontend/js/custom.js') }}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        $('#contactForm, #getQuoteForm, #quickContactForm').on('submit', function(e) {
+            e.preventDefault();
 
-                let form = $(this);
-                let btn = form.find('button[type="submit"]');
-                let originalBtnText = btn.html();
+            let form = $(this);
+            let btn = form.find('button[type="submit"]');
+            let originalBtnText = btn.html();
 
-                // Clear old errors
-                form.find('.text-danger').html('');
-                form.find('.form-control').removeClass('is-invalid');
+            // Clear old errors
+            form.find('.text-danger').html('');
+            form.find('.form-control').removeClass('is-invalid');
 
-                // Button loading state
-                btn.prop('disabled', true);
-                btn.html('<span class="spinner-border spinner-border-sm"></span> Sending...');
+            // Button loading state
+            btn.prop('disabled', true);
+            btn.html('<span class="spinner-border spinner-border-sm"></span> Sending...');
 
-                let formData = new FormData(this);
+            let formData = new FormData(this);
 
-                $.ajax({
-                    url: form.attr('action'),
-                    method: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+            $.ajax({
+                url: form.attr('action'),
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
 
-                    success: function(res) {
+                success: function(res) {
+
+                    form.find('.form-alert').html(
+                        '<span class="text-success">Message sent successfully!</span>'
+                    );
+
+                    form[0].reset();
+
+                    if (typeof grecaptcha !== "undefined") {
+                        grecaptcha.reset();
+                    }
+
+                    btn.prop('disabled', false).html(originalBtnText);
+                },
+
+                error: function(xhr) {
+
+                    btn.prop('disabled', false).html(originalBtnText);
+
+                    if (xhr.status === 422) {
+
+                        let errors = xhr.responseJSON.errors;
+
+                        $.each(errors, function(key, value) {
+
+                            let field = form.find('[name="' + key + '"]');
+
+                            field.addClass('is-invalid');
+
+                            form.find('.error-' + key).html(value[0]);
+                        });
+
+                    } else {
 
                         form.find('.form-alert').html(
-                            '<span class="text-success">Message sent successfully!</span>'
+                            '<span class="text-danger">Something went wrong. Try again.</span>'
                         );
-
-                        form[0].reset();
-
-                        if (typeof grecaptcha !== "undefined") {
-                            grecaptcha.reset();
-                        }
-
-                        btn.prop('disabled', false).html(originalBtnText);
-                    },
-
-                    error: function(xhr) {
-
-                        btn.prop('disabled', false).html(originalBtnText);
-
-                        if (xhr.status === 422) {
-
-                            let errors = xhr.responseJSON.errors;
-
-                            $.each(errors, function(key, value) {
-
-                                let field = form.find('[name="' + key + '"]');
-
-                                field.addClass('is-invalid');
-
-                                form.find('.error-' + key).html(value[0]);
-                            });
-
-                        } else {
-
-                            form.find('.form-alert').html(
-                                '<span class="text-danger">Something went wrong. Try again.</span>'
-                            );
-                        }
                     }
-                });
+                }
             });
-        </script>
-        @stack('scripts')
+        });
+    </script>
+    @php
+        $custom_header_codes = \App\Models\CustomCode::where('type', 'footer')->get();
+    @endphp
+    @foreach ($custom_header_codes as $code)
+        {!! html_entity_decode($code->codes) !!}
+    @endforeach
+    @stack('scripts')
 
-    </div>
+
 </body>
 
 </html>

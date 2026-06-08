@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="$title" :meta_title="$meta_title" :meta_desc="$meta_desc">
     <!-- breadcumb Section-->
     <div class="breadcumb-area">
         <div class="container">
@@ -34,10 +34,10 @@
                                     <a
                                         href="{{ url("blog/$blog->slug") }}">{{ $blog->published_at?->format('d M, Y') }}</a>
                                 </div>
-                                <h3 class="blog-title"><a href="{{ url("blog/$blog->slug") }}"
-                                        data-cursor-text="View">{{ $blog->title }}</a></h3>
+                                <h3 class="blog-title"><a href="{{ url("blog/$blog->slug") }}" data-cursor-text="View"
+                                        title="{{ $blog->title }}">{{ $blog->title }}</a></h3>
                                 <div class="blog-autor">
-                                    <a href="blog-details.html">By - <span>Pankaj Mehta</span></a>
+                                    <a href="/author-profile">By - <span>Pankaj Mehta</span></a>
                                 </div>
                             </div>
                         </div>

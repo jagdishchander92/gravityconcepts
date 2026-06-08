@@ -42,8 +42,6 @@
             margin-left: unset;
         }
     </style>
-    
-
     @stack('styles')
 </head>
 
@@ -63,7 +61,12 @@
             <div>
 
                 <ul class="list-unstyled d-flex align-items-center mb-0 gap-1">
-
+                    @if (auth()->user()->can('generate-sitemap'))
+                        <li>
+                            <a href="{{ url('/backend/seo/generate-sitemap') }}" class="btn btn-sm btn-primary"><i
+                                    class="ti ti-sitemap"></i> Generate Sitemap </a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ url('/') }}" target="_blank" class="btn btn-sm btn-primary"><i
                                 class="ti ti-eye"></i> View Website </a>

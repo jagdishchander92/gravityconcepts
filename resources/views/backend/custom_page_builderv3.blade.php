@@ -153,12 +153,15 @@
                             <i class="fa fa-spinner fa-spin"></i> Loading images...
                         </div>
                     </div>
-                    <div style="padding:12px 12px 0;display:none" id="fmPagination">
-                        <button class="topbar-btn" id="fmPrevBtn" onclick="loadImages(currentPage-1,true)"
-                            style="opacity:.5"><i class="fa fa-chevron-left"></i> Prev</button>
+                    <div style="padding:12px 12px 0;display:none" id="fmPagination" class="mt-3">
                         <span style="color:var(--text3);font-size:11px" id="fmPageInfo">Page 1</span>
-                        <button class="topbar-btn" id="fmNextBtn" onclick="loadImages(currentPage+1,true)"
-                            style="opacity:.5"><i class="fa fa-chevron-right"></i> Next</button>
+                        <div class="d-flex gap-2">
+                            <button class="topbar-btn" id="fmPrevBtn" onclick="loadImages(currentPage-1,true)"
+                                style="opacity:.5"><i class="fa fa-chevron-left"></i> Prev</button>
+
+                            <button class="topbar-btn" id="fmNextBtn" onclick="loadImages(currentPage+1,true)"
+                                style="opacity:.5"><i class="fa fa-chevron-right"></i> Next</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,7 +178,7 @@
         </div>
     </div>
 
-    <form id="previewForm" method="POST" action="/backend/pagecraft/preview" target="_blank"
+    <form id="previewForm" method="POST" action="/backend/pagecraft/preview/{{ $page->slug }}" target="_blank"
         style="display:none;">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="json" id="previewJson">
@@ -392,6 +395,7 @@
                     props: {
                         src: "https://picsum.photos/seed/pb/600/300",
                         alt: "Image",
+                        size: "original",
                     },
                 },
                 {
@@ -432,6 +436,33 @@
                     props: {
                         code: "<p>Custom HTML here</p>",
                     },
+                },
+                {
+                    type: 'process',
+                    icon: 'fa-right-long',
+                    label: "Process",
+                    props: {
+                        items: [{
+                                icon: "fa-rocket",
+                                text: "Fast",
+                                desc: "Ship fast.",
+                            }, {
+                                icon: "fa-shield",
+                                text: "Secure",
+                                desc: "Always safe.",
+                            },
+                            {
+                                icon: "fa-users",
+                                text: "Support",
+                                desc: "24/7 help.",
+                            },
+                            {
+                                icon: "fa-chart-line",
+                                text: "Growth",
+                                desc: "Scale fast.",
+                            },
+                        ]
+                    }
                 },
                 {
                     type: "theme-section",
@@ -1375,7 +1406,7 @@
                 case "heading-n":
                     return `<${p.level || "h2"} class="${p.classes || ""}" style="margin:0">${p.text || "Heading"}</${p.level || "h2"}>`;
                 case "subheading":
-                    return `<p class="${p.classes || ""}" style="margin:4px 0 0 0">${p.subtext || "Subheading"}</p>`;
+                    return `<p class="${p.classes || ""}" style="margin:4px 0 0 0">${p.text || "Subheading"}</p>`;
                 case "text":
                     return `<div class="w-text"><p>${(p.content || "").replace(/\n/g, "<br>")}</p></div>`;
                 case "button":
@@ -1416,6 +1447,8 @@
                 }
                 case "theme-section":
                     return renderThemeSection(p);
+                case "process":
+                    return renderProcessSection(p);
                 case "working-process-section":
                     return renderWorkingProcessSection(p);
                 case "shortcode":
@@ -1441,6 +1474,16 @@
                 )
                 .join("");
             return `<div class="w-theme-section"><div class="ts-hero"><div class="ts-hero-text"><h3>${p.subtitle || ""}</h3><h2>${p.title || ""}</h2><p>${p.desc || ""}</p><a href="${p.btnUrl || "#"}" class="ts-btn" onclick="return false"><i class="fa fa-arrow-right"></i>${p.btnText || "Learn More"}</a></div>${p.image ? `<div class="ts-hero-img"><img src="${p.image}" alt=""></div>` : ""}</div><div class="ts-cards">${cards}</div></div>`;
+        }
+
+        function renderProcessSection(p) {
+            const cards = (p.items || [])
+                .map(
+                    (c) =>
+                    `<div class="ts-card"><div class="tc-icon"><i class="fa ${c.icon || "fa-star"}"></i></div><h4>${c.text || ""}</h4><p>${c.desc || ""}</p></div>`,
+                )
+                .join("");
+            return `<div class="w-process"><div class="ts-cards">${cards}</div></div>`;
         }
 
         function renderWorkingProcessSection(p) {
@@ -2267,12 +2310,12 @@
 ${sec.cols
     .map(
         (col, i) => `<div class="bs-col-row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <label>Col ${i + 1}</label>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select onchange="updateBsColClass('${sec.id}','${col.id}',this.value)">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["col-12", "col-md-1", "col-md-2", "col-md-3", "col-md-4", "col-md-5", "col-md-6", "col-md-7", "col-md-8", "col-md-9", "col-md-10", "col-md-11", "col-md-12", "col-lg-3", "col-lg-4", "col-lg-6", "col-lg-8", "col"].map((v) => `<option value="${v}" ${col.bsCol === v ? "selected" : ""}>${v}</option>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <button onclick="removeBsCol('${sec.id}','${col.id}')"><i class="fa fa-xmark"></i></button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>`,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <label>Col ${i + 1}</label>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <select onchange="updateBsColClass('${sec.id}','${col.id}',this.value)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["col-12", "col-md-1", "col-md-2", "col-md-3", "col-md-4", "col-md-5", "col-md-6", "col-md-7", "col-md-8", "col-md-9", "col-md-10", "col-md-11", "col-md-12", "col-lg-3", "col-lg-4", "col-lg-6", "col-lg-8", "col"].map((v) => `<option value="${v}" ${col.bsCol === v ? "selected" : ""}>${v}</option>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <button onclick="removeBsCol('${sec.id}','${col.id}')"><i class="fa fa-xmark"></i></button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>`,
     )
     .join("")}
 </div>
@@ -2323,16 +2366,16 @@ ${sty.bgImage ? `<div class="bg-img-preview"><img src="${esc(sty.bgImage)}" alt=
 ${
     sty.bgImage
         ? `<div class="prop-field-row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Size</label><select onchange="updateSectionStyle('${sec.id}','bgSize',this.value)">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["cover", "contain", "auto", "100% 100%"].map((v) => `<option value="${v}" ${sty.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Position</label><select onchange="updateSectionStyle('${sec.id}','bgPosition',this.value)">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["center", "top", "bottom", "left", "right", "center top", "center bottom"].map((v) => `<option value="${v}" ${sty.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Repeat</label><div class="btn-group">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["no-repeat", "repeat", "repeat-x", "repeat-y"].map((v) => `<button class="${(sty.bgRepeat || "no-repeat") === v ? "active" : ""}" onclick="updateSectionStyle('${sec.id}','bgRepeat','${v}')">${v}</button>`).join("")}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div></div>`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Size</label><select onchange="updateSectionStyle('${sec.id}','bgSize',this.value)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["cover", "contain", "auto", "100% 100%"].map((v) => `<option value="${v}" ${sty.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Position</label><select onchange="updateSectionStyle('${sec.id}','bgPosition',this.value)">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["center", "top", "bottom", "left", "right", "center top", "center bottom"].map((v) => `<option value="${v}" ${sty.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Repeat</label><div class="btn-group">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${["no-repeat", "repeat", "repeat-x", "repeat-y"].map((v) => `<button class="${(sty.bgRepeat || "no-repeat") === v ? "active" : ""}" onclick="updateSectionStyle('${sec.id}','bgRepeat','${v}')">${v}</button>`).join("")}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div></div>`
         : ""
 }
 <div class="prop-field-row">
@@ -2390,9 +2433,9 @@ ${s.bgImage ? `<div class="bg-img-preview"><img src="${esc(s.bgImage)}" alt=""><
 ${
     s.bgImage
         ? `<div class="prop-field-row">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Size</label><select onchange="updateDivStyle('${div.id}','bgSize',this.value)">${["cover", "contain", "auto"].map((v) => `<option ${s.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Pos</label><select onchange="updateDivStyle('${div.id}','bgPosition',this.value)">${["center", "top", "bottom", "left", "right"].map((v) => `<option ${s.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>`
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Size</label><select onchange="updateDivStyle('${div.id}','bgSize',this.value)">${["cover", "contain", "auto"].map((v) => `<option ${s.bgSize === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="prop-field"><label>BG Pos</label><select onchange="updateDivStyle('${div.id}','bgPosition',this.value)">${["center", "top", "bottom", "left", "right"].map((v) => `<option ${s.bgPosition === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>`
         : ""
 }
 <div class="prop-field-row">
@@ -2483,7 +2526,7 @@ ${
 <div class="prop-field" style="margin-top:5px"><label>Or paste URL</label><input type="url" value="${esc(p.src || "")}" placeholder="https://..." onchange="updateWidgetProp('${widget.id}','src',this.value)"></div>
 </div>
 </div>
-<div class="prop-field"><label>Alt Text</label><input type="text" value="${esc(p.alt || "")}" onchange="updateWidgetProp('${widget.id}','alt',this.value)"></div></div>`;
+<div class="prop-field"><label>Alt Text</label><input type="text" value="${esc(p.alt || "")}" onchange="updateWidgetProp('${widget.id}','alt',this.value)"></div><div class="prop-field"><label>Image Size</label><div class="btn-group">${["small", "medium", "large", "original"].map(v => `<button class="${(p.size || "original") === v ? "active" : ""}" onclick="updateWidgetPropDirect('${widget.id}','size','${v}')"> ${v.charAt(0).toUpperCase() + v.slice(1)} </button>`).join("")}</div></div></div>`;
                     break;
                 case "card-img":
                     content =
@@ -2562,10 +2605,14 @@ ${
 <button class="add-item-btn" onclick="addArrItem('${widget.id}','items','New item')"><i class="fa fa-plus"></i> Add</button></div>`;
                     break;
                 case "stats":
-                    console.log(p.items)
                     content = `<div class="prop-section"><div class="prop-section-title"><i class="fa fa-chart-bar"></i> Stats</div>
 <div class="items-list">${(p.items || []).map((it, i) => `<div class="item-row"><input value="${esc(it.num)}" placeholder="1000+" style="width:65px" onchange="updateStatItem('${widget.id}',${i},'num',this.value)"><input value="${esc(it.label)}" placeholder="Label" onchange="updateStatItem('${widget.id}',${i},'label',this.value)"><input value="${esc(it.icon)}" placeholder="fa-users" onchange="updateStatItem('${widget.id}',${i},'icon',this.value)"><button onclick="removeStatItem('${widget.id}',${i})"><i class="fa fa-xmark"></i></button></div>`).join("")}</div>
 <button class="add-item-btn" onclick="addStatItem('${widget.id}')"><i class="fa fa-plus"></i> Add</button></div>`;
+                    break;
+                    case "process":
+                    content = `<div class="prop-section"><div class="prop-section-title"><i class="fa fa-right-long"></i> Process</div>
+<div class="items-list">${(p.items || []).map((it, i) => `<div class="item-row"><input value="${esc(it.icon)}" placeholder="1000+" style="width:65px" onchange="updateStatItem('${widget.id}',${i},'icon',this.value)"><input value="${esc(it.text)}" placeholder="Label" onchange="updateStatItem('${widget.id}',${i},'text',this.value)"><input value="${esc(it.desc)}" placeholder="fa-users" onchange="updateStatItem('${widget.id}',${i},'desc',this.value)"><button onclick="removeStatItem('${widget.id}',${i})"><i class="fa fa-xmark"></i></button></div>`).join("")}</div>
+<button class="add-item-btn" onclick="addProcessItem('${widget.id}')"><i class="fa fa-plus"></i> Add</button></div>`;
                     break;
                 case "progress":
                     content = `<div class="prop-section"><div class="prop-section-title"><i class="fa fa-bars-progress"></i> Progress</div>
@@ -2613,27 +2660,27 @@ ${
 
             <div class="items-list">
                 ${(p.cards || []).map((card, i) => `
-                                                                                                                                                                        <div class="item-row"
-                                                                                                                                                                            style="flex-direction:column;align-items:stretch;gap:6px">
+                                                                                                                                                                                                                        <div class="item-row"
+                                                                                                                                                                                                                            style="flex-direction:column;align-items:stretch;gap:6px">
 
-                                                                                                                                                                            <input type="text"
-                                                                                                                                                                                placeholder="Icon (fa-rocket)"
-                                                                                                                                                                                value="${esc(card.icon || "")}"
-                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'icon',this.value)">
+                                                                                                                                                                                                                            <input type="text"
+                                                                                                                                                                                                                                placeholder="Icon (fa-rocket)"
+                                                                                                                                                                                                                                value="${esc(card.icon || "")}"
+                                                                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'icon',this.value)">
 
-                                                                                                                                                                            <input type="text"
-                                                                                                                                                                                placeholder="Title"
-                                                                                                                                                                                value="${esc(card.text || "")}"
-                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'text',this.value)">
+                                                                                                                                                                                                                            <input type="text"
+                                                                                                                                                                                                                                placeholder="Title"
+                                                                                                                                                                                                                                value="${esc(card.text || "")}"
+                                                                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'text',this.value)">
 
-                                                                                                                                                                            <textarea
-                                                                                                                                                                                placeholder="Description"
-                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'desc',this.value)"
-                                                                                                                                                                            >${esc(card.desc || "")}</textarea>
+                                                                                                                                                                                                                            <textarea
+                                                                                                                                                                                                                                placeholder="Description"
+                                                                                                                                                                                                                                onchange="updateWorkingCardItem('${widget.id}',${i},'desc',this.value)"
+                                                                                                                                                                                                                            >${esc(card.desc || "")}</textarea>
 
-                                                                                                                                                                           
-                                                                                                                                                                        </div>
-                                                                                                                                                                    `).join("")}
+                                                                                                                                                                                                                           
+                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                    `).join("")}
             </div>
 
         </div>`;
@@ -2664,15 +2711,15 @@ ${
             <div class="prop-section-title"><i class="fa fa-building"></i> Brands Listing</div>
             <div class="items-list">
                 ${(p.images || []).map((img, i) => `
-                                                                        <div class="brand-item-row">
-                                                                            <div class="image-preview-box" style="width:70px;height:40px;flex-shrink:0">
-                                                                                <img src="${esc(img)}" alt="Brand" style="width:100%;height:100%;object-fit:contain">
-                                                                            </div>
-                                                                            <input type="hidden" value="${esc(img)}" placeholder="Image URL" style="flex:1" onchange="updateBrandsItem('${widget.id}',${i},this.value)">
-                                                                            <button class="image-picker-btn" onclick="openFM(url=>{updateBrandsItem('${widget.id}',${i},url);renderCanvas();selectWidget('${widget.id}');})" style="padding:6px 8px"><i class="fa fa-image"></i></button>
-                                                                            <button onclick="removeBrandsItem('${widget.id}',${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:6px"><i class="fa fa-xmark"></i></button>
-                                                                        </div>
-                                                                    `).join("")}
+                                                                                                                        <div class="brand-item-row">
+                                                                                                                            <div class="image-preview-box" style="width:70px;height:40px;flex-shrink:0">
+                                                                                                                                <img src="${esc(img)}" alt="Brand" style="width:100%;height:100%;object-fit:contain">
+                                                                                                                            </div>
+                                                                                                                            <input type="hidden" value="${esc(img)}" placeholder="Image URL" style="flex:1" onchange="updateBrandsItem('${widget.id}',${i},this.value)">
+                                                                                                                            <button class="image-picker-btn" onclick="openFM(url=>{updateBrandsItem('${widget.id}',${i},url);renderCanvas();selectWidget('${widget.id}');})" style="padding:6px 8px"><i class="fa fa-image"></i></button>
+                                                                                                                            <button onclick="removeBrandsItem('${widget.id}',${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;padding:6px"><i class="fa fa-xmark"></i></button>
+                                                                                                                        </div>
+                                                                                                                    `).join("")}
             </div>
             <button class="add-item-btn" onclick="addBrandsItem('${widget.id}')"><i class="fa fa-plus"></i> Add Brand Image</button>
         </div>`;
@@ -2927,6 +2974,7 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
 
         // Widget updates
         function updateWidgetProp(widgetId, prop, val) {
+            console.log(widgetId, prop, val)
             const found = findWidget(widgetId);
             if (!found) return;
             found.widget.props[prop] = val;
@@ -3024,6 +3072,19 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
                 f.widget.props.items.push({
                     num: "0",
                     label: "Label",
+                });
+                refreshWidget(wid);
+                requestAnimationFrame(() => selectWidget(wid));
+            }
+        }
+        function addProcessItem(wid) {
+            saveHistory();
+            const f = findWidget(wid);
+            if (f) {
+                f.widget.props.items.push({
+                    icon: "fa-rocket",
+                    text: "Label",
+                    desc:"Desc"
                 });
                 refreshWidget(wid);
                 requestAnimationFrame(() => selectWidget(wid));
@@ -3226,7 +3287,7 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
             const nextBtn = document.getElementById("fmNextBtn");
             const pageInfo = document.getElementById("fmPageInfo");
 
-            pagination.style.display = totalPages > 1 ? "flex" : "none";
+            pagination.style.display = totalPages > 1 ? "block" : "none";
             prevBtn.style.opacity = currentPage > 1 ? "1" : ".5";
             prevBtn.disabled = currentPage <= 1;
             nextBtn.style.opacity = currentPage < totalPages ? "1" : ".5";
@@ -4107,10 +4168,9 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
         // SORTABLEJS ELEMENTOR SUPPORT
         // ============================
 
-
         function initSortableSystem() {
 
-            document.querySelectorAll('.section-col, .div-inner, #canvas')
+            document.querySelectorAll('.section-col, .pb-bs-col, .div-inner, #canvas')
                 .forEach(container => {
 
                     if (container.dataset.sortableInit) return;
@@ -4199,26 +4259,27 @@ ${s.bgImage ? `<div class="bg-img-preview" style="margin-top:4px"><img src="${es
 
         function getContainerArray(el) {
 
-            // canvas
+            // canvas root
             if (el.id === 'canvas') {
                 return sections;
             }
 
-            // div
+            // div inner container
             if (el.classList.contains('div-inner')) {
-
                 const divId = el.id.replace('div-inner-', '');
-
                 const div = findDivWrapper(divId);
-
                 if (div) return div.children;
             }
 
-            // section col
+            // section col (custom flex layout)
             if (el.classList.contains('section-col')) {
-
                 const colId = el.id;
+                return findColWidgets(colId);
+            }
 
+            // BS Row col (.pb-bs-col) — id is set directly on the colEl
+            if (el.classList.contains('pb-bs-col')) {
+                const colId = el.id;
                 return findColWidgets(colId);
             }
 

@@ -33,6 +33,11 @@ class SettingsController extends Controller
         $particle_js_type = Setting::where('key', 'particle_js_type')->first();
         $particle_js_type = $particle_js_type ? json_decode($particle_js_type->value, true) : [];
         $data['particle_js_type'] = $particle_js_type;
+        $home_banner_sliders = Setting::where('key', 'home_banner_slider')->first();
+        $home_banner_sliders = $home_banner_sliders
+            ? json_decode($home_banner_sliders->value, true)
+            : [];
+        $data['home_banner_sliders'] = $home_banner_sliders;
         // $data['particle_js_type'] = Setting::where('key', 'particle_js_type')->first();
         return view('backend.admin.settings.setting_index', $data);
     }
@@ -97,7 +102,7 @@ class SettingsController extends Controller
         }
 
         // Save only if something exists
-        if (!empty($data)) { 
+        if (!empty($data)) {
             Setting::updateOrInsert(
                 ['key' => 'website_logo_setting'],
                 ['value' => json_encode($data)]
@@ -176,5 +181,82 @@ class SettingsController extends Controller
         );
 
         return redirect()->route('admin.settings')->with('success', 'Particle type updated');
+    }
+
+    public function home_banner_slider_store(Request $request)
+    {
+        $old = Setting::where('key', 'home_banner_slider')->first();
+
+        $oldData = $old ? json_decode($old->value, true) : [];
+
+        $sliders = [];
+        // pre($request->all());
+        // die;
+
+        if ($request->has('sliders')) {
+
+            foreach ($request->sliders as $index => $slider) {
+
+                $image = $oldData[$index]['image'] ?? null;
+
+                if ($request->hasFile("sliders.$index.image")) {
+                    $image = $request->file("sliders.$index.image")->store('home-banner');
+                }
+
+                $sliders[] = [
+                    'image' => $image,
+                    'small_title' => $slider['small_title'] ?? '',
+                    'title_1' => $slider['title_1'] ?? '',
+                    'title_2' => $slider['title_2'] ?? '',
+                    'title_3' => $slider['title_3'] ?? '',
+                    'button_text' => $slider['button_text'] ?? '',
+                    'button_url' => $slider['button_url'] ?? '',
+                    // 'volunteer_count' => $slider['volunteer_count'] ?? '',
+                    // 'volunteer_text' => $slider['volunteer_text'] ?? '',
+                    'since_year' => $slider['since_year'] ?? '',
+                    'based_location' => $slider['based_location'] ?? '',
+                ];
+            }
+        }
+
+        Setting::updateOrCreate(
+            ['key' => 'home_banner_slider'],
+            [
+                'value' => json_encode($sliders)
+            ]
+        );
+
+        return redirect()->back()->with('success', 'Home banner sliders updated successfully.');
+    }
+
+    public function workingHoursStore(Request $request)
+    {
+        $working_hours = [];
+
+        if ($request->working_hours) {
+
+            foreach ($request->working_hours as $day => $data) {
+
+                $working_hours[$day] = [
+                    'open' => $data['open'] ?? '',
+                    'close' => $data['close'] ?? '',
+                    'closed' => isset($data['closed']) ? 1 : 0,
+                ];
+            }
+        }
+
+        Setting::updateOrCreate(
+            [
+                'key' => 'working_hours'
+            ],
+            [
+                'value' => json_encode($working_hours)
+            ]
+        );
+
+        return redirect()->back()->with(
+            'success',
+            'Working hours updated successfully.'
+        );
     }
 }

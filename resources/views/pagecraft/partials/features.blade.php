@@ -15,9 +15,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="section-desc">
-                    <p>loginet is a main-homeal organizations maintaince
-                        dedicated to protecting planet through sustainable
-                        community empowerment moderator</p>
+                    <p></p>
                 </div>
             </div>
         </div>

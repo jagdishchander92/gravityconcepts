@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Page;
 use App\Models\Seo;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -20,10 +21,33 @@ class FrontendController extends Controller
     // }
     public function page($slug = '/')
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
-        $breadcrumb = $page->header_section;
-        $sections = $page->blocks;
-        return view('pagecraft.preview_2', compact('sections', 'breadcrumb'));
+        if ($slug == '/') {
+            $page = Page::where('slug', $slug)->first();
+            if ($page) {
+                $breadcrumb = $page->header_section;
+                $sections = $page->blocks;
+            } else if ($page?->status != 1) {
+                $breadcrumb = null;
+                $sections = null;
+                abort(404);
+            } else {
+                $breadcrumb = null;
+                $sections = null;
+                abort(404);
+            }
+        } else {
+
+            $page = Page::where('slug', $slug)->firstOrFail();
+            $breadcrumb = $page->header_section;
+            $sections = $page->blocks;
+            if ($page->status != 1) {
+                $breadcrumb = null;
+                $sections = null;
+                abort(404);
+            }
+        }
+
+        return view('pagecraft.preview_2', compact('page', 'sections', 'breadcrumb'));
     }
 
     public function blogByCategory($slug)
@@ -32,10 +56,13 @@ class FrontendController extends Controller
 
         $query = Blog::with(['category']);
         $query->where('category_id', $category->id);
-        $blogs_seo = Seo::where('key', 'blogs_listing')->first()?->data;
-        $data['title'] = $blogs_seo['title'] ?? '';
-        $data['meta_title'] = $blogs_seo['meta_title'] ?? '';
-        $data['meta_desc'] = $blogs_seo['meta_desc'] ?? '';
+        $website_common_info = Setting::where('key', 'website_common_info')->first();
+        $website_common_info = $website_common_info ? json_decode($website_common_info->value, true) : [];
+        $cat_tilte = $category->title ?? '';
+        $website_name = $website_common_info['web_name'] ?? '';
+        $data['title'] = $cat_tilte . ' - ' . $website_name;
+        $data['meta_title'] = $category->meta_title ?? '';
+        $data['meta_desc'] = $category->meta_desc ?? '';
         $data['blogs'] = $query->paginate(16);
         return view('frontend.blog-list', $data);
     }
@@ -57,7 +84,7 @@ class FrontendController extends Controller
     }
     public function showBlog($slug)
     {
-        $blog = Blog::with(['category', 'comments'])->where('slug', $slug)->firstOrFail();
+        $blog = Blog::with(['category', 'comments'])->where('slug', $slug)->where('status', 1)->firstOrFail();
         $blog->increment('page_views');
         $data['categories'] = Category::all();
         $data['blog'] = $blog;
@@ -115,7 +142,14 @@ class FrontendController extends Controller
         Contact::create($request->only([
             'name', 'email', 'phone', 'subject', 'message'
         ]));
-
+        $website_info = \App\Models\Setting::where('key', 'website_common_info')->first();
+        if ($website_info && $website_info->value) {
+            $website_info = json_decode($website_info->value, true);
+        }
+        $admin_email = 'rakesh@vaticinfotech.com';
+        $subject = 'New Contact Form submitted from ' . $website_info['web_name'] ?: '-';
+        $body = view('emails.contact_form', ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'subject' => $request->subject, 'message' => $request->message])->render();
+        send_email($admin_email, $subject, $body);
         return response()->json(['success' => true]);
     }
 }

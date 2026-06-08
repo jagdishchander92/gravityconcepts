@@ -9,7 +9,7 @@ var DREAMIT = {};
 	//Loading Preloader
 	function handlePreloader() {
 		if ($('.preloader').length) {
-			$('.preloader').delay(200).fadeOut(600);
+			$('.preloader').delay(0).fadeOut(0);
 		}
 	}
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\Pages\PagesController;
 use App\Http\Controllers\Backend\Seo\BlogsController;
 use App\Http\Controllers\Backend\Seo\CategoriesController;
 use App\Http\Controllers\Backend\Seo\SeoController;
+use App\Http\Controllers\Backend\Seo\SitemapController;
 use App\Http\Controllers\Backend\Seo\TestimonialController;
 use App\Http\Controllers\PagecraftController;
 use App\Http\Controllers\Utility\FileManagerController;
@@ -69,7 +70,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/website-social-media/store', [SettingsController::class, 'socialMediaStore'])->name('settings.social.update')->can('website-settings');
 
         Route::post('/website-info-store', [SettingsController::class, 'websiteInfoStore'])->name('settings.website_info_store')->can('website-settings');
+        Route::post('/working-hour-store', [SettingsController::class, 'workingHoursStore'])->name('settings.working_hours_store')->can('website-settings');
         Route::post('/particle-js-store', [SettingsController::class, 'particleJsTypeStore'])->name('settings.particle_type_store')->can('website-settings');
+        Route::post(
+            'home-banner-slider-store',
+            [SettingsController::class, 'home_banner_slider_store']
+        )->name('settings.home_banner_slider_store')->can('home_banner_slider_store');
 
         Route::get('/contacts-list', [AdminController::class, 'contactFormIndex'])->name('contacts')->can('contacts-list');
 
@@ -80,6 +86,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/delete-testimonial/{id}', [TestimonialController::class, 'delete'])->name('testimonials.delete')->can('testimonial-list');
         Route::post('/testimonial-update/{testimonial}', [TestimonialController::class, 'storeUpdate'])->name('testimonials.update')->can('testimonial-list');
+
+        Route::get('/custom-codes', [AdminController::class, 'customCodes'])->name('custom_codes.index')->can('custom-codes');
+        Route::get('/custom-codes/create', [AdminController::class, 'customCodeCreate'])->name('custom_codes.create')->can('custom-codes');
+        Route::get('/custom-codes/edit/{id}', [AdminController::class, 'customCodeEdit'])->name('custom_codes.edit')->can('custom-codes');
+        Route::post('/custom-codes/storeUpdate/{id?}', [AdminController::class, 'customCodeStoreUpdate'])->name('custom_codes.store_update')->can('custom-codes');
     });
     Route::prefix('seo/')->name('seo.')->group(function () {
         Route::prefix('/blogs')->name('blogs.')->group(function () {
@@ -96,11 +107,14 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/ajax-category-delete/{id}', [CategoriesController::class, 'deleteCategory'])->can('blog-categories');
             Route::get('/comments', [BlogsController::class, 'commentIndex'])->name('comments')->can('blogs-comment');
             Route::post('/change-comment-status', [BlogsController::class, 'commentStatus'])->name('comments.status')->can('blogs-comment');
+            Route::post('/change-blog-status', [BlogsController::class, 'changeBlogStatus'])->name('status.change')->can('change-blog-status');
         });
         Route::get('/', [SeoController::class, 'index'])->name('index')->can('seo-index');
         Route::post('/store-blog-seo', [SeoController::class, 'blogsSeo'])->name('store-blogs-seo')->can('seo-index');
         Route::post('/store-contact-us-seo', [SeoController::class, 'contactSeo'])->name('store-contact-us-seo')->can('seo-index');
         Route::post('/store-analytics', [SeoController::class, 'contactAnalytics'])->name('store-analytics')->can('seo-index');
+
+        Route::get('/generate-sitemap', [SitemapController::class, 'generateSitemap'])->can('generate-sitemap');
     });
 
 
@@ -138,7 +152,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete/{id}', [CardsController::class, 'delete'])->name('delete')->can('cards-delete');
         Route::post('/store', [CardsController::class, 'storeUpdate'])->name('store')->can('cards-store');
         Route::post('/update/{id}', [CardsController::class, 'storeUpdate'])->name('update')->can('cards-update');
-
     });
 
     Route::post('/upload', [FileManagerController::class, 'upload'])->name('tinymce.upload');
@@ -146,27 +159,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/file-manager/upload', [FileManagerController::class, 'upload']);
     Route::delete('/file-manager/delete/{id}', [FileManagerController::class, 'delete']);
     Route::get('/file-manager', [FileManagerController::class, 'fileManager'])->name('file-manager');
-});
-Route::prefix('pagecraft')->name('pagecraft.')->group(function () {
-    Route::get('/', [PagecraftController::class, 'index'])->name('index');
-    Route::get('/preview', [PagecraftController::class, 'preview'])->name('preview');
-    Route::post('/preview', [PagecraftController::class, 'preview'])->name('preview');
-    Route::post('/upload', [PagecraftController::class, 'upload'])->name('upload');
-});
-Route::post(
-    '/pagebuilder/templates/save',
-    [PagebuilderTemplateController::class, 'save']
-);
 
-Route::get(
-    '/pagebuilder/templates/list',
-    [PagebuilderTemplateController::class, 'list']
-);
-Route::post('pagebuilder/templates/delete', [PagebuilderTemplateController::class, 'deleteTemplate']);
-Route::post('pagebuilder/page/store', [PagebuilderTemplateController::class, 'storePage']);
+     Route::get('page-editor/{id}', [PagesController::class,'pageCraftEditor']);
+  
+    Route::prefix('pagecraft')->name('pagecraft.')->group(function () {
+        Route::post('/preview/{slug}', [PagecraftController::class, 'preview'])->name('preview');
+    });
+    Route::post(
+        '/pagebuilder/templates/save',
+        [PagebuilderTemplateController::class, 'save']
+    );
 
-Route::get('page-editor/{id}', function ($id) {
-    $data['page_id'] = $id;
-    $data['sections'] = Page::find($id)->blocks;
-    return view('backend.custom_page_builderv3', $data);
+    Route::get(
+        '/pagebuilder/templates/list',
+        [PagebuilderTemplateController::class, 'list']
+    );
+    Route::post('pagebuilder/templates/delete', [PagebuilderTemplateController::class, 'deleteTemplate']);
+    Route::post('pagebuilder/page/store', [PagebuilderTemplateController::class, 'storePage']);
 });

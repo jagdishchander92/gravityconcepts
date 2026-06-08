@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="$blog->title" :meta_title="$blog->meta_title" :meta_desc='$blog->meta_desc'>
     <!-- breadcumb Section-->
     <div class="breadcumb-area">
         <div class="container">
@@ -32,7 +32,7 @@
                             </div>
                             <div class="blog-details-content">
                                 <div class="meta-blog">
-                                    <span class="mate-text">By Author</span>
+                                    <span class="mate-text">By <a href="{{ url('/author-profile') }}">Author</a></span>
                                     <span><i
                                             class="fa-regular fa-calendar-days"></i>{{ $blog->published_at?->format('d M, Y') }}</span>
                                     <span><img src="{{ asset('frontend/images/inner-image/category-icon.png') }}"

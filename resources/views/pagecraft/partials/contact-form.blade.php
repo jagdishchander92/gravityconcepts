@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="col-xl-6">
-            <div class="contact-form-box h-100">
+            <div class="contact-form-box">
                 <!-- section title -->
                 <div class="sec-title">
                     <div class="section-sub-title">
@@ -62,15 +62,18 @@
                                 <i class="fa-solid fa-message"></i>
                             </div>
                         </div>
-                        <div class="col-12 p-2">
+                        <div class="col-md-6 p-2">
                             <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}">
                             </div>
                             <small class="text-danger error-g-recaptcha-response"></small>
                         </div>
-                        <div class="form-alert"></div>
-                        <div class="contact-form">
-                            <button type="submit">Send Message<i class="fa-solid fa-arrow-right"></i></button>
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <button type="submit">Send Message<i class="fa-solid fa-arrow-right"></i></button>
+                            </div>
+                            <div class="form-alert"></div>
                         </div>
+
                     </div>
                 </form>
                 <div id="status"></div>

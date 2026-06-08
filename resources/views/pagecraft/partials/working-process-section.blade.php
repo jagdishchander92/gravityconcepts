@@ -50,10 +50,10 @@
              </div>
          </div>
          <div class="work-process-shape1">
-             <img src="{{ asset('frontend/images/main-home/process-shape1.png') }}" alt="shape1">
+             <img src="{{ asset('frontend/images/main-home/process-shape2.png') }}" alt="shape1" style=" transform: rotateY(180deg);">
          </div>
          <div class="work-process-shape2">
-             <img src="{{ asset('frontend/images/main-home/process-shape2.png') }}" alt="shape2">
+             <img src="{{ asset('frontend/images/main-home/process-shape2.png') }}" alt="shape2" >
          </div>
      </div>
  </section>

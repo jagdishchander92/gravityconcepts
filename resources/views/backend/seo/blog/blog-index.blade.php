@@ -13,18 +13,24 @@
              <div class="row">
                  <div class="col-12">
                      <div class="row mb-3">
-                         <div class="col-md-2">
+                         <div class="col-md-4">
                              <form action="{{ route('seo.blogs.index') }}" method="get">
                                  <div class="input-group">
                                      <input type="text" name="q"
                                          value="{{ isset($_GET['q']) ? $_GET['q'] : '' }}" class="form-control"
                                          placeholder="Search">
+                                     <select name="category_id" class="form-select">
+                                         <option value="">Select Category</option>
+                                         @foreach ($categories as $category)
+                                             <option value="{{ $category->id }}"> {{ $category->title }} </option>
+                                         @endforeach
+                                     </select>
                                      <button class="btn btn-outline-success" type="submit"
                                          id="button-addon2">Search</button>
                                  </div>
                              </form>
                          </div>
-                         <div class="col-md-6">
+                         <div class="col-md-4">
 
                          </div>
                          <div class="col-md-4">
@@ -57,11 +63,14 @@
                                      Created At
                                  </td>
                                  <td>
+                                     Published At
+                                 </td>
+                                 <td>
                                      Action
                                  </td>
                              </thead>
                              <tbody>
-                                 @foreach ($blogs as $blog)
+                                 @forelse ($blogs as $blog)
                                      <tr>
                                          <td>
                                              {{ $blog->id }}
@@ -82,12 +91,21 @@
                                              @if ($blog->status == 1)
                                                  <span class="badge bg-success">Active</span>
                                              @elseif($blog->status == 2)
+                                                 <span class="badge bg-info">Scheduled</span>
+                                             @elseif($blog->status == 3)
                                                  <span class="badge bg-warning">Draft</span>
                                              @else
-                                                 <span class="badge bg-warning">In Active</span>
+                                                 <span class="badge bg-danger">In Active</span>
                                              @endif
                                          </td>
                                          <td>{{ $blog->created_at }}</td>
+                                         <td>
+                                             @if ($blog->published_at)
+                                                 {{ $blog->published_at }}
+                                             @else
+                                                 Not Published
+                                             @endif
+                                         </td>
                                          <td>
                                              <div class="d-flex gap-2">
                                                  <a href="{{ route('seo.blogs.edit', $blog->id) }}">
@@ -100,12 +118,52 @@
                                                      data-url="{{ route('seo.blogs.delete', $blog->id) }}">
                                                      <i class="ti ti-trash"></i>
                                                  </a>
+                                                 <div class="btn-group">
+                                                     <button type="button"
+                                                         class="btn btn-sm btn-success dropdown-toggle"
+                                                         data-bs-toggle="dropdown" aria-expanded="false">
+                                                         Update Status
+                                                     </button>
+
+                                                     <ul class="dropdown-menu">
+                                                         <li>
+                                                             <a class="dropdown-item change-status"
+                                                                 href="javascript:void(0);"
+                                                                 data-id="{{ $blog->id }}" data-status="1">
+                                                                 Active
+                                                             </a>
+                                                         </li>
+                                                         <li>
+                                                             <a class="dropdown-item change-status"
+                                                                 href="javascript:void(0);"
+                                                                 data-id="{{ $blog->id }}" data-status="0">
+                                                                 Inactive
+                                                             </a>
+                                                         </li>
+                                                         <li>
+                                                             <a class="dropdown-item change-status"
+                                                                 href="javascript:void(0);"
+                                                                 data-id="{{ $blog->id }}" data-status="3">
+                                                                 Draft
+                                                             </a>
+                                                         </li>
+                                                     </ul>
+
+                                                 </div>
                                              </div>
                                          </td>
                                      </tr>
-                                 @endforeach
+                                 @empty
+                                     <tr>
+                                         <td colspan="7" class="text-center">No Blogs Found!</td>
+                                     </tr>
+                                 @endforelse
                              </tbody>
                          </table>
+
+                     </div>
+                     <div class="d-flex mt-3 justify-content-end">
+                         {{ $blogs->links() }}
                      </div>
                  </div>
              </div>
@@ -126,6 +184,35 @@
                  }).then((result) => {
                      if (result.isConfirmed) {
                          window.location.href = url;
+                     }
+                 });
+             });
+
+
+             $(document).on('click', '.change-status', function() {
+                 let id = $(this).data('id');
+                 let status = $(this).data('status');
+
+                 $.ajax({
+                     url: "{{ route('seo.blogs.status.change') }}",
+                     type: "POST",
+                     data: {
+                         _token: "{{ csrf_token() }}",
+                         id: id,
+                         status: status
+                     },
+                     success: function(res) {
+                         if (res.success) {
+                             Swal.fire({
+                                 icon: 'success',
+                                 title: 'Updated!',
+                                 text: 'Status changed successfully',
+                                 timer: 1200,
+                                 showConfirmButton: false
+                             }).then(() => {
+                                 location.reload(); // or update badge dynamically
+                             });
+                         }
                      }
                  });
              });

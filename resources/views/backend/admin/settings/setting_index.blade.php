@@ -219,6 +219,104 @@
                     </div>
                 </form>
             </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-heading">
+                        Working Hours
+                    </h5>
+                </div>
+
+                @php
+                    $working_hours = \App\Models\Setting::where('key', 'working_hours')->first();
+                    $working_hours = $working_hours ? json_decode($working_hours->value, true) : [];
+
+                    $days = [
+                        'monday' => 'Monday',
+                        'tuesday' => 'Tuesday',
+                        'wednesday' => 'Wednesday',
+                        'thursday' => 'Thursday',
+                        'friday' => 'Friday',
+                        'saturday' => 'Saturday',
+                        'sunday' => 'Sunday',
+                    ];
+                @endphp
+
+                <form action="{{ route('admin.settings.working_hours_store') }}" method="POST">
+
+                    @csrf()
+
+                    <div class="card-body">
+
+                        @foreach ($days as $key => $day)
+                            @php
+                                $data = $working_hours[$key] ?? [];
+                            @endphp
+
+                            <div class="border rounded p-3 mb-3">
+
+                                <div class="row align-items-end">
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">
+                                            {{ $day }}
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">
+                                            Opening Time
+                                        </label>
+
+                                        <input type="time" name="working_hours[{{ $key }}][open]"
+                                            class="form-control" value="{{ $data['open'] ?? '' }}">
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label">
+                                            Closing Time
+                                        </label>
+
+                                        <input type="time" name="working_hours[{{ $key }}][close]"
+                                            class="form-control" value="{{ $data['close'] ?? '' }}">
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+
+                                        <div class="form-check mt-4">
+
+                                            <input class="form-check-input closed-checkbox" type="checkbox"
+                                                name="working_hours[{{ $key }}][closed]" value="1"
+                                                id="closed_{{ $key }}"
+                                                {{ isset($data['closed']) && $data['closed'] ? 'checked' : '' }}>
+
+                                            <label class="form-check-label" for="closed_{{ $key }}">
+                                                Closed
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        @endforeach
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-sm btn-success">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+
+          
 
         </div>
         <div class="col-md-6 mb-3">
@@ -250,16 +348,16 @@
                             <label for="" class="form-label">Logo(Dark)</label>
                             <input type="file" name="logo_dark" class="form-control" id="">
                             @if (isset($website_logo_setting['logo_dark']) && $website_logo_setting['logo_dark'])
-                                <img src="{{ asset($website_logo_setting['logo_dark']) }}" class="img-fluid p-2 bg-dark mt-2"
-                                    width="200">
+                                <img src="{{ asset($website_logo_setting['logo_dark']) }}"
+                                    class="img-fluid p-2 bg-dark mt-2" width="200">
                             @endif
                         </div>
                         <div class="form-group mb-3">
                             <label for="" class="form-label">Footer Bg Image</label>
                             <input type="file" name="footer_bg_image" class="form-control" id="footer_bg_image">
                             @if (isset($website_logo_setting['footer_bg_image']) && $website_logo_setting['footer_bg_image'])
-                                <img src="{{ asset($website_logo_setting['footer_bg_image']) }}" class="img-fluid mt-2"
-                                    width="200">
+                                <img src="{{ asset($website_logo_setting['footer_bg_image']) }}"
+                                    class="img-fluid mt-2" width="200">
                             @endif
                         </div>
 
@@ -384,6 +482,212 @@
                     </div>
                 </form>
             </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-heading">Home Banner Slider</h5>
+                </div>
+
+                <form action="{{ route('admin.settings.home_banner_slider_store') }}" method="POST"
+                    enctype="multipart/form-data">
+
+                    @csrf
+
+                    <div class="card-body">
+
+
+
+                        <div id="slider-wrapper">
+
+                            @if (isset($home_banner_sliders) && count($home_banner_sliders) > 0)
+
+                                @foreach ($home_banner_sliders as $index => $slider)
+                                    <div class="slider-item border rounded p-3 mb-4 bg-light">
+
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="mb-0">Slider {{ $index + 1 }}</h5>
+
+                                            <button type="button" class="btn btn-danger btn-sm remove-slider">
+                                                Remove
+                                            </button>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Background Image</label>
+
+                                                <input type="file" name="sliders[{{ $index }}][image]"
+                                                    class="form-control">
+
+                                                @if (isset($slider['image']) && $slider['image'])
+                                                    <img src="{{ asset($slider['image']) }}"
+                                                        class="img-fluid mt-2 rounded" width="200">
+                                                @endif
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Small Title</label>
+
+                                                <input type="text"
+                                                    name="sliders[{{ $index }}][small_title]"
+                                                    class="form-control" value="{{ $slider['small_title'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label">Title 1</label>
+
+                                                <input type="text" name="sliders[{{ $index }}][title_1]"
+                                                    class="form-control" value="{{ $slider['title_1'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label">Title 2</label>
+
+                                                <input type="text" name="sliders[{{ $index }}][title_2]"
+                                                    class="form-control" value="{{ $slider['title_2'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-4 mb-3">
+                                                <label class="form-label">Title 3</label>
+
+                                                <input type="text" name="sliders[{{ $index }}][title_3]"
+                                                    class="form-control" value="{{ $slider['title_3'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Button Text</label>
+
+                                                <input type="text"
+                                                    name="sliders[{{ $index }}][button_text]"
+                                                    class="form-control" value="{{ $slider['button_text'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Button URL</label>
+
+                                                <input type="text" name="sliders[{{ $index }}][button_url]"
+                                                    class="form-control" value="{{ $slider['button_url'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Since Year</label>
+
+                                                <input type="text" name="sliders[{{ $index }}][since_year]"
+                                                    class="form-control" value="{{ $slider['since_year'] ?? '' }}">
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Based Location</label>
+
+                                                <input type="text"
+                                                    name="sliders[{{ $index }}][based_location]"
+                                                    class="form-control"
+                                                    value="{{ $slider['based_location'] ?? '' }}">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="slider-item border rounded p-3 mb-4 bg-light">
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="mb-0">Slider 1</h5>
+
+                                        <button type="button" class="btn btn-danger btn-sm remove-slider">
+                                            Remove
+                                        </button>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Background Image</label>
+
+                                            <input type="file" name="sliders[0][image]" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Small Title</label>
+
+                                            <input type="text" name="sliders[0][small_title]"
+                                                class="form-control">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Title 1</label>
+
+                                            <input type="text" name="sliders[0][title_1]" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Title 2</label>
+
+                                            <input type="text" name="sliders[0][title_2]" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Title 3</label>
+
+                                            <input type="text" name="sliders[0][title_3]" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Button Text</label>
+
+                                            <input type="text" name="sliders[0][button_text]"
+                                                class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Button URL</label>
+
+                                            <input type="text" name="sliders[0][button_url]" class="form-control">
+                                        </div>
+
+
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Since Year</label>
+
+                                            <input type="text" name="sliders[0][since_year]" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Based Location</label>
+
+                                            <input type="text" name="sliders[0][based_location]"
+                                                class="form-control">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            @endif
+
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-sm" id="add-slider">
+                            Add Slider
+                        </button>
+
+                    </div>
+
+                    <div class="card-footer text-end">
+                        <button class="btn btn-success btn-sm">
+                            Save
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+
+
+
             {{-- <div class="card mb-3">
                 <div class="card-header">
                     <h5 class="card-heading">Slider</h5>
@@ -531,6 +835,135 @@
                     }
                 });
             });
+            let sliderIndex = {{ isset($home_banner_sliders) ? count($home_banner_sliders) : 1 }};
+
+            $('#add-slider').on('click', function() {
+
+                let html = `
+        <div class="slider-item border rounded p-3 mb-4 bg-light">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Slider ${sliderIndex + 1}</h5>
+
+                <button type="button"
+                    class="btn btn-danger btn-sm remove-slider">
+                    Remove
+                </button>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Background Image</label>
+
+                    <input type="file"
+                        name="sliders[${sliderIndex}][image]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Small Title</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][small_title]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Title 1</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][title_1]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Title 2</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][title_2]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Title 3</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][title_3]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Button Text</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][button_text]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Button URL</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][button_url]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Since Year</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][since_year]"
+                        class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Based Location</label>
+
+                    <input type="text"
+                        name="sliders[${sliderIndex}][based_location]"
+                        class="form-control">
+                </div>
+
+            </div>
+
+        </div>
+        `;
+
+                $('#slider-wrapper').append(html);
+
+                sliderIndex++;
+
+            });
+
+
+            $(document).on('click', '.remove-slider', function() {
+
+                $(this).closest('.slider-item').remove();
+
+            });
+
+             function toggleTimeFields() {
+
+                        $('.closed-checkbox').each(function() {
+
+                            let parent = $(this).closest('.row');
+
+                            let isChecked = $(this).is(':checked');
+
+                            parent.find('input[type="time"]').prop('disabled', isChecked);
+
+                        });
+
+                    }
+
+                    toggleTimeFields();
+
+                    $(document).on('change', '.closed-checkbox', function() {
+
+                        toggleTimeFields();
+
+                    });
         </script>
     @endpush
 </x-app>

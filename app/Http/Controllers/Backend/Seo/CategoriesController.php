@@ -21,7 +21,7 @@ class CategoriesController extends Controller
     {
         $query = Category::query();
 
-        // 🔍 search
+        // search
         if ($request->search) {
             $query->where('title', 'like', '%' . $request->search . '%');
         }
@@ -46,6 +46,8 @@ class CategoriesController extends Controller
                 ? (int) $request->parent_id
                 : 0;
             $data['title'] = $request->title;
+            $data['meta_title'] = $request->meta_title;
+            $data['meta_desc'] = $request->meta_desc;
             $data['slug'] = Str::slug($request->title);
             $data['status'] = 1;
             // Image Upload

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -15,13 +16,19 @@ class BlogsController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->q != null) {
 
-            $data['blogs'] = Blog::with(['category'])->where('title', 'like', '%' . $request->q . '%')->get();
-        } else {
-
-            $data['blogs'] = Blog::with(['category'])->get();
+        $query = Blog::with(['category']);
+        if ($request->filled('q')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->q . '%')
+                    ->orWhere('slug', 'like', '%' . $request->q . '%');
+            });
         }
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+        $data['blogs'] = $query->paginate(25);
+        $data['categories'] = Category::all();
         return view('backend.seo.blog.blog-index', $data);
     }
 
@@ -65,10 +72,11 @@ class BlogsController extends Controller
         if ($request->schedule_post == 'on' && $request->published_at) {
             $blog->status = 2;
             $blog->published_at = $request->published_at;
-        }
-
-        if ($request->has('draft')) {
-            $blog->is_draft = 1;
+        } elseif ($request->has('draft')) {
+            $blog->status = 3;
+        } else {
+            $blog->status = 1;
+            $blog->published_at = Carbon::now();
         }
 
         if ($request->img) {
@@ -80,8 +88,6 @@ class BlogsController extends Controller
         }
 
         $blog->img_desc = $request->img_desc;
-
-        
 
         $slider = $request->slider;
 
@@ -153,5 +159,20 @@ class BlogsController extends Controller
                 ? 'Comment Approved Successfully'
                 : 'Comment Disapproved Successfully'
         ]);
+    }
+
+
+    public function changeBlogStatus(Request $request)
+    {
+        $blog =  Blog::where('id', $request->id)->first();
+        if ($blog) {
+            $blog->status = $request->status;
+            if (!$blog->published_at && $request->status == 1) {
+                $blog->published_at = Carbon::now();
+            }
+            $blog->save();
+        }
+
+        return response()->json(['success' => true, 'message' => "Status changed successfully"]);
     }
 }

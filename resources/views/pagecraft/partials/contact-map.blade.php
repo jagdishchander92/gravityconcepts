@@ -235,6 +235,111 @@
         pointer-events: none;
 
     }
+
+    .status-badge {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: .35em .75em .35em .55em;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .04em;
+        white-space: nowrap;
+    }
+
+    .status-badge .pulse-dot {
+        position: relative;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .status-badge .pulse-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        border-width: 1.5px;
+        border-style: solid;
+        animation: badge-pulse 2s ease-out infinite;
+        pointer-events: none;
+    }
+
+    .status-badge .pulse-ring:nth-child(2) {
+        animation-delay: .65s;
+    }
+
+    .status-badge .pulse-ring:nth-child(3) {
+        animation-delay: 1.3s;
+    }
+
+    @keyframes badge-pulse {
+        0% {
+            width: 9px;
+            height: 9px;
+            opacity: .85;
+        }
+
+        100% {
+            width: 28px;
+            height: 28px;
+            opacity: 0;
+        }
+    }
+
+    .badge-open {
+        background: #e6f7ef;
+        color: #166534;
+    }
+
+    .badge-open .pulse-dot {
+        background: #22c55e;
+    }
+
+    .badge-open .pulse-ring {
+        border-color: #22c55e;
+    }
+
+    .badge-closing {
+        background: #fefce8;
+        color: #854d0e;
+    }
+
+    .badge-closing .pulse-dot {
+        background: #eab308;
+    }
+
+    .badge-closing .pulse-ring {
+        border-color: #eab308;
+    }
+
+    .badge-opening {
+        background: #eff6ff;
+        color: #1e40af;
+    }
+
+    .badge-opening .pulse-dot {
+        background: #3b82f6;
+    }
+
+    .badge-opening .pulse-ring {
+        border-color: #3b82f6;
+    }
+
+    .badge-closed {
+        background: #f3f4f6;
+        color: #6b7280;
+    }
+
+    .badge-closed .pulse-dot {
+        background: #9ca3af;
+    }
 </style>
 @php
     $website_common_info = \App\Models\Setting::where('key', 'website_common_info')->first();
@@ -282,6 +387,18 @@
                 <div class="cmap-card-label">Our address</div>
                 <div class="cmap-card-value">
                     {{ $website_common_info['location'] ?? '' }}
+                    @if (isset($website_common_info['map_lat']) &&
+                            $website_common_info['map_lat'] &&
+                            isset($website_common_info['map_lng']) &&
+                            $website_common_info['map_lng']
+                    )
+                        <a href="https://www.google.com/maps/dir/?api=1&destination={{ $website_common_info['map_lat'] }},{{ $website_common_info['map_lng'] }}"
+                            target="_blank" class="ms-3"
+                            style="color: var(--theme-color2);text-decoration: underline;">
+                            Get Directions <i class="fa-solid fa-arrow-right-long"></i>
+
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="cmap-accent-bar"></div>
@@ -300,39 +417,92 @@
             <div class="cmap-accent-bar"></div>
         </div>
 
-        <!-- Working hours -->
+        @php
+
+            $working_hours = \App\Models\Setting::where('key', 'working_hours')->first();
+            $working_hours = $working_hours ? json_decode($working_hours->value, true) : [];
+
+        @endphp
+
+
         <div class="cmap-card" data-cmap-delay="360">
-            <div class="cmap-icon-wrap"><i class="fa fa-clock" aria-hidden="true"></i></div>
+            <div class="cmap-icon-wrap">
+                <i class="fa fa-clock" aria-hidden="true"></i>
+            </div>
             <div>
-                <div class="cmap-card-label">Working hours</div>
+                <div class="cmap-card-label">
+                    Working hours
+
+                </div>
                 <div class="cmap-card-value">
-                    {!! html_entity_decode($website_common_info['open_hours'] ?? '') !!}
+                    <div class="cmap-card-value">
+                        {{ $website_common_info['open_hours'] ?? '' }}
+                    </div>
+                    <span id="working-status"></span>
                 </div>
             </div>
             <div class="cmap-accent-bar"></div>
         </div>
-
-    </div><!-- /.cmap-cards-row -->
+    </div>
 </section>
-
-<script>
-    (function() {
-        var cards = document.querySelectorAll('.cmap-card');
-        var io = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting) {
-                    var delay = parseInt(e.target.getAttribute('data-cmap-delay') || 0);
-                    setTimeout(function() {
-                        e.target.classList.add('cmap-visible');
-                    }, delay);
-                    io.unobserve(e.target);
-                }
+@push('scripts')
+    <script>
+        (function() {
+            var cards = document.querySelectorAll('.cmap-card');
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        var delay = parseInt(e.target.getAttribute('data-cmap-delay') || 0);
+                        setTimeout(function() {
+                            e.target.classList.add('cmap-visible');
+                        }, delay);
+                        io.unobserve(e.target);
+                    }
+                });
+            }, {
+                threshold: 0.12
             });
-        }, {
-            threshold: 0.12
-        });
-        cards.forEach(function(c) {
-            io.observe(c);
-        });
-    })();
-</script>
+            cards.forEach(function(c) {
+                io.observe(c);
+            });
+        })();
+        const workingHours = @json($working_hours);
+
+        function checkWorkingStatus() {
+            const now = new Date();
+            const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+            const today = workingHours[days[now.getDay()]];
+
+            let label = 'Closed',
+                cls = 'badge-closed',
+                rings = '';
+
+            if (today && !today.closed) {
+                const cur = now.getHours() * 60 + now.getMinutes();
+
+                const [openH, openM] = today.open.split(':').map(Number);
+                const [closeH, closeM] = today.close.split(':').map(Number);
+                const open = openH * 60 + openM;
+                const close = closeH * 60 + closeM;
+
+                const ringsHtml = '<span class="pulse-ring"></span>'.repeat(3);
+
+                if (cur >= open && cur < close) {
+                    label = (close - cur) <= 60 ? 'Closing Soon' : 'Open Now';
+                    cls = (close - cur) <= 60 ? 'badge-closing' : 'badge-open';
+                    rings = ringsHtml;
+                } else if (cur < open && (open - cur) <= 60) {
+                    label = 'Opening Soon';
+                    cls = 'badge-opening';
+                    rings = ringsHtml;
+                }
+            }
+
+            $('#working-status').attr('class', 'status-badge ' + cls).html(
+                `<span class="pulse-dot">${rings}</span>${label}`
+            );
+        }
+
+        checkWorkingStatus();
+    </script>
+@endpush

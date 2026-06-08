@@ -13,14 +13,13 @@ class PagecraftController extends Controller
     public function preview(Request $request, $slug)
     {
         if ($request->json) {
-
-            $sections = json_decode($request->json, true);
-        } else {
-            $page = Page::find(2);
+            $page = Page::where('slug', $slug)->firstOrFail();
             $breadcrumb = $page->header_section;
             $sections = $page->blocks;
+            $sections = json_decode($request->json, true);
+            return view('pagecraft.preview_2', compact('sections', 'breadcrumb'));
+        } else {
+            abort(404);
         }
-
-        return view('pagecraft.preview_2', compact('sections', 'breadcrumb'));
     }
 }

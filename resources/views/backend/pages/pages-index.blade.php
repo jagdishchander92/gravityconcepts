@@ -26,6 +26,42 @@
         <div class="card card-shadow">
             <x-alert />
             <div class="card-body">
+                <form action="" method="get">
+                    <div class="row mb-3">
+                        <div class="col-md-5">
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="Search"
+                                    value="{{ request('q') }}">
+
+                                <select name="status" class="form-select">
+                                    <option value="">Select Status</option>
+
+                                    <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
+                                        Active
+                                    </option>
+
+                                    <option value="2" {{ request('status') == '2' ? 'selected' : '' }}>
+                                        Draft
+                                    </option>
+
+                                    <option value="3" {{ request('status') == '3' ? 'selected' : '' }}>
+                                        Inactive
+                                    </option>
+                                </select>
+
+                                <button class="btn btn-primary" type="submit">
+                                    Filter
+                                </button>
+
+                                <a href="{{ route('pages.index') }}" class="btn btn-secondary">
+                                    Reset
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover table-striped">
@@ -38,7 +74,7 @@
                                 <td>Action</td>
                             </thead>
                             <tbody>
-                                @foreach ($pages as $page)
+                                @forelse ($pages as $page)
                                     <tr>
                                         <td> {{ $page->id }} </td>
                                         <td> {{ $page->title }} </td>
@@ -57,7 +93,8 @@
                                             <div class="d-flex gap-2">
 
                                                 <a href="{{ route('pages.edit', $page->id) }}"><button
-                                                        class="btn btn-sm btn-warning" title="Edit"> <i class="ti ti-edit"></i>
+                                                        class="btn btn-sm btn-warning" title="Edit"> <i
+                                                            class="ti ti-edit"></i>
                                                     </button></a>
                                                 <a href="javascript:void(0);"
                                                     class="btn btn-sm btn-danger btn-delete-page"
@@ -65,11 +102,13 @@
                                                     <i class="ti ti-trash"></i>
                                                 </a>
                                                 <a href="{{ route('pages.clone', $page->id) }}">
-                                                    <button class="btn btn-sm btn-info" title="Clone"> <i class="ti ti-copy"></i>
+                                                    <button class="btn btn-sm btn-info" title="Clone"> <i
+                                                            class="ti ti-copy"></i>
                                                     </button>
                                                 </a>
                                                 <a href="{{ url("$page->slug") }}" target="_blank">
-                                                    <button class="btn btn-sm btn-success" title="View"> <i class="ti ti-eye"></i>
+                                                    <button class="btn btn-sm btn-success" title="View"> <i
+                                                            class="ti ti-eye"></i>
                                                     </button>
                                                 </a>
                                                 <div class="btn-group">
@@ -82,15 +121,15 @@
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a class="dropdown-item change-status"
-                                                                href="javascript:void(0);" data-id="{{ $page->id }}"
-                                                                data-status="1">
+                                                                href="javascript:void(0);"
+                                                                data-id="{{ $page->id }}" data-status="1">
                                                                 Active
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a class="dropdown-item change-status"
-                                                                href="javascript:void(0);" data-id="{{ $page->id }}"
-                                                                data-status="2">
+                                                                href="javascript:void(0);"
+                                                                data-id="{{ $page->id }}" data-status="2">
                                                                 Draft
                                                             </a>
                                                         </li>
@@ -102,12 +141,15 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">No Pages Found</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

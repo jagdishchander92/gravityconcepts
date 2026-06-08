@@ -8,9 +8,37 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data['pages'] = Page::orderBy('id', 'DESC')->paginate(15);
+        $query = Page::query();
+
+        if ($request->filled('q')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->q . '%')
+                    ->orWhere('slug', 'like', '%' . $request->q . '%');
+            });
+        }
+
+        if ($request->filled('status')) {
+            switch ($request->status) {
+                case 1: // Active
+                    $query->where('status', 1);
+                    break;
+
+                case 2: // Draft
+                    $query->where('status', 2);
+                    break;
+
+                case 3: // Inactive
+                    $query->where('status', 0);
+                    break;
+            }
+        }
+
+        $data['pages'] = $query
+            ->orderByDesc('id')
+            ->paginate(20)
+            ->withQueryString();
 
         return view('backend.pages.pages-index', $data);
     }
@@ -40,7 +68,7 @@ class PagesController extends Controller
             'meta_description' => $request->meta_desc,
             'header_section' => $page_header,
         ];
-       
+
         $page = Page::updateOrCreate(['id' => $id], $data_table);
 
         return response()->json([
@@ -48,7 +76,6 @@ class PagesController extends Controller
             'page_id' => $page->id,
             'message' => 'Page Created Successfully'
         ]);
-
     }
     public function edit($id)
     {
@@ -78,11 +105,11 @@ class PagesController extends Controller
             'section_description' => $request->section_description,
             'image'               => $request->breadcrumb_image,
         ];
-        $data['blocks'] = $page->blocks;
+        $data['sections'] = $page->blocks;
         $data['head'] = $page->header_section;
 
         // Render your existing frontend page view
-        return view('frontend.page.page_view', $data);
+        return view('pagecraft.preview_2', $data);
     }
 
     public function changeStatus(Request $request)
@@ -123,5 +150,14 @@ class PagesController extends Controller
         $newPage->save();
 
         return redirect()->route('pages.index')->with('success', 'Page Cloned Successfully');
+    }
+
+    public function pageCraftEditor($id)
+    {
+        $data['page_id'] = $id;
+        $page = Page::find($id);
+        $data['sections'] = $page->blocks;
+        $data['page'] = $page;
+        return view('backend.custom_page_builderv3', $data);
     }
 }

@@ -17,6 +17,7 @@
                              <div class="input-group">
                                  <input type="text" name="q" id="" class="form-control"
                                      placeholder="Search">
+                                
                                  <button class="btn btn-outline-secondary" type="button"
                                      id="button-addon2">Button</button>
                              </div>
@@ -69,13 +70,17 @@
                                          <td>{{ $category->id }} </td>
                                          <td>
                                              <div>
-                                                 <img class="img-fluid" width="100" height="100"
-                                                     src="{{ asset($category->img) }}" alt="">
+                                                 @if ($category->img)
+                                                     <img class="img-fluid" width="100" height="100"
+                                                         src="{{ asset($category->img) }}" alt="">
+                                                 @else
+                                                 <span>No Image</span>
+                                                 @endif
                                              </div>
                                          </td>
                                          <td>{{ $category->title }} </td>
                                          <td>{{ $category?->parent?->title ?? '-' }}</td>
-                                         <td>0</td>
+                                         <td>{{$category->blogs->count()}}</td>
                                          <td>
                                              @if ($category->status == 1)
                                                  <span class="badge  bg-success">Active</span>
@@ -128,6 +133,14 @@
                      <div class="form-group mb-3">
                          <label class="form-label">Category Image</label>
                          <input type="file" id="categoryImage" class="form-control">
+                     </div>
+                     <div class="form-group mb-3">
+                         <label for="" class="form-label">Meta Title</label>
+                         <input type="text" name="meta_title" id="metaTitle" class="form-control">
+                     </div>
+                     <div class="form-group mb-3">
+                         <label for="" class="form-label">Meta Description</label>
+                         <input type="text" name="meta_desc" id="metaDesc" class="form-control">
                      </div>
                  </div>
                  <div class="modal-footer">
@@ -187,12 +200,14 @@
                  const parent_id = $("#categorySelect").val();
                  const category_title = $("#categoryName").val();
                  const image = $('#categoryImage')[0].files[0];
-                 console.log('parent_id', parent_id)
-                 console.log('category_title', category_title)
+                 const metaTitle = $('#metaTitle').val();
+                 const metaDesc = $('#metaDesc').val();
                  // return;
                  let formData = new FormData();
                  formData.append('parent_id', parent_id);
                  formData.append('title', category_title);
+                 formData.append('meta_title', metaTitle);
+                 formData.append('meta_desc', metaDesc);
 
                  if (image) {
                      formData.append('img', image);

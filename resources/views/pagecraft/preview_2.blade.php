@@ -1,4 +1,4 @@
-<x-layout >
+<x-layout :title="$page->title ?? ''" :meta_title="$page->meta_title ?? ''" :meta_desc="$page->meta_description ?? ''">
     @if ($breadcrumb && isset($breadcrumb['breadcrumb_title']) && $breadcrumb['breadcrumb_title'])
         <div class="breadcumb-area"
             @if ($breadcrumb['image']) style="background-image: url({{ $breadcrumb['image'] }})" @endif>
@@ -22,9 +22,12 @@
     @endif
 
     <div class="pagecraft-preview">
-        @foreach ($sections as $section)
-            {!! renderNode($section) !!}
-        @endforeach
+
+        @if (!empty($sections))
+            @foreach ($sections as $section)
+                {!! renderNode($section) !!}
+            @endforeach
+        @endif
     </div>
 </x-layout>
 
@@ -211,6 +214,7 @@
         return match ($type) {
             'heading' => view('pagecraft.partials.heading', compact('p', 'widgetStyle', 'classes'))->render(),
             'heading-n' => renderHeadingN($p, $widgetStyle, $p['classes']),
+            'subheading' => renderSubHeading($p, $widgetStyle, $p['classes']),
             'text' => renderText($p, $widgetStyle, $classes),
             'button' => renderButton($p, $widgetStyle, $classes),
             'image' => renderImage($p, $widgetStyle, $classes),
@@ -233,6 +237,7 @@
             'divider' => view('pagecraft.partials.divider', compact('p', 'widgetStyle', 'classes'))->render(),
             'badges' => view('pagecraft.partials.badges', compact('p', 'widgetStyle', 'classes'))->render(),
             'icon' => view('pagecraft.partials.icon', compact('p', 'widgetStyle', 'classes'))->render(),
+            'process' => view('pagecraft.partials.process', compact('p', 'widgetStyle', 'classes'))->render(),
             'brands-listing' => view(
                 'pagecraft.partials.brands-listing',
                 compact('p', 'widgetStyle', 'classes'),
@@ -247,6 +252,10 @@
         };
     }
 
+    function renderSubHeading($p, $styles, $classes): string
+    {
+        return "<p class=\"{$classes}\" style=\"{$styles}\">" . nl2br(e($p['text'] ?? '')) . '</p>';
+    }
     // Individual widget renderers
     function renderHeading($p, $styles, $classes): string
     {
@@ -255,7 +264,9 @@
     function renderHeadingN($p, $style, $classes): string
     {
         $level = $p['level'] ?? 'h2';
-        return "<{$level} class=\"{$classes}\" style=\"{$style}\">" . ($p['text'] ?? 'Heading') . "</{$level}>";
+        return "<{$level} class=\"{$classes} title text-anime-3\" style=\"{$style}\">" .
+            ($p['text'] ?? 'Heading') .
+            "</{$level}>";
     }
     function renderSpacer($p, $style, $classes): string
     {
@@ -288,10 +299,21 @@
 
     function renderImage($p, $style, $classes): string
     {
-        return "<img src=\"{$p['src']}\" alt=\"{$p['alt']}\" class=\"{$classes}\" style=\"{$classes}\">";
+        $size = $p['size'] ?? 'original';
+        $url = '';
+        if ($size == 'small') {
+            $url = changeSize($p['src'], '150x150');
+        } elseif ($size == 'medium') {
+            $url = changeSize($p['src'], '300x300');
+        } elseif ($size == 'large') {
+            $url = changeSize($p['src'], '1024x1024');
+        } elseif ($size == 'original') {
+            $url = $p['src'];
+        } else {
+            $url = $p['src'];
+        }
+        return "<img src=\"{$url}\" alt=\"{$p['alt']}\" class=\"{$classes}\" style=\"{$classes}\">";
     }
-
-    // Add all other render functions here (following the same pattern)...
 
     function get($array, $key, $default = ''): string
     {
@@ -361,11 +383,13 @@
             case 'contact-map':
                 return view('pagecraft.partials.contact-map', compact('data'))->render();
                 break;
+            case 'quick-contact':
+                return view('pagecraft.partials.quick-contact', compact('data'))->render();
+                break;
 
             default:
                 return '<p>Not a valid shortcode</p>';
                 break;
         }
     }
-
 @endphp

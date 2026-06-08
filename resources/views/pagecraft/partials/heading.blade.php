@@ -10,7 +10,7 @@
          $level = $p['level'] ?? 'h2';
      @endphp
      <div class="section-title">
-         <{{ $level }}>
+         <{{ $level }} class="title text-anime-3">
              {!! html_entity_decode($p['text'] ?? '') !!}
              </{{ $level }}>
      </div>

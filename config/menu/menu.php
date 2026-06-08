@@ -108,6 +108,17 @@
                 ],
             ]
         ],
+        'Custom Codes' => [
+            'icon' => 'ti-code',
+            'items' => [
+                [
+                    'title' => 'Custom Codes',
+                    'route' => 'admin.custom_codes.index',
+                    'icon'  => 'ti-code',
+                    'permission' => 'custom-codes',
+                ],
+            ]
+        ],
         // 'File Manager' => [
         //     'icon' => 'ti-folder',
         //     'items' => [

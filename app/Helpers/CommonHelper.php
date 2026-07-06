@@ -10,7 +10,7 @@ if (!function_exists('pre')) {
 if (!function_exists('imgUrl')) {
     function imgUrl($url)
     {
-        return strstr($url, '/storage/');
+        return ($url);
     }
 }
 if (!function_exists('changeSize()')) {

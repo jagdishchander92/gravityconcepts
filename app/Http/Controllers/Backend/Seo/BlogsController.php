@@ -127,7 +127,7 @@ class BlogsController extends Controller
     public function delete($id)
     {
         Blog::where('id', $id)->delete();
-        return redirect('seo/blogs')->with('success', 'Blog Deleted Successfully');
+        return redirect('backend/seo/blogs')->with('success', 'Blog Deleted Successfully');
     }
 
     public function commentIndex(Request $request)

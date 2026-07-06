@@ -10,15 +10,15 @@
     <meta charset="utf-8">
     @php
         $logos = \App\Models\Setting::where('key', 'website_logo_setting')->first();
-        if ($logos->value) {
+        if ($logos?->value) {
             $logos = json_decode($logos->value, true);
         }
         $website_info = \App\Models\Setting::where('key', 'website_common_info')->first();
-        if ($website_info->value) {
+        if ($website_info?->value) {
             $website_info = json_decode($website_info->value, true);
         }
         $social_medias = \App\Models\Setting::where('key', 'website_social_media')->first();
-        if ($social_medias->value) {
+        if ($social_medias?->value) {
             $social_medias = json_decode($social_medias->value, true);
         }
     @endphp
@@ -40,9 +40,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root{
-            --text-color : #67777a;
+        :root {
+            --text-color: #67777a;
+            /* --theme-color2: #037193; */
         }
+
+        /* :root {
+            --theme-color1: #0F7EA6;
+            --theme-color1-rgb: 15, 126, 166;
+            --theme-color2: #0A4F66;
+            --theme-color2-rgb: 10, 79, 102;
+            --theme-color7: #0A4F66;
+        } */
     </style>
     @stack('styles')
     @php
@@ -410,8 +419,9 @@
                             <!--Footer Column-->
                             <div class="col-xl-3 col-lg-12 col-md-6">
                                 <div class="footer-widget-content social">
-                                    <div class="logo"><a href="/"><img src="{{ asset($logos['logo_dark']??'')}}"
-                                                alt="logo" width="180"></a></div>
+                                    <div class="logo"><a href="/"><img
+                                                src="{{ asset($logos['logo_dark'] ?? '') }}" alt="logo"
+                                                width="180"></a></div>
                                     <div class="footer-desc">{{ $website_info['footer_about'] ?? '' }}
                                     </div>
                                     <ul class="footer-social">

@@ -27,7 +27,7 @@
                     <div class="col-xl-4 col-lg-6 col-md-6">
                         <div class="single-blog-box">
                             <div class="blog-thumb reveal">
-                                <img src="{{ $blog->img }}" alt="thumb">
+                                <img src="{{ url(imgUrl($blog->img) )}}" alt="thumb">
                             </div>
                             <div class="blog-content">
                                 <div class="blog-meta">

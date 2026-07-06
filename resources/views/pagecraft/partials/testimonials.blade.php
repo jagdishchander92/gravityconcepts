@@ -29,8 +29,8 @@
                     @endphp
                     @foreach ($testimonials as $testimonial)
                         <div class="swiper-slide">
-                            <div class="col-lg-12">
-                                <div class="single-testi-box" data-cursor-text="View">
+                            <div class="col-lg-12 h-100">
+                                <div class="single-testi-box h-100" data-cursor-text="View">
                                     <div class="testi-autor-box">
                                         <div class="testi-autor">
                                             <img src="{{ url($testimonial->img) }}" alt="autor">

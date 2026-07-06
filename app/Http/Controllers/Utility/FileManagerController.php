@@ -55,8 +55,12 @@ class FileManagerController extends Controller
                 return Storage::disk('public')->lastModified($file);
             })
             ->map(function ($file) {
+                $url = Storage::disk('public')->url($file);
+
+                $url = preg_replace('#^.*/storage/#', '', $url);
+
                 return [
-                    'url' => Storage::disk('public')->url($file),
+                    'url' => '/'.$url,
                     'name' => basename($file),
                     'path' => $file
                 ];

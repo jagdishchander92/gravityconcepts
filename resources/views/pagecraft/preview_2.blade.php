@@ -302,11 +302,11 @@
         $size = $p['size'] ?? 'original';
         $url = '';
         if ($size == 'small') {
-            $url = changeSize($p['src'], '150x150');
+            $url = changeSize(imgUrl($p['src']), '150x150');
         } elseif ($size == 'medium') {
-            $url = changeSize($p['src'], '300x300');
+            $url = changeSize(imgUrl($p['src']), '300x300');
         } elseif ($size == 'large') {
-            $url = changeSize($p['src'], '1024x1024');
+            $url = changeSize(imgUrl($p['src']), '1024x1024');
         } elseif ($size == 'original') {
             $url = $p['src'];
         } else {

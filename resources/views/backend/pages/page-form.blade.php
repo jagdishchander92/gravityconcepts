@@ -130,7 +130,7 @@
                                                     <div class="image-preview mt-2">
                                                         @if ($bread_image)
                                                             <div class="position-relative d-inline-block">
-                                                                <img src="{{ $bread_image }}" class="img-thumbnail"
+                                                                <img src="{{ imgUrl($bread_image) }}" class="img-thumbnail"
                                                                     style="max-height:120px; max-width:100%;">
                                                                 <button type="button"
                                                                     class="btn btn-danger btn-sm position-absolute top-0 end-0 remove-image">&times;</button>

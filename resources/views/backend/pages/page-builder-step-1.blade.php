@@ -153,7 +153,7 @@
                                         <div class="image-preview mt-3">
                                             @if ($bread_image)
                                                 <div class="position-relative d-inline-block">
-                                                    <img src="{{ $bread_image }}" class="img-thumbnail rounded"
+                                                    <img src="{{ imgUrl($bread_image)}}" class="img-thumbnail rounded"
                                                         style="max-height:140px; max-width:100%;">
 
                                                     <button type="button"

@@ -9,7 +9,7 @@
                                 alt="sub-icon">Features</h1>
                     </div>
                     <div class="section-title">
-                        <h1 class="title text-anime-3">Powerfull Features of Gravity Concepts company</h1>
+                        <h1 class="title text-anime-3">Powerfull Features of Empath Logistics</h1>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="swiper service-classic-active">
                 <div class="swiper-wrapper">
                     @php
-                        $ids = explode(',', $data);
+                        $ids = array_filter(explode(',', $data));
                         if (!empty($ids)) {
                             $features = \App\Models\Card::where('card_type', 'feature_card')
                                 ->whereIn('id', $ids)
@@ -43,7 +43,7 @@
                                         <div class="service-content">
                                             <div class="service-icon">
                                                 <img src="{{ asset($feature->card_icon) }}" alt="icon"
-                                                    width="30">
+                                                    width="80">
                                             </div>
                                             <h2 class="service-title"> {!! html_entity_decode($feature->title) !!} </h2>
                                         </div>

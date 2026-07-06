@@ -885,4 +885,23 @@ hr.dotted {
   }
 }
 
+.about-icon img {
+  width: 50px;
+}
+
 /* process section end */
+.icon-card {
+  height: 100%;
+  margin-bottom: 1rem;
+}
+
+.single-about-box {
+  height: 100%;
+}
+
+[class*="col-"]:has(> .icon-card) {
+  margin-bottom: 1.5rem;
+}
+[class*="col-"]:has(> .xc-card) {
+  margin-bottom: 1.5rem;
+}

@@ -9,7 +9,7 @@
                             <div class="col-lg-12">
                                 <div class="brand-box">
                                     <div class="brand-thumb">
-                                        <img src="{{ $image }}" width="200" alt="brand img">
+                                        <img src="{{ imgUrl($image) }}" width="200" alt="brand img">
                                     </div>
                                 </div>
                             </div>

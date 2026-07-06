@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="blog-details-thumb">
-                                <img src="{{ $blog->img }}" alt="details thumb">
+                                <img src="{{ url(imgUrl($blog->img)) }}" alt="details thumb">
                             </div>
                             <div class="blog-details-content">
                                 <div class="meta-blog">
@@ -286,7 +286,8 @@
                                 </div>
                                 <div class="widget-catefories-tags">
                                     @foreach ($blog->tags as $tag)
-                                        <a href="{{ url('blogs') }}?tags={{$tag}}">{{ ucfirst($tag) }}</a>
+                                        <a
+                                            href="{{ url('blogs') }}?tags={{ $tag }}">{{ ucfirst($tag) }}</a>
                                     @endforeach
 
 

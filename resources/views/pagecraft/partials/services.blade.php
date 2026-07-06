@@ -11,16 +11,13 @@
                                     alt="sub-icon">Services</h1>
                         </div>
                         <div class="section-title">
-                            <h1 class="title title-anim text-white">Leading Transportation Provider</h1>
+                            <h1 class="title title-anim text-white">Special Services</h1>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="section-desc">
-                        <p class="title-anim">With Gravity Concepts, you
-                            will get a 24×7 service that helps you automate and
-                            improve your daily activities, resulting in greater
-                            transparency and increased efficiency.</p>
+                        <p class="title-anim">Globally known for our ability to handle every last detail of our customers’ particular logistics and forwarding needs, Empath Logistics Special Services team takes care of all your logistics.</p>
                     </div>
                 </div>
             </div>
@@ -29,7 +26,7 @@
             <div class="swiper service-home2-active">
                 <div class="swiper-wrapper">
                     @php
-                        $ids = explode(',', $data);
+                        $ids = array_filter(explode(',', $data));
                         if (!empty($ids)) {
                             $services = \App\Models\Card::where('card_type', 'service_card')
                                 ->whereIn('id', explode(',', $data))
@@ -43,11 +40,11 @@
                             <div class="col-xl-12">
                                 <div class="single-service-box">
                                     <div class="service-thumb">
-                                        <figure class="reveal"><img src="{{ url($service->card_img) }}"
+                                        <figure class="reveal"><img src="{{ url($service->card_img ?? '/') }}"
                                                 alt="service-thumb">
                                         </figure>
                                         <div class="service-icon">
-                                            <img src="{{ url($service->card_icon) }}" alt="icon" width="40">
+                                            <img src="{{ asset($service->card_icon) }}" alt="icon" width="60">
                                         </div>
                                     </div>
                                     <div class="service-content">

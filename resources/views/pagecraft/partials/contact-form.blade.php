@@ -3,7 +3,7 @@
     <div class="row g-0">
         <div class="col-xl-6">
             <div class="contact-thumb h-100">
-                <figure class="reveal"><img src="{{ asset('frontend/images/home2-classic/contact-thumb.png') }}"
+                <figure class="reveal h-100"><img src="{{ asset('frontend/images/home2-classic/contact-thumb.png') }}"
                         alt="contact thumb"></figure>
                 <div class="contact-autor-info">
                     <div class="autor-img-box">
@@ -61,6 +61,26 @@
                                 <textarea name="message" id="message" cols="30" rows="10" placeholder="Write Message..." required></textarea>
                                 <i class="fa-solid fa-message"></i>
                             </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="term_accept">
+                                <label class="form-check-label" for="term_accept">
+
+                                    <span class="text-dark">By checking this checkbox, I agree to receive SMS
+                                        messages
+                                        about text message from Empath Logistics at the phone number provided above. The
+                                        SMS
+                                        frequency may vary. Data rates may apply. Text HELP to +1 302-596-9003 for
+                                        assistance.
+                                        Reply STOP to opt out of receiving SMS messages. Please review our <a
+                                            href="{{ url('privacy-policy') }}" target="_blank">Privacy Policy</a> and <a
+                                            href="{{ url('terms-and-conditions') }}" target="_blank">Terms of
+                                            service</a><br>
+                                    </span>
+                                </label>
+                            </div>
+
                         </div>
                         <div class="col-md-6 p-2">
                             <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}">

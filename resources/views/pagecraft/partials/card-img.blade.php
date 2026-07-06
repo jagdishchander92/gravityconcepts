@@ -1,7 +1,7 @@
 <div class="xc-card {{ $classes }}" style="{{ $widgetStyle }}">
 
     <div class="xc-card__img-wrap">
-        <img class="xc-card__img" src="{{ $p['img'] }}" alt="Waterfall in lush green forest" />
+        <img class="xc-card__img" src="{{ imgUrl($p['img']) }}" alt="Waterfall in lush green forest" />
         <div class="xc-card__overlay"></div>
         {{-- <span class="xc-card__badge">Nature</span> --}}
     </div>

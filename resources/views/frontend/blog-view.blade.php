@@ -1,6 +1,6 @@
 <x-layout :title="$blog->title" :meta_title="$blog->meta_title" :meta_desc='$blog->meta_desc'>
     <!-- breadcumb Section-->
-    <div class="breadcumb-area">
+    <div class="breadcumb-area" style="background-image: url({{ asset('frontend/images/blogs-breadcrumb.png') }})">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 text-center">
@@ -9,8 +9,8 @@
                             <h4>Blog Details</h4>
                         </div>
                         <ul>
-                            <li><a href="index.html">loginet</a></li>
-                            <li>Blog Details</li>
+                            <li><a href="{{ url('blogs') }}">Blogs</a></li>
+                            <li>{{ $blog->title }}</li>
                         </ul>
                     </div>
                 </div>
@@ -28,11 +28,11 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="blog-details-thumb">
-                                <img src="{{ url(imgUrl($blog->img)) }}" alt="details thumb">
+                                <img src="{{ url(imgUrl($blog->img ?? '')) }}" alt="details thumb">
                             </div>
                             <div class="blog-details-content">
                                 <div class="meta-blog">
-                                    <span class="mate-text">By <a href="{{ url('/author-profile') }}">Author</a></span>
+                                    <span class="mate-text">By <a href="{{ url('/author-profile') }}">Pankaj Mehta</a></span>
                                     <span><i
                                             class="fa-regular fa-calendar-days"></i>{{ $blog->published_at?->format('d M, Y') }}</span>
                                     <span><img src="{{ asset('frontend/images/inner-image/category-icon.png') }}"
@@ -121,7 +121,7 @@
                                                     <div class="col-lg-12">
                                                         <div class="blog-post-box">
                                                             <div class="blog-post-thumb">
-                                                                <img src="{{ asset(changeSize(imgUrl($item->img), '150x150')) }}"
+                                                                <img src="{{ asset(changeSize(imgUrl($item->img ?? ''), '150x150')) }}"
                                                                     alt="blog post" width="80">
                                                             </div>
                                                             <div class="blog-post-content">
@@ -270,7 +270,7 @@
                                 @foreach ($top_5_blogs as $item)
                                     <div class="sidber-widget-recent-post">
                                         <div class="recent-widget-thumb">
-                                            <img src="{{ asset(changeSize(imgUrl($item->img), '150x150')) }}"
+                                            <img src="{{ asset(changeSize(imgUrl($item->img ?? ''), '150x150')) }}"
                                                 alt="img" width="100">
                                         </div>
                                         <div class="recent-widget-content">

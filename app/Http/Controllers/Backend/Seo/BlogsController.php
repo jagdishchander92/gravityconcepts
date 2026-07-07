@@ -80,7 +80,7 @@ class BlogsController extends Controller
         }
 
         if ($request->img) {
-            if (Str::startsWith($request->img, $baseUrl)) {
+            if (!(Str::startsWith($request->img, 'https://'))) {
                 $blog->img = $request->img;
             } else {
                 $blog->img = $this->handleExternalImage($request->img);

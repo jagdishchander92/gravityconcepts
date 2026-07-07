@@ -36,7 +36,7 @@
 
                             <div class="mb-4">
                                 <label for="title" class="form-label fw-semibold">
-                                    Page Title
+                                    Page Name
                                 </label>
                                 <input type="text" name="title" id="title"
                                     class="form-control @error('title') is-invalid @enderror"
@@ -153,7 +153,7 @@
                                         <div class="image-preview mt-3">
                                             @if ($bread_image)
                                                 <div class="position-relative d-inline-block">
-                                                    <img src="{{ imgUrl($bread_image)}}" class="img-thumbnail rounded"
+                                                    <img src="{{ imgUrl($bread_image) }}" class="img-thumbnail rounded"
                                                         style="max-height:140px; max-width:100%;">
 
                                                     <button type="button"

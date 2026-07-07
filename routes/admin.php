@@ -35,6 +35,8 @@ Route::get('/log-out', function (Request $request) {
 })->name('backend.logout');
 Route::post('/login-post', [AuthController::class, 'loginPost']);
 Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [AuthController::class, 'editProfile']);
+    Route::post('/update-profile', [AuthController::class, 'editProfileSave']);
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->can('dashboard');
         //users
@@ -160,8 +162,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/file-manager/delete/{id}', [FileManagerController::class, 'delete']);
     Route::get('/file-manager', [FileManagerController::class, 'fileManager'])->name('file-manager');
 
-     Route::get('page-editor/{id}', [PagesController::class,'pageCraftEditor']);
-  
+    Route::get('page-editor/{id}', [PagesController::class, 'pageCraftEditor']);
+
     Route::prefix('pagecraft')->name('pagecraft.')->group(function () {
         Route::post('/preview/{slug}', [PagecraftController::class, 'preview'])->name('preview');
     });

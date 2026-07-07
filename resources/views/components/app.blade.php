@@ -82,10 +82,12 @@
                                 <div class="d-flex gap-3 align-items-center border-dashed border-bottom px-3 py-3">
                                     <img src="{{ asset('backend/images/avatar/user.png') }}" alt=""
                                         class="avatar avatar-md rounded-circle" />
-                                    <div>
-                                        <h4 class="mb-0 small">{{ auth()->user()->name }}</h4>
-                                        <p class="mb-0  small">{{ auth()->user()->email }}</p>
-                                    </div>
+                                    <a href="{{ url('/backend/profile') }}">
+                                        <div>
+                                            <h4 class="mb-0 small">{{ auth()->user()->name }}</h4>
+                                            <p class="mb-0  small">{{ auth()->user()->email }}</p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="p-3 d-flex flex-column gap-1 small lh-lg">
                                     <a href="{{ route('backend.logout') }}" class="d-flex align-items-center">

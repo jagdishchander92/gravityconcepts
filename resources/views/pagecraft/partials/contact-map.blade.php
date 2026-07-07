@@ -373,8 +373,12 @@
             <div>
                 <div class="cmap-card-label">Email us</div>
                 <div class="cmap-card-value">
-                    <a
-                        href="mailto:{{ $website_common_info['email'] ?? '' }}">{{ $website_common_info['email'] ?? '' }}</a>
+                    @php
+                        $emails = explode(',', $website_common_info['email']);
+                        $phones = explode(',', $website_common_info['phone']);
+                    @endphp
+                    <a href="mailto:{{ $emails[0] ?? '' }}">{{ $emails[0] ?? '' }}</a><br>
+                    <a href="mailto:{{ $emails[1] ?? '' }}">{{ $emails[1] ?? '' }}</a>
                 </div>
             </div>
             <div class="cmap-accent-bar"></div>
@@ -410,8 +414,8 @@
             <div>
                 <div class="cmap-card-label">Call us</div>
                 <div class="cmap-card-value">
-                    <a
-                        href="tel:{{ $website_common_info['phone'] ?? '' }}">{{ $website_common_info['phone'] ?? '' }}</a>
+                    <a href="tel:{{ $phones[0] ?? '' }}">{{ $phones[0] ?? '' }}</a><br>
+                    <a href="tel:{{ $phones[1] ?? '' }}">{{ $phones[1] ?? '' }}</a>
                 </div>
             </div>
             <div class="cmap-accent-bar"></div>

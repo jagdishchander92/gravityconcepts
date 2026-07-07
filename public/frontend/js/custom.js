@@ -89,7 +89,7 @@ function drawConnectors() {
 }
 
 // Run on load and resize
-window.addEventListener("load", drawConnectors);
-window.addEventListener("resize", drawConnectors);
+// window.addEventListener("load", drawConnectors);
+// window.addEventListener("resize", drawConnectors);
 // Also run after fonts/images settle
-setTimeout(drawConnectors, 300);
+// setTimeout(drawConnectors, 300);

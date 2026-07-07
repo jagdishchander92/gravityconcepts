@@ -7,7 +7,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
     @php
         $logos = \App\Models\Setting::where('key', 'website_logo_setting')->first();
         if ($logos?->value) {
@@ -22,36 +21,103 @@
             $social_medias = json_decode($social_medias->value, true);
         }
     @endphp
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index,follow">
 
-    <title>{{ $title ?? 'Gravity IT Solution' }}</title>
 
-    <meta name="title" content="{{ $meta_title ?? '' }}">
-
+    <title>{{ $meta_title ?? $website_info['web_name'] }}</title>
     <meta name="description" content="{{ $meta_desc ?? '' }}">
+    <link rel="canonical" href="{{ request()->fullUrl() }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ $website_info['web_name'] ?? '' }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="{{ $meta_title }}">
+    <meta property="og:description" content="{{ $meta_desc }}">
+    <meta property="og:url" content="{{ request()->fullUrl() }}">
+    <meta property="og:image" content="">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $meta_title ?? '' }}">
+    <meta name="twitter:description" content="{{ $meta_desc ?? '' }}">
+    <meta name="twitter:image" content="">
+    <meta name="theme-color" content="#0B4654">
+
+    <link rel="shortcut icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
     <!-- Stylesheets -->
+
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/style.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('frontend/css/style-dark.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backend/lib/sweetalert2/dist/sweetalert2.min.css') }}">
-    <link rel="shortcut icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset($logos['favicon'] ?? '') }}" type="image/x-icon">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         :root {
             --text-color: #67777a;
             /* --theme-color2: #037193; */
+            --xyz: #0A4F66;
+            --xyz: #0A4F66;
         }
 
-        /* :root {
-            --theme-color1: #0F7EA6;
+        :root {
+            --theme-color1: #042A36;
             --theme-color1-rgb: 15, 126, 166;
             --theme-color2: #0A4F66;
             --theme-color2-rgb: 10, 79, 102;
-            --theme-color7: #0A4F66;
-        } */
+            --theme-color7: #028db8;
+            --theme-color4: #042A36;
+            --theme-color4: #042A36;
+            --heading-color: #042A36;
+            --custom-bg-color: #1E2A38;
+        }
+
+        .bg-black {
+            background-color: #1E2A38 !important;
+
+
+        }
+
+
+        .service-section-home2,
+        .work-process-section-one,
+        .testimonial-section-classic {
+            background-color: var(--custom-bg-color);
+        }
+
+        .service-section-home2 .sub-title,
+        .work-process-section-one .sub-title,
+        .testimonial-section-classic .sub-title {
+            color: white !important;
+            border-color: white !important;
+        }
+
+        .service-section-home2 h1.sub-title img,
+        .work-process-section-one h1.sub-title img,
+        .testimonial-section-classic h1.sub-title img {
+            filter: brightness(0) invert(1);
+        }
+
+        `` .main-footer-one {
+            background-color: var(--custom-bg-color);
+        }
+
+        .main-footer-one .main-footer-section::before {
+            background-color: #142335;
+        }
+
+        .service-section-home2 .single-service-box .service-thumb::before {
+            background-image: url(data:image/svg+xml,%3Csvg%20width%3D%22362%22%20height%3D%22255%22%20viewBox%3D%220%200%20362%20255%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%2020C0%208.95431%208.9543%200%2020%200H342C353.046%200%20362%208.9543%20362%2020V234.607C362%20246.544%20351.611%20255.823%20339.749%20254.48L17.7492%20218.01C7.63905%20216.865%200%20208.312%200%20198.137V20Z%22%20fill%3D%22%230A4F66%22%2F%3E%3C%2Fsvg%3E);
+        }
+
+        h1.sub-title img {
+            filter: brightness(0) saturate(100%) invert(21%) sepia(50%) saturate(1472%) hue-rotate(156deg) brightness(96%) contrast(95%);
+        }
     </style>
     @stack('styles')
     @php
@@ -484,54 +550,73 @@
 
                             <!--Footer Column-->
                             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
-                                <div class="footer-widget-content">
+                                <div class="footer-widget-content mb-5">
                                     <h2 class="footer-title">Contact Us</h2>
                                     <div class="footer-content">
-                                        <div class="location"><span>Our
+                                        <div class="location pb-0"><span class="pb-0 mb-0">Our
                                                 Address</span>{{ $website_info['location'] ?? '' }}</div>
+
                                         <ul class="contact-info">
-                                            <li class="email-text"><a href="#">Send E-Mail</a></li>
+                                            <li class="email-text pb-0 mb-0"><a href="#" class="pb-0 mb-0">Send
+                                                    E-Mail</a></li>
+                                            @php
+                                                $emails = explode(',', $website_info['email'] ?? '');
+                                                $phones = explode(',', $website_info['phone'] ?? '');
+                                            @endphp
                                             <li class="email-address"><a
-                                                    href="mailto:{{ $website_info['email'] ?? '' }}">{{ $website_info['email'] ?? '' }}</a>
+                                                    href="mailto:{{ $emails[0] ?? '' }}">{{ $emails[0] ?? '' }}</a>
                                             </li>
+                                            <li class="email-address"><a
+                                                    href="mailto:{{ $emails[1] ?? '' }}">{{ $emails[1] ?? '' }}</a>
+                                            </li>
+                                        </ul>
+                                        <ul class="contact-info">
+                                            <li class="email-text pb-0 mb-0"><a class="pb-0 mb-0" href="#">Call
+                                                    us</a></li>
+                                            <li class="email-address"><a
+                                                    href="tel:{{ $phones[0] ?? '' }}">{{ $phones[0] ?? '' }}</a>
+                                            </li>
+                                            <li class="email-address"><a
+                                                    href="tel:{{ $phones[1] ?? '' }}">{{ $phones[1] ?? '' }}</a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-shape">
+                            <div class="footer-shape1">
+                                <img src="{{ url('frontend/images') }}/home2/footer-shape1.png" alt="footer shape">
+                            </div>
+                            {{-- <div class="footer-shape2">
+                            <img src="{{ url('frontend/images') }}/home2/footer-shape2.png" alt="footer shape">
+                        </div> --}}
+                        </div>
+                    </div>
+
+                    <!--Footer Bottom-->
+                    <div class="footer-bottom">
+                        <div class="auto-container">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="copyright-text">&copy;
+                                        {{ $website_info['footer_copy_right'] ? str_replace('_yyyy_', date('Y'), $website_info['footer_copy_right']) : '' }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="footer-bottom-menu">
+                                        <ul>
+                                            <li><a href="{{ url('privacy-policy') }}">Privacy and Policy</a></li>
+                                            <li><a href="{{ url('sitemap.xml') }}" target="_blank">Sitemap</a></li>
+                                            <li><a href="{{ url('faq') }}">FAQ’s</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="footer-shape">
-                        <div class="footer-shape1">
-                            <img src="{{ url('frontend/images') }}/home2/footer-shape1.png" alt="footer shape">
-                        </div>
-                        {{-- <div class="footer-shape2">
-                            <img src="{{ url('frontend/images') }}/home2/footer-shape2.png" alt="footer shape">
-                        </div> --}}
-                    </div>
                 </div>
-
-                <!--Footer Bottom-->
-                <div class="footer-bottom">
-                    <div class="auto-container">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="copyright-text">&copy;
-                                    {{ $website_info['footer_copy_right'] ? str_replace('_yyyy_', date('Y'), $website_info['footer_copy_right']) : '' }}
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="footer-bottom-menu">
-                                    <ul>
-                                        <li><a href="{{ url('privacy-policy') }}">Privacy and Policy</a></li>
-                                        <li><a href="{{ url('sitemap.xml') }}" target="_blank">Sitemap</a></li>
-                                        <li><a href="{{ url('faq') }}">FAQ’s</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </footer>
 
         <!--End Main Footer -->

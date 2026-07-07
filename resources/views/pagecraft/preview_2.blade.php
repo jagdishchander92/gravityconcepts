@@ -277,7 +277,7 @@
 
     function renderText($p, $style, $classes): string
     {
-        return "<p class=\"{$classes}\" style=\"{$style}\">" . nl2br(e($p['content'] ?? '')) . '</p>';
+        return sprintf('<p class="%s" style="%s">%s</p>', $classes, $style, nl2br($p['content'] ?? '', false));
     }
     function renderButton($p, $style, $classes): string
     {

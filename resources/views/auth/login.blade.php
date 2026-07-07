@@ -34,7 +34,7 @@
                         <input id="email" name="email" type="email" class="form-control"
                             placeholder="name@example.com" required>
                         @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
 
                     </div>
@@ -47,7 +47,7 @@
                         <input id="password" name="password" type="password" class="form-control"
                             placeholder="Password" required minlength="6">
                         @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -57,7 +57,7 @@
                             <label class="form-check-label small" for="remember">Remember me</label>
                         </div>
                         @error('remember')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 

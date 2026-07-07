@@ -172,7 +172,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" placeholder="Email"
+                            <input type="text" name="email" placeholder="Email"
                                 value="{{ $website_common_info['email'] ?? '' }}" class="form-control">
                         </div>
                         <div class="form-group mb-3">
